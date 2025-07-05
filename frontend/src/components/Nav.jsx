@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import LogoutBtn from './LogoutBtn';
 
 import authContext from '../contexts/authcontext';
+import Logo from './Logo';
 
 function Nav() {
   const { authUser } = useContext(authContext);
@@ -24,11 +25,11 @@ function Nav() {
       <nav className="flex items-center justify-between px-6">
         {/* Logo */}  
 
-       { /**  <div className="flex items-center gap-4">
+         <div className="flex items-center gap-4">
           <Link to="/">
             <Logo width="70px" />
           </Link>
-        </div> */}
+        </div> 
       
 
         {/* Navigation Links */}
