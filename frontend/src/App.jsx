@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
+import { Home, Login, Signup } from './pages'
 
 function App() {
 
   return (
-    <>
-      <h1 className='text-red-500'>EcoSphere</h1>
+    <div className=''>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
       </Routes>
-    </>
+    </div>
   )
 }
 
