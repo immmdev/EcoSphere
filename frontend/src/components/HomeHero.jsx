@@ -38,8 +38,6 @@ function HomeHero() {
             >
               More about Us
             </Link>
-
-
           </div>
         </div>
       </div>
