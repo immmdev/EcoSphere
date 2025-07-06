@@ -1,3 +1,6 @@
+
+import { useState } from 'react'
+import Initiative from "./pages/Initiative"
 import { Routes, Route } from 'react-router-dom';
 import { Home, Login, Signup } from './pages';
 import Profile from './pages/Profile';
@@ -16,6 +19,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/Initiative' element={<Initiative />} />
+
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/support' element={<Support />} />
@@ -25,6 +30,7 @@ function App() {
         <Route path='/eco-shop' element={<EcoShop />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/communities' element={<Communities />} />
+
       </Routes>
       <Footer />
     </div>
