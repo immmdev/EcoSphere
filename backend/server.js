@@ -1,12 +1,19 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
+
 const mongoose = require('mongoose');
 const initiativeSchema = require("./models/Initiative.model")
+
+import connectDB from './config/mongodb.js';
+
 
 //app config
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+//database config
+connectDB()
 
 //middlewares
 app.use(express.json());
