@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 function Footer() {
@@ -23,27 +24,31 @@ function Footer() {
             </div>
           </div>
 
-          {/* Company Links */}
-          <div className="md:col-span-2">
-            <p className="text-green-400 font-semibold mb-2">Company</p>
-            {[
-              'About Us',
-              'Sustainability Mission',
-              'How It Works',
-              'Partnerships',
-              'Careers',
-              'EcoBlog',
-              'Media Kit',
-              'GreenPulse Cares',
-            ].map((item, idx) => (
-              <a key={idx} href="#" className="block text-gray-500 text-sm hover:text-gray-700 mb-1">
-                {item}
-              </a>
-            ))}
-          </div>
+					{/* Company Links */}
+					<div className="md:col-span-2">
+						<p className="text-green-400 font-semibold mb-2">Company</p>
+						{[
+							"About Us",
+							"Sustainability Mission",
+							"How It Works",
+							"Partnerships",
+							"Careers",
+							"EcoBlog",
+							"Media Kit",
+							"GreenPulse Cares",
+						].map((item, idx) => (
+							<a
+								key={idx}
+								href="#"
+								className="block text-gray-500 text-sm hover:text-gray-700 mb-1"
+							>
+								{item}
+							</a>
+						))}
+					</div>
 
-          {/* Spacer */}
-          <div className="hidden md:block md:col-span-1"></div>
+					{/* Spacer */}
+					<div className="hidden md:block md:col-span-1"></div>
 
           {/* Support Links */}
           <div className="md:col-span-2">
@@ -104,3 +109,4 @@ function Footer() {
 }
 
 export default Footer;
+				
