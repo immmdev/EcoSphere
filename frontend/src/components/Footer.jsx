@@ -1,6 +1,7 @@
 import React from 'react';
+import { FaTwitter, FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="w-full border-black bg-black border-t ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -61,10 +62,18 @@ function Footer() {
               </a>
             ))}
           </div>
+        </div>
 
-          {/* Spacer */}
-          <div className="hidden md:block md:col-span-1"></div>
-
+        {/* Platform */}
+        <div>
+          <h3 className="font-semibold mb-3">Platform</h3>
+          <ul className="space-y-2 text-gray-300">
+            <li><a href="#" className="hover:text-white">Carbon Tracker</a></li>
+            <li><a href="#" className="hover:text-white">Communities</a></li>
+            <li><a href="#" className="hover:text-white">Marketplace</a></li>
+            <li><a href="#" className="hover:text-white">Learning Hub</a></li>
+          </ul>
+        </div>
           {/* Get Started Links */}
           <div className="md:col-span-2">
             <p className="text-green-400 font-semibold mb-2">Get Started</p>
@@ -80,27 +89,23 @@ function Footer() {
           </div>
         </div>
 
-        {/* Description Text */}
-        <div className="mt-8 text-sm text-gray-500 space-y-4">
-          <p>
-            GreenPulse is your one-stop platform to reduce your carbon footprint, join eco-conscious communities, and explore sustainable living. From tracking daily emissions to learning how to recycle and upcycle, we provide tools and motivation to live greener every day.
-          </p>
-          <p>
-            All actions and data visualizations are meant to guide behavioral change and provide insights. This platform does not replace certified environmental auditing. Please consult experts for regulatory or commercial carbon reporting.
-          </p>
-          <p>
-            For queries or feedback, reach out to{' '}
-            <a href="mailto:support@greenpulse.org" className="hover:underline text-gray-600">
-              support@greenpulse.org
-            </a>.
-          </p>
-          <p>
-            © 2025 GreenPulse. All rights reserved. Head Office: 221B Sustainability Lane, Eco District, New Delhi – 110001, India.
-          </p>
+        {/* Company */}
+        <div>
+          <h3 className="font-semibold mb-3">Company</h3>
+          <ul className="space-y-2 text-gray-300">
+            <li><a href="#" className="hover:text-white">About Us</a></li>
+            <li><a href="#" className="hover:text-white">Our Mission</a></li>
+            <li><a href="#" className="hover:text-white">Contact</a></li>
+            <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
+          </ul>
         </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="mt-10 border-t border-gray-700 pt-6 text-center text-gray-400">
+        © 2024 EcoSphere. All rights reserved. Building a sustainable future together.
       </div>
     </footer>
   );
 }
 
-export default Footer;
