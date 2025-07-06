@@ -1,60 +1,107 @@
-import React, { useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import LogoutBtn from './LogoutBtn';
-import authContext from '../contexts/authcontext';
-import Logo from './Logo';
 
-function Nav() {
-  const { authUser } = useContext(authContext);
-  const navigate = useNavigate();
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-  const navItems = [
-    { name: 'Home', slug: '/', active: true },
-    { name: 'Login', slug: '/login', active: !authUser },
-    { name: 'SignUp', slug: '/signup', active: !authUser },
-    { name: 'Dashboard', slug: '/dashboard', active: true },
-    { name: 'Communities', slug: '/communities' ,active: true},
-    { name: 'Initiative', slug: '/initiative/new',active: true},
-    { name: 'MarketPlace', slug: '/marketplace',active: true },
-    { name: 'Learn', slug: '/learn' ,active: true},
-  ];
+function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="py-3 shadow bg-white">
-      <nav className="flex items-center justify-between px-6">
-        {/* Logo */}  
+    <nav className="bg-white border-b border-gray-300 px-4 py-3">
+      <div className="max-w-7xl mx-auto flex  items-center justify-between">
 
-         <div className="flex items-center gap-4">
-          <Link to="/">
-            <Logo width="70px" />
-          </Link>
-        </div> 
-      
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/earth.png" alt="logo" className="w-10 h-10" />
+          <span className="text-gray-600 text-lg font-semibold">EcoSphere</span>
+        </Link>
 
-        {/* Navigation Links */}
-        <ul className="flex items-center gap-2">
-          {navItems.map(
-            (item) =>
-              item.active && (
-                <li key={item.name}>
-                  <button
-                    onClick={() => navigate(item.slug)}
-                    className="px-6 py-2 hover:bg-green-100 hover:text-black rounded-full transition duration-200"
-                  >
-                    {item.name}
-                  </button>
-                </li>
-              )
-          )}
-          {authUser && (
+        {/* Toggler for Mobile */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="lg:hidden text-gray-600 focus:outline-none"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {isOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
+
+        {/* Nav Links */}
+        <div className={`${isOpen ? 'block' : 'hidden'} lg:flex items-center gap-6`}>
+          <ul className="flex flex-col lg:flex-row items-center gap-10 text-sm mt-4 lg:mt-0">
+
             <li>
-              <LogoutBtn />
+              <Link to="/" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Home
+              </Link>
             </li>
-          )}
-        </ul>
-      </nav>
-    </header>
+
+            <li>
+              <Link to="/eco-shop" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                EcoShoping
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/communities" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Communities
+              </Link>
+            </li>
+            <li>
+              <Link to="/learn" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Learn
+              </Link>
+            </li>
+            <li>
+              <Link to="/initiatives" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Initiatives
+              </Link>
+            </li>
+            <li>
+              <Link to="/support" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Support
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Contact
+              </Link>
+            </li>
+            <li>
+
+              <Link to="/login" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link to="/signup" className="text-gray-500 hover:text-caribbeanGreen transition-colors duration-200 no-underline">
+                Signup
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 }
 
-export default Nav;
+export default Navbar;
