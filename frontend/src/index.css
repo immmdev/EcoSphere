@@ -3,3 +3,14 @@
 button {
     cursor: pointer;
 }
+.eco-static-bg {
+  background: linear-gradient(
+    135deg,
+    #0B3D2E,  /* Deep pine green */
+    #1C6B4D,  /* Forest foliage */
+    #306547,  /* Medium sea green */
+    #1C6B4D,
+    #0B3D2E  /* Forest foliage */
+  );
+}
+

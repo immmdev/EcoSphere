@@ -2,14 +2,14 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="w-full border-gray-300 border-t">
+    <footer className="w-full border-black bg-black border-t ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Logo and Socials */}
           <div className="md:col-span-3">
             <div className="flex items-center gap-3 mb-4">
               <img className="w-6 h-6" src="/earth.png" alt="logo" />
-              <span className="text-gray-600 text-lg font-medium">EcoSphere</span>
+              <span style={{fontFamily: 'Pacifico, cursive'}} className="text-gray-600 text-lg font-medium">EcoSphere</span>
             </div>
             <p className="text-gray-500 text-sm mb-2">
               © 2025, GreenPulse Community<br />All rights reserved.
@@ -25,7 +25,7 @@ function Footer() {
 
           {/* Company Links */}
           <div className="md:col-span-2">
-            <p className="text-gray-700 font-semibold mb-2">Company</p>
+            <p className="text-green-400 font-semibold mb-2">Company</p>
             {[
               'About Us',
               'Sustainability Mission',
@@ -47,7 +47,7 @@ function Footer() {
 
           {/* Support Links */}
           <div className="md:col-span-2">
-            <p className="text-gray-700 font-semibold mb-2">Support</p>
+            <p className="text-green-400 font-semibold mb-2">Support</p>
             {[
               'Help Center',
               'Contact Us',
@@ -67,7 +67,7 @@ function Footer() {
 
           {/* Get Started Links */}
           <div className="md:col-span-2">
-            <p className="text-gray-700 font-semibold mb-2">Get Started</p>
+            <p className="text-green-400 font-semibold mb-2">Get Started</p>
             {[
               'Create an Account',
               'Start Your Eco Journey',
