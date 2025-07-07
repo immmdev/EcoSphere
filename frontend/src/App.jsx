@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 
+
+
 function App() {
 	return (
 		<div>
@@ -19,7 +21,7 @@ function App() {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/initiatives" element={<Initiative />} />
 				<Route path="/eco-shop" element={<EcoShop />} />
-                <Route path='/eco-shop/:productId' element={<Product />} />
+        <Route path='/eco-shop/:productId' element={<Product />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/communities" element={<Communities />} />
 			</Routes>
@@ -29,3 +31,4 @@ function App() {
 }
 
 export default App;
+
