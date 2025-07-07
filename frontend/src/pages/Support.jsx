@@ -1,38 +1,38 @@
 import { useState } from "react";
 
 const faqs = [
-	{
-		question: "How do I join a community?",
-		answer: "Go to the Communities page and click 'Join' next to the community you're interested in.",
-	},
-	{
-		question: "What is the EcoScore?",
-		answer: "EcoScore is a rating based on your sustainable actions tracked through EcoSphere tools.",
-	},
-	{
-		question: "How do I track my carbon footprint?",
-		answer: "Use the Carbon Tracker tool under the Learn section to log daily activities and get estimates.",
-	},
-	{
-		question: "How do I reset my password?",
-		answer: "Go to Login > Forgot Password and follow the instructions.",
-	},
-	{
-		question: "Can I sell handmade eco-products?",
-		answer: "Yes, visit the EcoShop page and register as a seller.",
-	},
-	{
-		question: "How to delete my account?",
-		answer: "Send a request through the support form at the bottom with the subject 'Account Deletion'.",
-	},
+  {
+    question: "How do I join a community?",
+    answer: "Go to the Communities page and click 'Join' next to the community you're interested in.",
+  },
+  {
+    question: "What is the EcoScore?",
+    answer: "EcoScore is a rating based on your sustainable actions tracked through EcoSphere tools.",
+  },
+  {
+    question: "How do I track my carbon footprint?",
+    answer: "Use the Carbon Tracker tool under the Learn section to log daily activities and get estimates.",
+  },
+  {
+    question: "How do I reset my password?",
+    answer: "Go to Login > Forgot Password and follow the instructions.",
+  },
+  {
+    question: "Can I sell handmade eco-products?",
+    answer: "Yes, visit the EcoShop page and register as a seller.",
+  },
+  {
+    question: "How to delete my account?",
+    answer: "Send a request through the support form at the bottom with the subject 'Account Deletion'.",
+  },
 ];
 
 function Support() {
-	const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-	const toggleFAQ = (index) => {
-		setActiveIndex(index === activeIndex ? null : index);
-	};
+  const toggleFAQ = (index) => {
+    setActiveIndex(index === activeIndex ? null : index);
+  };
 
   const helpTopics = [
     {
@@ -101,28 +101,14 @@ function Support() {
       navigate: "/initiatives"
     },
   ];
-	
 
-			<section className="max-w-4xl mx-auto py-12 px-4 bg-black rounded-lg">
-				<h2 className="text-2xl font-semibold mb-6 text-white">
-					Frequently Asked Questions
-				</h2>
-				<div className="space-y-4">
-					{faqs.map((faq, idx) => (
-						<div key={idx} className="border border-lime-700 rounded-md">
-							<button
-								onClick={() => toggleFAQ(idx)}
-								className="w-full text-left px-4 py-3 hover:bg-lime-950 focus:outline-none transition"
-							>
-								<span className="font-medium text-lg text-white">
-									{faq.question}
-								</span>
-							</button>
-							{activeIndex === idx && <div className="px-4 py-3">{faq.answer}</div>}
-						</div>
-					))}
-				</div>
-			</section>
+  return (
+    <div className="eco-static-bg text-white">
+      <section className="py-10 text-center px-4">
+        <h1 className="text-4xl font-bold text-white mb-2">How can we help you?</h1>
+        <p className="text-lg text-green-100 mb-6">Get quick help on common issues or contact our team.</p>
+      </section>
+
       <section className="max-w-4xl mx-auto py-12 px-4 bg-black rounded-lg">
         <h2 className="text-2xl font-semibold mb-6 text-white">Frequently Asked Questions</h2>
         <div className="space-y-4">
