@@ -11,6 +11,7 @@ import Support from './pages/Support';
 import Learn from './pages/Learn';
 import Contact from './pages/Contact';
 import EcoShop from './pages/EcoShop';
+import EcoCalculator from './pages/EcoCalculator';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/eco-shop' element={<EcoShop />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/communities' element={<Communities />} />
+        <Route path='/calculator' element={<EcoCalculator />} />
       </Routes>
       <Footer />
     </div>
