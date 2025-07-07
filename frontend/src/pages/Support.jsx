@@ -42,7 +42,10 @@ function Support() {
         <svg className="w-6 h-6 text-lime-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.83892 12.4543s1.24988-3.08822-.21626-5.29004C8.15656 4.96245 4.58671 4.10885 4.39794 4.2436c-.18877.13476-1.11807 3.32546.34803 5.52727 1.4661 2.20183 5.09295 2.68343 5.09295 2.68343Zm0 0C10.3389 13.4543 12 15 12 18v2c0-2-.4304-3.4188 2.0696-5.9188m0 0s-.4894-2.7888 1.1206-4.35788c1.6101-1.56907 4.4903-1.54682 4.6701-1.28428.1798.26254.4317 2.84376-1.0809 4.31786-1.61 1.5691-4.7098 1.3243-4.7098 1.3243Z"/>
         </svg>
+      
       ),
+      navigate : "/"
+
     },
     {
       title: "Communities",
@@ -52,6 +55,7 @@ function Support() {
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 0 0-5.356-1.857M10 20v-2a3 3 0 0 0-5.356-1.857M5 8h.01M19 8h.01M11.8 16a6 6 0 1 0-3.6 0h3.6Z"/>
         </svg>
       ),
+       navigate : "/communities"
     },
     {
       title: "Learn & Grow",
@@ -61,6 +65,8 @@ function Support() {
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.78552 9.5 12.7855 14l9-4.5-9-4.5-8.99998 4.5Zm0 0V17m3-6v6.2222c0 .3483 2 1.7778 5.99998 1.7778 4 0 6-1.3738 6-1.7778V11"/>
         </svg>
       ),
+     navigate : "/learn"
+     
     },
     {
       title: "Using the Carbon Tracker",
@@ -70,6 +76,7 @@ function Support() {
           <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M6 4v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2m6-16v2m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v10m6-16v10m0 0a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m0 0v2"/>
         </svg>
       ),
+      navigate : "/calculator"
     },
     {
       title: "EcoShop Help",
@@ -79,16 +86,19 @@ function Support() {
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7H5a2 2 0 0 0-2 2v4m5-6h8M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m0 0h3a2 2 0 0 1 2 2v4m0 0v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6m18 0s-4 2-9 2-9-2-9-2m9-2h.01"/>
         </svg>
       ),
+      navigate : "/eco-shop"
     },
     {
-      title: "Account & Security",
-      desc: "Manage your data, privacy and more",
+      title: "Join Initiatives",
+      desc: "Be a part of the green community",
       icon: (
         <svg class="w-6 h-6  text-lime-300 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
 </svg>
 
+
       ),
+      navigate: "/initiatives"
     },
   ];
 
@@ -126,7 +136,7 @@ function Support() {
               <div className="mb-3">{card.icon}</div>
               <h3 className="text-xl font-semibold mb-2 text-white">{card.title}</h3>
               <p className="text-green-100">{card.desc}</p>
-              <a href="#" className="mt-2 inline-block hover:underline text-lime-300">Learn More →</a>
+              <a href={card.navigate} className="mt-2 inline-block hover:underline text-lime-300">Learn More →</a>
             </div>
           ))}
         </div>
