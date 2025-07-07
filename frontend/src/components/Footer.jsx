@@ -13,7 +13,7 @@ function Footer() {
               <span style={{fontFamily: 'Pacifico, cursive'}} className="text-gray-600 text-lg font-medium">EcoSphere</span>
             </div>
             <p className="text-gray-500 text-sm mb-2">
-              © 2025, GreenPulse Community<br />All rights reserved.
+              © 2025, EcoSphere Community<br />All rights reserved.
             </p>
             <div className="flex gap-2 mt-2 text-gray-500 text-lg">
               <i className="fa-brands fa-twitter hover:text-blue-400"></i>
@@ -35,7 +35,7 @@ function Footer() {
 							"Careers",
 							"EcoBlog",
 							"Media Kit",
-							"GreenPulse Cares",
+							"EcoSphere Cares",
 						].map((item, idx) => (
 							<a
 								key={idx}
@@ -88,7 +88,7 @@ function Footer() {
         {/* Description Text */}
         <div className="mt-8 text-sm text-gray-500 space-y-4">
           <p>
-            GreenPulse is your one-stop platform to reduce your carbon footprint, join eco-conscious communities, and explore sustainable living. From tracking daily emissions to learning how to recycle and upcycle, we provide tools and motivation to live greener every day.
+            EcoSphere is your one-stop platform to reduce your carbon footprint, join eco-conscious communities, and explore sustainable living. From tracking daily emissions to learning how to recycle and upcycle, we provide tools and motivation to live greener every day.
           </p>
           <p>
             All actions and data visualizations are meant to guide behavioral change and provide insights. This platform does not replace certified environmental auditing. Please consult experts for regulatory or commercial carbon reporting.
@@ -96,11 +96,11 @@ function Footer() {
           <p>
             For queries or feedback, reach out to{' '}
             <a href="mailto:support@greenpulse.org" className="hover:underline text-gray-600">
-              support@greenpulse.org
+              ecospherehelpdesk@gmail.com
             </a>.
           </p>
           <p>
-            © 2025 GreenPulse. All rights reserved. Head Office: 221B Sustainability Lane, Eco District, New Delhi – 110001, India.
+            © 2025 EcoSphere. All rights reserved. Head Office: I.E.T. Lucknow, District Lucknow, Uttar Pradesh– 226021, India.
           </p>
         </div>
       </div>
