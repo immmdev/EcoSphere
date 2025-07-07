@@ -40,7 +40,7 @@ function Support() {
 			desc: "Setup your profile and begin your journey",
 			icon: (
 				<svg
-					className="w-6 h-6 text-lime-300"
+					className="w-6 h-6 text-green-100"
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"
@@ -60,7 +60,7 @@ function Support() {
 			desc: "Explore and join like-minded eco-groups",
 			icon: (
 				<svg
-					className="w-6 h-6 text-lime-300"
+					className="w-6 h-6 text-green-100"
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"
@@ -80,7 +80,7 @@ function Support() {
 			desc: "Browse educational content on sustainability",
 			icon: (
 				<svg
-					className="w-6 h-6 text-lime-300"
+					className="w-6 h-6 text-green-100"
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"
@@ -100,7 +100,7 @@ function Support() {
 			desc: "Learn how to log your emissions and track EcoScore",
 			icon: (
 				<svg
-					className="w-6 h-6 text-lime-300"
+					className="w-6 h-6 text-green-100"
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"
@@ -119,7 +119,7 @@ function Support() {
 			desc: "How to buy and sell eco-products",
 			icon: (
 				<svg
-					className="w-6 h-6 text-lime-300"
+					className="w-6 h-6 text-green-100"
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"
@@ -139,7 +139,7 @@ function Support() {
 			desc: "Manage your data, privacy and more",
 			icon: (
 				<svg
-					className="w-6 h-6 text-lime-300 dark:text-white"
+					className="w-6 h-6 text-green-100 dark:text-white"
 					aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -160,49 +160,49 @@ function Support() {
 	return (
 		<div className="eco-static-bg text-white">
 			<section className="py-10 text-center px-4">
-				<h1 className="text-4xl font-bold text-white mb-2">How can we help you?</h1>
-				<p className="text-lg text-green-100 mb-6">
+				<h1 className="text-4xl md:text-5xl font-bold text-white mb-4">How can we help you?</h1>
+				<p className="text-lg  text-green-100 mb-6">
 					Get quick help on common issues or contact our team.
 				</p>
 			</section>
 
-			<section className="max-w-4xl mx-auto py-12 px-4 bg-black rounded-lg">
-				<h2 className="text-2xl font-semibold mb-6 text-white">
+			<section className="max-w-4xl mx-auto py-12 px-4 bg-green-100 rounded-lg">
+				<h2 className="text-2xl font-semibold mb-6 text-green-800">
 					Frequently Asked Questions
 				</h2>
 				<div className="space-y-4">
 					{faqs.map((faq, idx) => (
-						<div key={idx} className="border border-lime-700 rounded-md">
+						<div key={idx} className="border border-green-800 rounded-md">
 							<button
 								onClick={() => toggleFAQ(idx)}
-								className="w-full text-left px-4 py-3 hover:bg-lime-950 focus:outline-none transition"
+								className="w-full text-left px-4 py-3  focus:outline-none transition"
 							>
-								<span className="font-medium text-lg text-white">
+								<span className="font-medium text-lg text-green-800">
 									{faq.question}
 								</span>
 							</button>
-							{activeIndex === idx && <div className="px-4 py-3">{faq.answer}</div>}
+							{activeIndex === idx && <div className="px-4 py-3 text-green-800">{faq.answer}</div>}
 						</div>
 					))}
 				</div>
 			</section>
 
 			<section className="py-12 px-4">
-				<h2 className="text-2xl font-semibold text-lime-300 text-center mb-10">
+				<h2 className="text-2xl font-semibold text-green-100 text-center mb-10">
 					Help Topics & Guides
 				</h2>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
 					{helpTopics.map((card, i) => (
 						<div
 							key={i}
-							className="border border-lime-700 p-6 rounded-xl shadow-lg hover:shadow-4xl transition duration-200"
+							className="border border-green-100 p-6 rounded-xl shadow-lg hover:shadow-4xl transition duration-200"
 						>
 							<div className="mb-3">{card.icon}</div>
 							<h3 className="text-xl font-semibold mb-2 text-white">{card.title}</h3>
 							<p className="text-green-100">{card.desc}</p>
 							<a
 								href="#"
-								className="mt-2 inline-block hover:underline text-lime-300"
+								className="mt-2 inline-block hover:underline text-green-100"
 							>
 								Learn More →
 							</a>
