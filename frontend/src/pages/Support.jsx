@@ -33,7 +33,6 @@ function Support() {
 	const toggleFAQ = (index) => {
 		setActiveIndex(index === activeIndex ? null : index);
 	};
-
   const helpTopics = [
     {
       title: "Getting Started",
@@ -101,24 +100,23 @@ function Support() {
       navigate: "/initiatives"
     },
   ];
-	
 
-			<section className="max-w-4xl mx-auto py-12 px-4 bg-black rounded-lg">
-				<h2 className="text-2xl font-semibold mb-6 text-white">
+			<section className="max-w-4xl mx-auto py-12 px-4 bg-green-100 rounded-lg">
+				<h2 className="text-2xl font-semibold mb-6 text-green-800">
 					Frequently Asked Questions
 				</h2>
 				<div className="space-y-4">
 					{faqs.map((faq, idx) => (
-						<div key={idx} className="border border-lime-700 rounded-md">
+						<div key={idx} className="border border-green-800 rounded-md">
 							<button
 								onClick={() => toggleFAQ(idx)}
-								className="w-full text-left px-4 py-3 hover:bg-lime-950 focus:outline-none transition"
+								className="w-full text-left px-4 py-3  focus:outline-none transition"
 							>
-								<span className="font-medium text-lg text-white">
+								<span className="font-medium text-lg text-green-800">
 									{faq.question}
 								</span>
 							</button>
-							{activeIndex === idx && <div className="px-4 py-3">{faq.answer}</div>}
+							{activeIndex === idx && <div className="px-4 py-3 text-green-800">{faq.answer}</div>}
 						</div>
 					))}
 				</div>
@@ -141,6 +139,7 @@ function Support() {
           ))}
         </div>
       </section>
+
 
       <section className="py-12 px-4">
         <h2 className="text-2xl font-semibold text-lime-300 text-center mb-10">Help Topics & Guides</h2>

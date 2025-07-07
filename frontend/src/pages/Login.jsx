@@ -33,13 +33,13 @@ const Login = () => {
 	}, [token]);
 
 	return (
-		<div className="flex items-center justify-center min-h-screen bg-green-50">
-			<div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-				<h2 className="text-3xl font-bold text-green-700 mb-4 text-center">
-					Welcome Back 🌱
+		<div className="flex items-center justify-center min-h-screen bg-green-50 eco-static-bg">
+			<div className="bg-green-100 p-8 rounded-2xl shadow-lg w-full max-w-md">
+				<h2 className="text-3xl font-bold text-green-900 mb-4 text-center">
+					Welcome Again
 				</h2>
-				<p className="text-gray-600 text-center mb-6">
-					Log in to continue your sustainable journey.
+				<p className="text-green-800 text-center mb-6">
+					Login to EcoSphere continue your sustainable journey
 				</p>
 				<form onSubmit={handleSubmit} className="space-y-4">
 					<input
@@ -47,7 +47,7 @@ const Login = () => {
 						name="email"
 						placeholder="Email"
 						onChange={(e) => setEmail(e.target.value)}
-						className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+						className="w-full text-green-800 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
 						required
 					/>
 					<input
@@ -55,19 +55,19 @@ const Login = () => {
 						name="password"
 						placeholder="Password"
 						onChange={(e) => setPassword(e.target.value)}
-						className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+						className="w-full text-green-800 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
 						required
 					/>
 					<button
 						type="submit"
-						className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-300"
+						className="w-full bg-emerald-400 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150"
 					>
 						Login
 					</button>
 				</form>
-				<p className="text-sm text-center mt-4 text-gray-600">
+				<p className="text-sm text-center mt-4 text-green-800">
 					Don’t have an account?{" "}
-					<Link to="/signup" className="text-green-700 font-semibold">
+					<Link to="/signup" className="text-green-900 font-semibold">
 						Sign up
 					</Link>
 				</p>
