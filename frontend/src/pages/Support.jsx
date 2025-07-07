@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const faqs = [
 	{
@@ -91,71 +92,69 @@ function Support() {
       title: "Join Initiatives",
       desc: "Be a part of the green community",
       icon: (
-        <svg class="w-6 h-6  text-lime-300 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-  <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-</svg>
-
-
+        <svg className="w-6 h-6 text-lime-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" strokeLinecap="square" strokeLinejoin="round" strokeWidth="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+        </svg>
       ),
       navigate: "/initiatives"
     },
   ];
 
-			<section className="max-w-4xl mx-auto py-12 px-4 bg-green-100 rounded-lg">
-				<h2 className="text-2xl font-semibold mb-6 text-green-800">
+	return (
+		<div className="eco-static-bg text-white">
+			<section className="py-10 text-center px-4">
+				<h1 className="text-4xl font-bold text-white mb-2">How can we help you?</h1>
+				<p className="text-lg text-green-100 mb-6">
+					Get quick help on common issues or contact our team.
+				</p>
+			</section>
+
+			<section className="max-w-4xl mx-auto py-12 px-4 bg-black rounded-lg">
+				<h2 className="text-2xl font-semibold mb-6 text-white">
 					Frequently Asked Questions
 				</h2>
 				<div className="space-y-4">
 					{faqs.map((faq, idx) => (
-						<div key={idx} className="border border-green-800 rounded-md">
+						<div key={idx} className="border border-lime-700 rounded-md">
 							<button
 								onClick={() => toggleFAQ(idx)}
-								className="w-full text-left px-4 py-3  focus:outline-none transition"
+								className="w-full text-left px-4 py-3 hover:bg-lime-950 focus:outline-none transition"
 							>
-								<span className="font-medium text-lg text-green-800">
+								<span className="font-medium text-lg text-white">
 									{faq.question}
 								</span>
 							</button>
-							{activeIndex === idx && <div className="px-4 py-3 text-green-800">{faq.answer}</div>}
+							{activeIndex === idx && <div className="px-4 py-3">{faq.answer}</div>}
 						</div>
 					))}
 				</div>
 			</section>
-      <section className="max-w-4xl mx-auto py-12 px-4 bg-black rounded-lg">
-        <h2 className="text-2xl font-semibold mb-6 text-white">Frequently Asked Questions</h2>
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="border border-lime-700 rounded-md">
-              <button
-                onClick={() => toggleFAQ(idx)}
-                className="w-full text-left px-4 py-3 hover:bg-lime-950 focus:outline-none transition"
-              >
-                <span className="font-medium text-lg text-white">{faq.question}</span>
-              </button>
-              {activeIndex === idx && (
-                <div className="px-4 py-3">{faq.answer}</div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
 
-
-      <section className="py-12 px-4">
-        <h2 className="text-2xl font-semibold text-lime-300 text-center mb-10">Help Topics & Guides</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {helpTopics.map((card, i) => (
-            <div key={i} className="border border-lime-700 p-6 rounded-xl shadow-lg hover:shadow-4xl transition duration-200">
-              <div className="mb-3">{card.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-white">{card.title}</h3>
-              <p className="text-green-100">{card.desc}</p>
-              <a href={card.navigate} className="mt-2 inline-block hover:underline text-lime-300">Learn More →</a>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+			<section className="py-12 px-4">
+				<h2 className="text-2xl font-semibold text-lime-300 text-center mb-10">
+					Help Topics & Guides
+				</h2>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+					{helpTopics.map((card, i) => (
+						<div
+							key={i}
+							className="border border-lime-700 p-6 rounded-xl shadow-lg hover:shadow-4xl transition duration-200"
+						>
+							<div className="mb-3">{card.icon}</div>
+							<h3 className="text-xl font-semibold mb-2 text-white">{card.title}</h3>
+							<p className="text-green-100">{card.desc}</p>
+							<Link
+								to={card.navigate}
+								className="mt-2 inline-block hover:underline text-lime-300"
+							>
+								Learn More →
+							</Link>
+						</div>
+					))}
+				</div>
+			</section>
+		</div>
+	);
 }
 
 export default Support;
