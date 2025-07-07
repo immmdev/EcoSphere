@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 
 const categories = [
@@ -55,6 +56,7 @@ const Initiatives = () => {
       : featured.filter((item) => item.category === selectedCategory);
 
   return (
+
     <div className="eco-static-bg text-green-900 min-h-screen">
       {/* Header Section with Slider */}
       <section className="relative h-[70vh] flex items-center justify-center text-center bg-green-50 overflow-hidden">
@@ -66,7 +68,7 @@ const Initiatives = () => {
               src={img}
               alt={`Slide ${i}`}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                i === current ? 'opacity-80' : 'opacity-0'
+                i === current ? "opacity-80" : "opacity-0"
               }`}
             />
           ))}
@@ -99,11 +101,13 @@ const Initiatives = () => {
       </section>
 
       {/* Category Tabs */}
+
       <section className="eco-static-bg py-6 px-4 border   border-green-100">
         <div className="flex flex-wrap justify-center gap-3">
           {categories.map((cat, i) => (
             <button
               key={i}
+
               className={
                 selectedCategory === cat
                   ? 'bg-lime-300 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150 '

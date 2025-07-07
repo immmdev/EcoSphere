@@ -1,9 +1,11 @@
+import React from 'react'
+
 function Communities() {
-    return ( 
-        <>
-            communty
-        </>
-     );
+  return (
+    <div>
+      
+    </div>
+  )
 }
 
-export default Communities;
+export default Communities
