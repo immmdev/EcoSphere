@@ -1,6 +1,6 @@
 import HomeHero from '../components/HomeHero';
 import IntroLeftHome from '../components/IntroLeftHome';
-import calcImg from '../assets/calculator-image.png'; // Make sure path is correct
+import calcImg from '../assets/calculator-image.png'; 
 import comImg from '../assets/community-image.png'
 import initImg from '../assets/initiative-image.png'
 import learnImg from '../assets/learn-image.png'
