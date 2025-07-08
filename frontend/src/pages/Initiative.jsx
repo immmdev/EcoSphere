@@ -92,7 +92,7 @@ const Initiatives = () => {
             <Link
               style={{ fontFamily: "Raleway, sans-serif" }}
               to="/"
-              className="bg-emerald-400 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150"
+              className="bg-lime-300 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
             >
               Explore All Initiatives
             </Link>

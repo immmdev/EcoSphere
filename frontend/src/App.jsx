@@ -4,6 +4,7 @@ import Product from "./components/EcoShopComponents/Product";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
+import CarbonFootprintCalculator from "./components/EcoCalci";
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/eco-shop/:productId' element={<Product />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/communities" element={<Communities />} />
+				<Route path="/calculator" element={<CarbonFootprintCalculator/>}/>
 			</Routes>
 			<Footer />
 		</div>
