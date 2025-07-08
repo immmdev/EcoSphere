@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { products } from "../assets/MarketPlace/assets.js";
+// import { products } from "../assets/MarketPlace/assets.js";
 
 export const ShopContext = createContext();
 
@@ -13,42 +13,49 @@ const ShopContextProvider = (props) => {
 	const [search, setSearch] = useState("");
 	const [showSearch, setShowSearch] = useState(false);
 	const [cartItems, setCartItems] = useState({});
-	// const [products, setProducts] = useState([]);
+	const [products, setProducts] = useState([]);
 	const [token, setToken] = useState("");
 	const navigate = useNavigate();
 
-	// const addToCart = async (itemId, size) => {
-	// 	if (!size) {
-	// 		toast.error("Select Product Size");
-	// 		return;
-	// 	}
+	const addToCart = async (itemId) => {
+		// if (!size) {
+		// 	toast.error("Select Product Size");
+		// 	return;
+		// }
 
-	// 	let cartData = structuredClone(cartItems);
-	// 	if (cartData[itemId]) {
-	// 		if (cartData[itemId][size]) {
-	// 			cartData[itemId][size] += 1;
-	// 		} else {
-	// 			cartData[itemId][size] = 1;
-	// 		}
-	// 	} else {
-	// 		cartData[itemId] = {};
-	// 		cartData[itemId][size] = 1;
-	// 	}
-	// 	setCartItems(cartData);
+		let cartData = structuredClone(cartItems);
+		if (cartData[itemId]) {
+            toast.error("Item already in cart");
+			// if (cartData[itemId]) {
+			// 	cartData[itemId] += 1;
+			// } else {
+			// 	cartData[itemId] = 1;
+			// }
+		} else {
+            setCartItems((prev) => ({
+                ...prev,
+                [itemId]: 1,
+            }));    
 
-	// 	if (token) {
-	// 		try {
-	// 			await axios.post(
-	// 				backendUrl + "/api/cart/add",
-	// 				{ itemId, size },
-	// 				{ headers: { token } }
-	// 			);
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 			toast.error(error.message || "Something went wrong while adding to cart");
-	// 		}
-	// 	}
-	// };
+			// cartData[itemId] = {};
+			// cartData[itemId][size] = 1;
+		}
+		// setCartItems(cartData);
+        
+		if (token) {
+			try {
+				const response =  await axios.post(
+					backendUrl + "/api/cart/add",
+					{ itemId },
+					{ headers: { token } }
+				);
+                toast.success(response.data.message);
+			} catch (error) {
+				console.log(error);
+				toast.error(error.message || "Something went wrong while adding to cart");
+			}
+		}
+	};
 
 	// const getCartCount = () => {
 	// 	let totalCount = 0;
@@ -64,82 +71,80 @@ const ShopContextProvider = (props) => {
 	// 	return totalCount;
 	// };
 
-	// const updateQuantity = async (itemId, size, quantity) => {
-	// 	let cartData = structuredClone(cartItems);
+	const updateQuantity = async (itemId, quantity) => {
+		let cartData = structuredClone(cartItems);
 
-	// 	cartData[itemId][size] = quantity;
+		cartData[itemId] = quantity;
 
-	// 	setCartItems(cartData);
+		setCartItems(cartData);
 
-	// 	if(token) {
-	//         try {
-	//             await axios.post(
-	//                 backendUrl + "/api/cart/update",
-	//                 { itemId, size, quantity },
-	//                 { headers: { token } }
-	//             );
-	//         } catch (error) {
-	//             console.log(error);
-	//             toast.error(error.message || "Something went wrong while updating cart");
-	//         }
-	//     }
-	// };
+		if(token) {
+	        try {
+	            await axios.post(
+	                backendUrl + "/api/cart/update",
+	                { itemId, quantity },
+	                { headers: { token } }
+	            );
+	        } catch (error) {
+	            console.log(error);
+	            toast.error(error.message || "Something went wrong while updating cart");
+	        }
+	    }
+	};
 
-	// const getUserCart = async (token) => {
-	//     try {
-	//         const response = await axios.post(
-	//             backendUrl + "/api/cart/get",
-	//             {},
-	//             { headers: { token } }
-	//         );
-	//         if (response.data.success) {
-	//             setCartItems(response.data.cartData);
-	//         } else {
-	//             toast.error(response.data.message);
-	//         }
-	//     } catch (error) {
-	//         console.log(error);
-	//         toast.error(error.message || "Something went wrong while fetching cart");
-	//     }
-	// }
+	const getUserCart = async (token) => {
+	    try {
+	        const response = await axios.post(
+	            backendUrl + "/api/cart/get",
+	            {},
+	            { headers: { token } }
+	        );
+	        if (response.data.success) {
+	            setCartItems(response.data.cartData);
+	        } else {
+	            toast.error(response.data.message);
+	        }
+	    } catch (error) {
+	        console.log(error);
+	        toast.error(error.message || "Something went wrong while fetching cart");
+	    }
+	}
 
-	// const getCartAmount = () => {
-	// 	let totalAmount = 0;
-	// 	for (const items in cartItems) {
-	// 		let itemInfo = products.find((product) => product._id === items);
-	// 		for (const item in cartItems[items]) {
-	// 			try {
-	// 				if (cartItems[items][item] > 0) {
-	// 					totalAmount += itemInfo.price * cartItems[items][item];
-	// 				}
-	// 			} catch (error) {}
-	// 		}
-	// 	}
-	// 	return totalAmount;
-	// };
+	const getCartAmount = () => {
+		let totalAmount = 0;
+		for (const item in cartItems) {
+			let itemInfo = products.find((product) => product._id === item);
+				try {
+					if (cartItems[item] > 0) {
+						totalAmount += itemInfo.price * cartItems[item];
+					}
+				} catch (error) {}
+		}
+		return totalAmount;
+	};
 
-	// const getProductsData = async () => {
-	// 	try {
-	// 		const response = await axios.get(backendUrl + "/api/product/list");
-	// 		if (response.data.success) {
-	// 			setProducts(response.data.products);
-	// 		} else {
-	// 			toast.error(response.data.message);
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		toast.error(error.message || "Something went wrong while fetching products");
-	// 	}
-	// };
+	const getProductsData = async () => {
+		try {
+			const response = await axios.get(backendUrl + "/api/product/list");
+			if (response.data.success) {
+				setProducts(response.data.products);
+			} else {
+				toast.error(response.data.message);
+			}
+		} catch (error) {
+			console.log(error);
+			toast.error(error.message || "Something went wrong while fetching products");
+		}
+	};
 
-	// useEffect(() => {
-	// 	getProductsData();
-	// }, []);
+	useEffect(() => {
+		getProductsData();
+	}, []);
 
 	useEffect(() => {
 		if (!token && localStorage.getItem("token")) {
 			setToken(localStorage.getItem("token"));
-			// getUserCart(localStorage.getItem("token"));
+			getUserCart(localStorage.getItem("token"));
 		}
 	}, []);
 
@@ -175,7 +180,11 @@ const ShopContextProvider = (props) => {
 		backendUrl,
 		token,
 		setToken,
-        products
+        products,
+        addToCart,
+        updateQuantity,
+        getCartAmount,
+
 	};
 
 	return <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>;

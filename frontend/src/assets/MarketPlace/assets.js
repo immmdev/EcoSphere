@@ -32,10 +32,12 @@ import img19 from "./img19.jpg";
 
 import star_icon from "./star_icon.png";
 import star_dull_icon from "./star_dull_icon.png";
+import bin_icon from "./bin_icon.png";
 
 export const assets = {
     star_icon, 
-    star_dull_icon
+    star_dull_icon,
+    bin_icon,
 }
 
 export const products = [

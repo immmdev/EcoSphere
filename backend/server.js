@@ -4,6 +4,8 @@ import 'dotenv/config';
 import connectDB from './config/mongodb.js';
 import connectCloudinary from './config/cloudinary.js';
 import userRouter from './routes/user.route.js';
+import cartRouter from './routes/cart.route.js';
+import productRouter from './routes/product.route.js';
 
 //app config
 const app = express();
@@ -17,6 +19,8 @@ app.use(cors());
 
 //api endpoints
 app.use('/api/user', userRouter)
+app.use('/api/cart', cartRouter)
+app.use('/api/product', productRouter)
 
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the backend server!');

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { ShopContext } from "../contexts/ShopContext";
 
 function Navbar() {
@@ -8,6 +8,8 @@ function Navbar() {
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [hoveredLink, setHoveredLink] = useState(null);
+	const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+	const profileDropdownRef = useRef(null);
 
 	let onmouseEnterHandler = (e, linkName) => {
 		e.preventDefault();
@@ -24,6 +26,24 @@ function Navbar() {
 		setToken("");
 		navigate("/login");
 	};
+
+	const toggleProfileDropdown = () => {
+		setIsProfileDropdownOpen(!isProfileDropdownOpen);
+	};
+
+	// Close dropdown when clicking outside
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+				setIsProfileDropdownOpen(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	return (
 		<nav className="bg-black border-b border-black px-4 py-3">
@@ -179,19 +199,118 @@ function Navbar() {
 
 						{/* Conditional rendering based on token */}
 						{token ? (
-							<li>
+							<li className="relative" ref={profileDropdownRef}>
 								<button
-									onClick={logout}
-									onMouseLeave={OnMouseExithandler}
-									onMouseEnter={(e) => onmouseEnterHandler(e, "logout")}
-									className={`${
-										hoveredLink === "logout"
-											? "text-green-400 transition-colors duration-200 no-underline"
-											: "text-gray-300 hover:text-caribbeanGreen transition-colors duration-200 no-underline"
-									} bg-transparent border-none cursor-pointer`}
+									onClick={toggleProfileDropdown}
+									className="flex items-center gap-2 text-gray-300 hover:text-green-400 transition-colors duration-200 bg-transparent border-none cursor-pointer"
 								>
-									Logout
+									<svg
+										className="w-6 h-6"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+										/>
+									</svg>
+									<svg
+										className={`w-4 h-4 transition-transform duration-200 ${
+											isProfileDropdownOpen ? "rotate-180" : ""
+										}`}
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
 								</button>
+
+								{/* Dropdown Menu */}
+								{isProfileDropdownOpen && (
+									<div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-50 border border-gray-600">
+										<div className="py-1">
+											<Link
+												to="/profile"
+												onClick={() => setIsProfileDropdownOpen(false)}
+												className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-green-400 transition-colors duration-200 no-underline"
+											>
+												<div className="flex items-center gap-2">
+													<svg
+														className="w-4 h-4"
+														fill="none"
+														stroke="currentColor"
+														viewBox="0 0 24 24"
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															strokeWidth={2}
+															d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+														/>
+													</svg>
+													My Profile
+												</div>
+											</Link>
+											<Link
+												to="/cart"
+												onClick={() => setIsProfileDropdownOpen(false)}
+												className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-green-400 transition-colors duration-200 no-underline"
+											>
+												<div className="flex items-center gap-2">
+													<svg
+														className="w-4 h-4"
+														fill="none"
+														stroke="currentColor"
+														viewBox="0 0 24 24"
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															strokeWidth={2}
+															d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+														/>
+													</svg>
+													My Cart
+												</div>
+											</Link>
+											<hr className="border-gray-600" />
+											<button
+												onClick={() => {
+													logout();
+													setIsProfileDropdownOpen(false);
+												}}
+												className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-red-400 transition-colors duration-200 bg-transparent border-none cursor-pointer"
+											>
+												<div className="flex items-center gap-2">
+													<svg
+														className="w-4 h-4"
+														fill="none"
+														stroke="currentColor"
+														viewBox="0 0 24 24"
+													>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															strokeWidth={2}
+															d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+														/>
+													</svg>
+													Logout
+												</div>
+											</button>
+										</div>
+									</div>
+								)}
 							</li>
 						) : (
 							<>

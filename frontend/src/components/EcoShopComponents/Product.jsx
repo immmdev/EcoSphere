@@ -6,11 +6,12 @@ import RelatedProducts from "./RelatedProducts.jsx";
 
 const Product = () => {
 	const { productId } = useParams();
-	// const { products, currency, addToCart } = React.useContext(ShopContext);
-	const { products, currency } = React.useContext(ShopContext);
+	const { products, currency, addToCart } = React.useContext(ShopContext);
 	const [productData, setProductData] = React.useState(false);
 	const [image, setImage] = React.useState("");
-	const [size, setSize] = React.useState("");
+
+    
+    
 
 	const fetchProductData = () => {
 		products.map((item) => {
@@ -84,7 +85,7 @@ const Product = () => {
 						</div>
 					</div> */}
 					<button
-						// onClick={() => addToCart(productData._id, size)}
+						onClick={() => addToCart(productData._id)}
 						className="bg-black text-white my-8 px-8 py-3 text-sm active:bg-gray-700 cursor-pointer"
 					>
 						ADD TO CART
