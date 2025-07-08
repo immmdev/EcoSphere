@@ -3,6 +3,7 @@ import { Home, Login, Signup, Support, Learn, Contact, Initiative, EcoShop, Prof
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
+import CarbonFootprintCalculator from "./components/EcoCalci";
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 				<Route path="/eco-shop" element={<EcoShop />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/communities" element={<Communities />} />
+				<Route path="/calculator" element={<CarbonFootprintCalculator/>}/>
 			</Routes>
 			<Footer />
 		</div>
