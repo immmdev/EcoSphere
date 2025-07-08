@@ -21,7 +21,7 @@ const Home = () => {
         <IntroLeftHome
           header="Carbon Footprint Calculator"
           info="The Carbon Footprint Calculator is a simple yet powerful tool within EcoSphere that helps users estimate their environmental impact based on their lifestyle choices. By entering data about daily activities such as transportation, energy usage, diet, and consumption habits, users receive a personalized carbon footprint score."
-          visitLink="/calculator"
+          visitLink="/eco-calculator"
           imgURL={calcImg}
 
         />

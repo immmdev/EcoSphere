@@ -106,6 +106,21 @@ function Navbar() {
 								Home
 							</Link>
 						</li>
+						
+						<li>
+							<Link
+								to="/eco-calculator"
+								onMouseLeave={OnMouseExithandler}
+								onMouseEnter={(e) => onmouseEnterHandler(e, "eco-calculator")}
+								className={
+									hoveredLink === "eco-calculator"
+										? "text-green-400 transition-colors duration-200 no-underline"
+										: "text-gray-300 hover:text-caribbeanGreen transition-colors duration-200 no-underline"
+								}
+							>
+								EcoCalculator
+							</Link>
+						</li>
 
 						<li>
 							<Link
