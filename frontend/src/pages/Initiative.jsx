@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
+
 const categories = [
   'All',
   'Tree Plantation',
@@ -54,7 +56,8 @@ const Initiatives = () => {
       : featured.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="bg-green-50 text-green-900 min-h-screen">
+
+    <div className="eco-static-bg text-green-900 min-h-screen">
       {/* Header Section with Slider */}
       <section className="relative h-[70vh] flex items-center justify-center text-center bg-green-50 overflow-hidden">
         {/* Image Slider */}
@@ -65,7 +68,7 @@ const Initiatives = () => {
               src={img}
               alt={`Slide ${i}`}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                i === current ? 'opacity-80' : 'opacity-0'
+                i === current ? "opacity-80" : "opacity-0"
               }`}
             />
           ))}
@@ -73,32 +76,43 @@ const Initiatives = () => {
 
         {/* Content on top */}
         <div className="relative z-10 px-4">
-          <h1 className="text-4xl font-bold text-green-800">Our Initiatives for a Greener Future</h1>
-          <p className="mt-4 text-green-900 max-w-2xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-green-900 mb-4">Our Initiatives for a Greener Future</h1>
+          <p className="mt-4 text-green-900 font-semibold max-w-2xl mx-auto">
             Explore environmental campaigns and projects making real change — join, support, or create your own.
           </p>
           <div className="mt-6 flex flex-col md:flex-row justify-center gap-4">
-            <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md">
+            <Link
+              style={{ fontFamily: "Raleway, sans-serif" }}
+              to="/"
+              className="bg-lime-300 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
+            >
               + Create Initiative
-            </button>
-            <button className="bg-white text-green-700 border border-green-600 px-6 py-2 rounded-md hover:bg-green-100">
-              Explore All
-            </button>
+            </Link>
+
+            <Link
+              style={{ fontFamily: "Raleway, sans-serif" }}
+              to="/"
+              className="bg-lime-300 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
+            >
+              Explore All Initiatives
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Category Tabs */}
-      <section className="bg-white py-6 px-4 border-t border-b border-green-200">
+
+      <section className="eco-static-bg py-6 px-4 border   border-green-100">
         <div className="flex flex-wrap justify-center gap-3">
           {categories.map((cat, i) => (
             <button
               key={i}
-              className={`px-4 py-2 border rounded-full text-sm transition ${
+
+              className={
                 selectedCategory === cat
-                  ? 'bg-green-600 text-white border-green-600'
-                  : 'border-green-500 text-green-700 hover:bg-green-100'
-              }`}
+                  ? 'bg-lime-300 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150 '
+                  : 'bg-emerald-400 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150'
+              }
               onClick={() => setSelectedCategory(cat)}
             >
               {cat}
@@ -109,7 +123,7 @@ const Initiatives = () => {
 
       {/* All Initiatives Grid */}
       <section className="py-12 px-6 max-w-6xl mx-auto">
-       <h2 className="text-2xl font-bold text-green-700 mb-6">
+       <h2 className="text-2xl font-bold text-green-100 mb-6">
   {selectedCategory === 'All'
     ? 'All Initiatives'
     : `${selectedCategory} Initiatives`}
@@ -117,23 +131,23 @@ const Initiatives = () => {
 
         <div className="grid md:grid-cols-3 gap-6">
           {filteredInitiatives.map((item, i) => (
-            <div key={i} className="bg-white shadow-md rounded-md p-4 space-y-3">
+            <div key={i} className="bg-emerald-100 shadow-md rounded-md p-4 space-y-3">
               <img
                 src={item.image}
                 alt="Initiative"
                 className="w-full h-40 object-cover rounded"
               />
               <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="text-sm text-gray-600">Location: India | Status: Active</p>
-              <span className="inline-block bg-green-100 text-green-800 px-2 py-1 text-xs rounded">
+              <p className="text-sm text-green-1000">Location: India | Status: Active</p>
+              <span className="inline-block bg-green-800 text-green-100 px-2 py-1 text-xs rounded">
                 {item.category}
               </span>
-              <button className="block text-green-600 font-medium hover:underline">Join</button>
+              <button className="block text-green-800 font-medium hover:underline">Join</button>
             </div>
           ))}
         </div>
         {filteredInitiatives.length === 0 && (
-          <p className="text-center text-gray-600 mt-4">No initiatives found in this category.</p>
+          <p className="text-center text-green-100 mt-4">No initiatives found in this category.</p>
         )}
       </section>
     </div>

@@ -20,7 +20,6 @@ const CommunityMidSec = () => {
     
   return (
 
-    
     <div>    {/* Past Community Interactions Slider */}
 <div className="bg-white py-12">
   <h2 className="text-3xl font-bold text-center text-green-700 mb-6">

@@ -1,3 +1,4 @@
+
 import React, { useState,useEffect } from 'react';
 import CommunityHeroSec from '../components/CommunityHeroSec';
 import CommunityMidSec from '../components/CommunityMidSec';
@@ -18,3 +19,4 @@ export default function Community() {
     </div>
   );
 }
+

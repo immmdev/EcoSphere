@@ -1,40 +1,39 @@
+import { Routes, Route } from "react-router-dom";
+import { Home, Login, Signup, Support, Learn, Contact, Initiative, EcoShop, Profile, Communities, Cart } from "./pages";
+import Product from "./components/EcoShopComponents/Product";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { ToastContainer } from "react-toastify";
+import CarbonFootprintCalculator from "./pages/EcoCalci";
+import Random from "./pages/Random"
 
-import { useState } from 'react'
-import Initiative from "./pages/Initiative"
-import { Routes, Route } from 'react-router-dom';
-import { Home, Login, Signup } from './pages';
-import Profile from './pages/Profile';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Communities from './pages/Communities';
-import Initiatives from './pages/Initiative';
-import Support from './pages/Support';
-import Learn from './pages/Learn';
-import Contact from './pages/Contact';
-import EcoShop from './pages/EcoShop';
+
 
 function App() {
-  return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/Initiative' element={<Initiative />} />
-
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/support' element={<Support />} />
-        <Route path='/learn' element={<Learn />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/initiatives' element={<Initiatives />} />
-        <Route path='/eco-shop' element={<EcoShop />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/communities' element={<Communities />} />
-
-      </Routes>
-      <Footer />
-    </div>
-  );
+	return (
+		<div>
+			<ToastContainer />
+			<Navbar />
+			<Routes>
+				<Route path="/random" element={<Random />} />
+				<Route path="/" element={<Home />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route path="/support" element={<Support />} />
+				<Route path="/learn" element={<Learn />} />
+				<Route path="/contact" element={<Contact />} />
+				<Route path="/initiatives" element={<Initiative />} />
+				<Route path="/eco-shop" element={<EcoShop />} />
+       			 <Route path='/eco-shop/:productId' element={<Product />} />
+                <Route path="/cart" element={<Cart />} />
+				<Route path="/profile" element={<Profile />} />
+				<Route path="/communities" element={<Communities />} />
+				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
+			</Routes>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
+
