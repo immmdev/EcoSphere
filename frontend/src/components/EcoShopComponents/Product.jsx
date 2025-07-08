@@ -10,9 +10,6 @@ const Product = () => {
 	const [productData, setProductData] = React.useState(false);
 	const [image, setImage] = React.useState("");
 
-    
-    
-
 	const fetchProductData = () => {
 		products.map((item) => {
 			if (item._id === productId) {

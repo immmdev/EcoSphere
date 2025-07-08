@@ -18,27 +18,20 @@ const ShopContextProvider = (props) => {
 	const navigate = useNavigate();
 
 	const addToCart = async (itemId) => {
-		// if (!size) {
-		// 	toast.error("Select Product Size");
-		// 	return;
-		// }
+        if (!token) {
+            toast.error("Please login to add items to cart");
+            navigate("/login");
+            return;
+        }
 
 		let cartData = structuredClone(cartItems);
 		if (cartData[itemId]) {
             toast.error("Item already in cart");
-			// if (cartData[itemId]) {
-			// 	cartData[itemId] += 1;
-			// } else {
-			// 	cartData[itemId] = 1;
-			// }
 		} else {
             setCartItems((prev) => ({
                 ...prev,
                 [itemId]: 1,
             }));    
-
-			// cartData[itemId] = {};
-			// cartData[itemId][size] = 1;
 		}
 		// setCartItems(cartData);
         
