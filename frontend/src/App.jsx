@@ -22,12 +22,8 @@ function App() {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/initiatives" element={<Initiative />} />
 				<Route path="/eco-shop" element={<EcoShop />} />
-<<<<<<< HEAD
        			 <Route path='/eco-shop/:productId' element={<Product />} />
-=======
-                <Route path='/eco-shop/:productId' element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
->>>>>>> 85cb3952195b23682c81852f1751b9b6f9825a22
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/communities" element={<Communities />} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
