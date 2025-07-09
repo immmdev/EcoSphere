@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LatestCollection from "../components/EcoShopComponents/LatestCollection";
 import BestSeller from "../components/EcoShopComponents/BestSeller";
 
@@ -9,7 +10,7 @@ const EcoShop = () => {
 			<LatestCollection />
 			<div className="flex justify-center my-8">
 				<Link
-					to="/eco-shop/all-collections"
+					to="/all-collections"
 					className="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-400 to-blue-500 text-white text-lg font-bold rounded-full shadow-lg transition-transform transform hover:scale-105 hover:from-green-500 hover:to-blue-600 focus:outline-none"
 				>
 					<span className="mr-3">All Collections</span>
