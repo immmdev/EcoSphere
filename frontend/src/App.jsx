@@ -10,7 +10,7 @@ import LearnArticleCreate from "./components/LearnArticleCreate";
 import CommunityDisplay from "./components/CommunityDisplay";
 import CommunityPostForm from "./components/CommunityPostCreate";
 import CommunityNewForm from "./components/CommunityNewForm";
-
+import LearnVideoCreate from "./components/LearnVideoCreate";
 
 
 function App() {
@@ -27,16 +27,17 @@ function App() {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/initiatives" element={<Initiative />} />
 				<Route path="/eco-shop" element={<EcoShop />} />
-       			 <Route path='/eco-shop/:productId' element={<Product />} />
-                <Route path="/cart" element={<Cart />} />
+				<Route path='/eco-shop/:productId' element={<Product />} />
+				<Route path="/cart" element={<Cart />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/communities" element={<Communities />} />
-				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
-			<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
-			<Route path="learn/article/new" element={<LearnArticleCreate/>}/>
-			<Route path="/communities/post/new" element={<CommunityPostForm/>}/>
-			<Route path="/communities/new" element={<CommunityNewForm/>}/>
-			<Route path="/community/:id" element={<CommunityDisplay />} />
+				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
+				<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
+				<Route path="learn/article/new" element={<LearnArticleCreate />} />
+				<Route path="learn/video/new" element={<LearnVideoCreate />} />
+				<Route path="/communities/post/new" element={<CommunityPostForm />} />
+				<Route path="/communities/new" element={<CommunityNewForm />} />
+				<Route path="/community/:id" element={<CommunityDisplay />} />
 
 
 			</Routes>
