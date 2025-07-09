@@ -83,8 +83,8 @@ function CarbonFootprintCalculator() {
   return (
     <div className='eco-static-bg p-5' >
       
-      <h1 className="text-4xl md:text-5xl text-center font-bold text-white mb-4 mt-5">
-        Calculate Daily Footprint
+      <h1 className="text-4xl md:text-4xl text-center font-bold text-white mb-4 mt-5">
+        Calculate today's carbon footprint
       </h1>
       <p className='text-green-100 mb-5 text-lg text-center'>EcoCalci – Effortlessly calculate your daily carbon footprint and take a step toward a greener future</p>
 

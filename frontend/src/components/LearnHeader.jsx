@@ -42,7 +42,7 @@ function LearnHeader() {
                     </button>
                 </div>
             </div>
-            <LearnCategoryTabs/>
+            <LearnCategoryTabs isVideo={isVideo}/>
             {isVideo===1? <LearnVideo/> : <LearnArticle/>}
          </section>
     );
