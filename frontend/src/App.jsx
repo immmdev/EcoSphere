@@ -6,8 +6,7 @@ import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import CarbonFootprintCalculator from "./pages/EcoCalci";
 import Random from "./pages/Random"
-
-
+import CreateInitiative from "./components/initiative-Formpage";
 
 function App() {
 	return (
@@ -23,6 +22,7 @@ function App() {
 				<Route path="/learn" element={<Learn />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/initiatives" element={<Initiative />} />
+				<Route path="/initiatives/form-page" element={<CreateInitiative/>} />
 				<Route path="/eco-shop" element={<EcoShop />} />
        			 <Route path='/eco-shop/:productId' element={<Product />} />
                 <Route path="/cart" element={<Cart />} />

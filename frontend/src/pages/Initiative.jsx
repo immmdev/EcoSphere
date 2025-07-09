@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
 
 const categories = [
@@ -56,8 +55,7 @@ const Initiatives = () => {
       : featured.filter((item) => item.category === selectedCategory);
 
   return (
-
-    <div className="eco-static-bg text-green-900 min-h-screen">
+    <div className="eco-static-bg text-green-900 min-h-screen scroll-smooth">
       {/* Header Section with Slider */}
       <section className="relative h-[70vh] flex items-center justify-center text-center bg-green-50 overflow-hidden">
         {/* Image Slider */}
@@ -68,7 +66,7 @@ const Initiatives = () => {
               src={img}
               alt={`Slide ${i}`}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                i === current ? "opacity-80" : "opacity-0"
+                i === current ? 'opacity-80' : 'opacity-0'
               }`}
             />
           ))}
@@ -82,32 +80,30 @@ const Initiatives = () => {
           </p>
           <div className="mt-6 flex flex-col md:flex-row justify-center gap-4">
             <Link
-              style={{ fontFamily: "Raleway, sans-serif" }}
-              to="/"
+              style={{ fontFamily: 'Raleway, sans-serif' }}
+              to="/initiatives/form-page"
               className="bg-lime-300 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
             >
               + Create Initiative
             </Link>
 
-            <Link
-              style={{ fontFamily: "Raleway, sans-serif" }}
-              to="/"
+            <a
+              href="#initiatives"
+              style={{ fontFamily: 'Raleway, sans-serif' }}
               className="bg-lime-300 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
             >
               Explore All Initiatives
-            </Link>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Category Tabs */}
-
-      <section className="eco-static-bg py-6 px-4 border   border-green-100">
+      <section className="eco-static-bg py-6 px-4 border border-green-100">
         <div className="flex flex-wrap justify-center gap-3">
           {categories.map((cat, i) => (
             <button
               key={i}
-
               className={
                 selectedCategory === cat
                   ? 'bg-lime-300 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150 '
@@ -122,12 +118,10 @@ const Initiatives = () => {
       </section>
 
       {/* All Initiatives Grid */}
-      <section className="py-12 px-6 max-w-6xl mx-auto">
-       <h2 className="text-2xl font-bold text-green-100 mb-6">
-  {selectedCategory === 'All'
-    ? 'All Initiatives'
-    : `${selectedCategory} Initiatives`}
-</h2>
+      <section id="initiatives" className="py-12 px-6 max-w-6xl mx-auto">
+        <h2 className="text-2xl font-bold text-green-100 mb-6">
+          {selectedCategory === 'All' ? 'All Initiatives' : `${selectedCategory} Initiatives`}
+        </h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           {filteredInitiatives.map((item, i) => (
@@ -146,6 +140,7 @@ const Initiatives = () => {
             </div>
           ))}
         </div>
+
         {filteredInitiatives.length === 0 && (
           <p className="text-center text-green-100 mt-4">No initiatives found in this category.</p>
         )}
