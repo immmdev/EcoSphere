@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import CarbonFootprintCalculator from "./pages/EcoCalci";
+import Random from "./pages/Random"
 
 
 
@@ -14,6 +15,7 @@ function App() {
 			<ToastContainer />
 			<Navbar />
 			<Routes>
+				<Route path="/random" element={<Random />} />
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
