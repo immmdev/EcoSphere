@@ -5,6 +5,12 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import CarbonFootprintCalculator from "./pages/EcoCalci";
+import Community from "./components/Support/Community";
+import LearnGrow from "./components/Support/LearnGrow";
+import CarbonTracker from "./components/Support/CarbonTracker";
+import Eco from "./components/Support/Eco";
+import Initiate from "./components/Support/Initiate";
+import GettingStarted from "./components/Support/GettingStarted";
 
 
 
@@ -27,6 +33,12 @@ function App() {
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/communities" element={<Communities />} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
+				<Route path="/getting-started" element={<GettingStarted/>} />
+                <Route path="/community" element={<Community/>} />
+                <Route path="/learn-grow" element= {<LearnGrow/>}/>
+                <Route path="/carbon-tracker" element={<CarbonTracker/>} />
+                <Route path="/eco" element={<Eco/>} />
+                <Route path="/initiate" element={<Initiate/>} />
 			</Routes>
 			<Footer />
 		</div>
