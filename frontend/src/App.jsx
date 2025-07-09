@@ -8,6 +8,7 @@ import CarbonFootprintCalculator from "./pages/EcoCalci";
 import LearnArticleInDetail from "./components/LearnArticleinDetail";
 import LearnArticleCreate from "./components/LearnArticleCreate";
 import LearnVideoCreate from "./components/LearnVideoCreate";
+import Random from "./pages/Random"
 
 
 
@@ -17,6 +18,7 @@ function App() {
 			<ToastContainer />
 			<Navbar />
 			<Routes>
+				<Route path="/random" element={<Random />} />
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
