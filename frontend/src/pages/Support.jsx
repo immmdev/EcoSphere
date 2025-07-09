@@ -54,7 +54,7 @@ function Support() {
       title: "Communities",
       desc: "Explore and join like-minded eco-groups",
       icon: <Users className="w-6 h-6 text-white" />,
-      navigate: "/communities",
+      navigate: "/community",
     },
     {
       title: "Learn & Grow",

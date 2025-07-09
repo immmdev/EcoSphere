@@ -31,7 +31,7 @@ function App() {
        			 <Route path='/eco-shop/:productId' element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
 				<Route path="/profile" element={<Profile />} />
-				<Route path="/communities" element={<Communities />} />
+				<Route path="/community" element={<Communities />} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
 				<Route path="/getting-started" element={<GettingStarted/>} />
                 <Route path="/community" element={<Community/>} />
