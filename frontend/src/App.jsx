@@ -48,8 +48,6 @@ function App() {
 				<Route path="/communities/post/new" element={<CommunityPostForm />} />
 				<Route path="/communities/new" element={<CommunityNewForm />} />
 				<Route path="/community/:id" element={<CommunityDisplay />} />
-
-
 			</Routes>
 			<Footer />
 		</div>
