@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react';
 
-function Communities() {
+import CommunityLanding from '../components/CommunityLandingPage';
+
+export default function Community() {
+
   return (
     <div>
-      
+     <CommunityLanding/>
     </div>
-  )
+  );
 }
 
-export default Communities
