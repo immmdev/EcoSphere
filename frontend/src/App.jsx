@@ -7,6 +7,9 @@ import { ToastContainer } from "react-toastify";
 import CarbonFootprintCalculator from "./pages/EcoCalci";
 import LearnArticleInDetail from "./components/LearnArticleinDetail";
 import LearnArticleCreate from "./components/LearnArticleCreate";
+import CommunityDisplay from "./components/CommunityDisplay";
+import CommunityPostForm from "./components/CommunityPostCreate";
+import CommunityNewForm from "./components/CommunityNewForm";
 import LearnVideoCreate from "./components/LearnVideoCreate";
 import Random from "./pages/Random"
 import Orders from "./pages/Orders";
@@ -21,7 +24,6 @@ function App() {
 			<ToastContainer />
 			<Navbar />
 			<Routes>
-				<Route path="/random" element={<Random />} />
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
@@ -37,10 +39,14 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/myorders" element={<Orders />} />
 				<Route path="/communities" element={<Communities />} />
-				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
-			<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
-			<Route path="learn/article/new" element={<LearnArticleCreate/>}/>
-			<Route path="learn/video/new" element={<LearnVideoCreate/>}/>
+				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
+				<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
+				<Route path="learn/article/new" element={<LearnArticleCreate />} />
+				<Route path="learn/video/new" element={<LearnVideoCreate />} />
+				<Route path="/communities/post/new" element={<CommunityPostForm />} />
+				<Route path="/communities/new" element={<CommunityNewForm />} />
+				<Route path="/community/:id" element={<CommunityDisplay />} />
+
 
 			</Routes>
 			<Footer />
