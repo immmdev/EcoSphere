@@ -5,6 +5,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import CarbonFootprintCalculator from "./pages/EcoCalci";
+import LearnArticleInDetail from "./components/LearnArticleinDetail";
+import LearnArticleCreate from "./components/LearnArticleCreate";
+import LearnVideoCreate from "./components/LearnVideoCreate";
 import Random from "./pages/Random"
 
 
@@ -29,6 +32,10 @@ function App() {
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/communities" element={<Communities />} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
+			<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
+			<Route path="learn/article/new" element={<LearnArticleCreate/>}/>
+			<Route path="learn/video/new" element={<LearnVideoCreate/>}/>
+
 			</Routes>
 			<Footer />
 		</div>

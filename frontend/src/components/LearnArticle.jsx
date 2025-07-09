@@ -1,5 +1,6 @@
 import React from 'react';
 // import photo1 from '../assets/'
+import { FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 function LearnArticle() {
@@ -7,7 +8,7 @@ function LearnArticle() {
     {
       title: "10 Easy Ways to Reduce Your Plastic Usage",
       summary: "Learn simple and practical tips to minimize plastic use in your daily life and contribute to a healthier planet.",
-      content: "Reducing plastic use starts with small changes like carrying reusable bags...",
+      content: "Sustainable living ka arth hai aisi jeevan shailee apnaana jo prakritik sansadhanon ka samuchit upyog kare aur paryavaran par kam se kam prabhav dale. Aaj ke samay mein jab climate change, pradushan, aur prakritik sansadhanon ki kami jaise samasyaayein badhti ja rahi hain, to har vyakti ka yogdan atyavashyak ho gaya hai. Iske liye humein apne rozmarra ke faislon mein kuch saadhan-vichar laane honge. Hum kam vastu kharidein, unn vastuon ko chunen jo long-lasting aur eco-friendly hoon, aur plastic ka istemal kam karein. Plant-based aur local food lena bhi ek acha kadam hai. Reusable items jaise bottles aur bags ka upyog plastic ke viakalp ke roop mein karna chahiye. Ghar ke liye LED bulbs aur energy-efficient machines chuniye, aur pani bachane ke liye low-flow devices lagaiye. Transport mein cycle, walk, aur public transport ka upyog karke emissions ghatayein. Sustainable tech jaise solar panels aur biodegradable packaging bhi is raaste ko aasan banate hain. Aise jeevan se na keval dharti surakshit hoti hai, balki vyakti ki health aur budget dono behtar hota hai. Jab hum ethical aur local shopping karte hain, to samudaay bhi majboot hota hai. Zaroori hai ki hum har chhoti chhoti chizon par dhyan dein — kya mujhe yah vastu sach mein chahiye, kya isse behtar vikalp hai, aur iska prabhav kya hoga. Global campaigns jaise UN ke SDGs aur carbon neutrality bhi isi disha mein kaam kar rahe hain. Har chhoti koshish maayane rakhti hai. Perfect hone ki zarurat nahi, lekin lagataar aur imaandaar koshish zaroori hai. Aaj agar har vyakti chhoti shuruaat kare, to kal ek hara-bhara, swachh aur surakshit bhavishya tay ho sakta hai.",
       category: "Beginner",
       tags: ["plastic", "sustainability", "eco-friendly"],
       type: "Article",
@@ -59,7 +60,7 @@ function LearnArticle() {
       coverImage: "https://images.pexels.com/photos/1151418/pexels-photo-1151418.jpeg",
       createdAt: new Date("2024-07-10"),
     },
-        {
+    {
       title: "Urban Gardening Tips for Small Spaces",
       summary: "No backyard? No problem...",
       content: "From vertical gardens to container pots...",
@@ -70,7 +71,7 @@ function LearnArticle() {
       coverImage: "https://images.pexels.com/photos/1151418/pexels-photo-1151418.jpeg",
       createdAt: new Date("2024-07-10"),
     },
-     {
+    {
       title: "Urban Gardening Tips for Small Spaces",
       summary: "No backyard? No problem...",
       content: "From vertical gardens to container pots...",
@@ -80,7 +81,7 @@ function LearnArticle() {
       author: "Rohan Verma",
       coverImage: "https://images.pexels.com/photos/1151418/pexels-photo-1151418.jpeg",
       createdAt: new Date("2024-07-10"),
-    },{
+    }, {
       title: "Zero Waste Lifestyle: A Realistic Guide",
       summary: "Going zero waste doesn't have to be extreme...",
       content: "This guide walks you through real-life steps...",
@@ -91,7 +92,7 @@ function LearnArticle() {
       coverImage: "https://images.pexels.com/photos/1089454/pexels-photo-1089454.jpeg",
       createdAt: new Date("2024-09-15"),
     },
-        {
+    {
       title: "10 Easy Ways to Reduce Your Plastic Usage",
       summary: "Learn simple and practical tips to minimize plastic use in your daily life and contribute to a healthier planet.",
       content: "Reducing plastic use starts with small changes like carrying reusable bags...",
@@ -144,11 +145,13 @@ function LearnArticle() {
             </div>
 
             <Link
-              to={`/learn/article/${index}`} // or use article.id if available
+              to={`/learn/article/${index}`}
+              state={{ articles }}
               className="inline-block mt-2 text-green-800 hover:underline font-medium text-sm"
             >
               Read More →
             </Link>
+
           </div>
         </div>
       ))}
