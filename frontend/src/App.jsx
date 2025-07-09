@@ -11,6 +11,11 @@ import CommunityDisplay from "./components/CommunityDisplay";
 import CommunityPostForm from "./components/CommunityPostCreate";
 import CommunityNewForm from "./components/CommunityNewForm";
 import LearnVideoCreate from "./components/LearnVideoCreate";
+import Random from "./pages/Random"
+import Orders from "./pages/Orders";
+import PlaceOrder from "./components/EcoShopComponents/PlaceOrder";
+import Verify from "./components/EcoShopComponents/Verify"
+
 
 
 function App() {
@@ -27,9 +32,12 @@ function App() {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/initiatives" element={<Initiative />} />
 				<Route path="/eco-shop" element={<EcoShop />} />
-				<Route path='/eco-shop/:productId' element={<Product />} />
-				<Route path="/cart" element={<Cart />} />
+       			<Route path='/eco-shop/:productId' element={<Product />} />
+                <Route path='/place-order' element={<PlaceOrder />} />
+                <Route path="/verify" element={<Verify />} />
 				<Route path="/profile" element={<Profile />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/myorders" element={<Orders />} />
 				<Route path="/communities" element={<Communities />} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
 				<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
