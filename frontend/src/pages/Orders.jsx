@@ -77,13 +77,13 @@ const Orders = () => {
 					orderData.map((item, index) => (
 						<div
 							key={index}
-							className="py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:justify-between gap-4"
+							className="py-4 border-t border-b text-white flex flex-col md:flex-row md:justify-between gap-4"
 						>
 							<div className="flex items-start gap-6 text-sm">
 								<img className="w-16 sm:w-20" src={item.imageUrl[0]} alt="" />
 								<div>
 									<p className="sm:text-base font-medium">{item.title}</p>
-									<div className="flex items-center gap-3 mt-1 text-base text-gray-700">
+									<div className="flex items-center gap-3 mt-1 text-base text-gray-200">
 										<p>
 											{currency}
 											{item.price}
@@ -93,13 +93,13 @@ const Orders = () => {
 									</div>
 									<p className="mt-1">
 										Date:{" "}
-										<span className="text-gray-400">
+										<span className="text-gray-300">
 											{new Date(item.date).toDateString()}
 										</span>
 									</p>
 									<p className="mt-1">
 										Payment:{" "}
-										<span className="text-gray-400">{item.paymentMethod}</span>
+										<span className="text-gray-300">{item.paymentMethod}</span>
 									</p>
 								</div>
 							</div>

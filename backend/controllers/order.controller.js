@@ -194,7 +194,6 @@ const userOrders = async (req, res) => {
         
         const {userId} = req.body;
         const orders = await Order.find({userId})
-        console.log(orders);
         res.status(200).json({ success: true, orders });
 
     } catch (error) {

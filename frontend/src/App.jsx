@@ -15,6 +15,7 @@ import Random from "./pages/Random"
 import Orders from "./pages/Orders";
 import PlaceOrder from "./components/EcoShopComponents/PlaceOrder";
 import Verify from "./components/EcoShopComponents/Verify"
+import Collection from "./components/EcoShopComponents/Collection";
 
 
 
@@ -32,6 +33,7 @@ function App() {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/initiatives" element={<Initiative />} />
 				<Route path="/eco-shop" element={<EcoShop />} />
+                <Route path="/all-collections" element={<Collection />} />
        			<Route path='/eco-shop/:productId' element={<Product />} />
                 <Route path='/place-order' element={<PlaceOrder />} />
                 <Route path="/verify" element={<Verify />} />
