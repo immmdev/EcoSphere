@@ -11,8 +11,17 @@ import CarbonTracker from "./components/Support/CarbonTracker";
 import Eco from "./components/Support/Eco";
 import Initiate from "./components/Support/Initiate";
 import GettingStarted from "./components/Support/GettingStarted";
-
-
+import LearnArticleInDetail from "./components/LearnArticleinDetail";
+import LearnArticleCreate from "./components/LearnArticleCreate";
+import CommunityDisplay from "./components/CommunityDisplay";
+import CommunityPostForm from "./components/CommunityPostCreate";
+import CommunityNewForm from "./components/CommunityNewForm";
+import LearnVideoCreate from "./components/LearnVideoCreate";
+import Random from "./pages/Random"
+import Orders from "./pages/Orders";
+import PlaceOrder from "./components/EcoShopComponents/PlaceOrder";
+import Verify from "./components/EcoShopComponents/Verify"
+import Collection from "./components/EcoShopComponents/Collection";
 
 function App() {
 	return (
@@ -30,7 +39,13 @@ function App() {
 				<Route path="/eco-shop" element={<EcoShop />} />
        			<Route path='/eco-shop/:productId' element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/all-collections" element={<Collection />} />
+       			<Route path='/eco-shop/:productId' element={<Product />} />
+                <Route path='/place-order' element={<PlaceOrder />} />
+                <Route path="/verify" element={<Verify />} />
 				<Route path="/profile" element={<Profile />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/myorders" element={<Orders />} />
 				<Route path="/communities" element={<Communities />} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
 				<Route path="/getting-started" element={<GettingStarted/>} />
@@ -39,6 +54,14 @@ function App() {
                 <Route path="/carbon-tracker" element={<CarbonTracker/>} />
                 <Route path="/eco" element={<Eco/>} />
                 <Route path="/initiate" element={<Initiate/>} />
+
+				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
+				<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
+				<Route path="learn/article/new" element={<LearnArticleCreate />} />
+				<Route path="learn/video/new" element={<LearnVideoCreate />} />
+				<Route path="/communities/post/new" element={<CommunityPostForm />} />
+				<Route path="/communities/new" element={<CommunityNewForm />} />
+				<Route path="/community/:id" element={<CommunityDisplay />} />
 			</Routes>
 			<Footer />
 		</div>

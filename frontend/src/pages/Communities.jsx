@@ -1,14 +1,14 @@
-import React from 'react'
 
 
+import CommunityLanding from '../components/CommunityLandingPage';
 
-function Communities() {
+export default function Community() {
+  
   return (
     <div>
-    
-    
+     <CommunityLanding/>
+
     </div>
-  )
+  );
 }
 
-export default Communities
