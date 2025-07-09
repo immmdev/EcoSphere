@@ -46,9 +46,8 @@ function App() {
                 <Route path='/place-order' element={<PlaceOrder />} />
                 <Route path="/verify" element={<Verify />} />
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/myorders" element={<Orders />} />
-
-				<Route path="/communities" element={<Communities />} />
+				<Route path="/profile" element={<Profile />} />
+				<Route path="/community" element={<Communities />} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
 				<Route path="/getting-started" element={<GettingStarted/>} />
                 <Route path="/community" element={<Community/>} />
