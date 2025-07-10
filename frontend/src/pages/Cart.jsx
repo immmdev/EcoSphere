@@ -9,9 +9,6 @@ const Cart = () => {
 
 	const [cartData, setCartData] = React.useState([]);
 
-    console.log(cartData);
-    
-
 	useEffect(() => {
 		if (products.length > 0) {
 			const tempData = [];
@@ -85,7 +82,7 @@ const Cart = () => {
 					);
 				})}
 			</div>
-			<div className="flex justify-end py-20">
+			<div className="flex justify-end py-20 text-white">
 				<div className="w-full sm:w-[450px]">
 					<CartTotal />
 					<div className="w-full text-end">

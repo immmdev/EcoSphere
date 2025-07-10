@@ -33,11 +33,17 @@ import img19 from "./img19.jpg";
 import star_icon from "./star_icon.png";
 import star_dull_icon from "./star_dull_icon.png";
 import bin_icon from "./bin_icon.png";
+import stripe_logo from "./stripe_logo.png";
+import razorpay_logo from "./razorpay_logo.png";
+import dropdown_icon from "./dropdown_icon.png";
 
 export const assets = {
-    star_icon, 
-    star_dull_icon,
-    bin_icon,
+	star_icon, 
+	star_dull_icon,
+	bin_icon,
+	stripe_logo,
+	razorpay_logo,
+	dropdown_icon
 }
 
 export const products = [
@@ -326,4 +332,94 @@ export const products = [
 		},
 		createdAt: "2025-06-20T09:00:00Z",
 	},
+	{
+		_id: "product-20",
+		title: "Bamboo Toothbrush Set",
+		description: "Eco-friendly toothbrushes made from sustainable bamboo.",
+		category: "Utilities",
+		price: 60,
+		imageUrl: [img1_1],
+		bestseller: false,
+		seller: {
+			userId: "64f1a1a2e6e123456789abe0",
+			name: "Aarav Joshi",
+			email: "aarav@example.com",
+		},
+		createdAt: "2025-06-19T10:00:00Z",
+	},
+	{
+		_id: "product-21",
+		title: "Terracotta Water Bottle",
+		description: "Handcrafted water bottle made from natural terracotta clay.",
+		category: "Utilities",
+		price: 180,
+		imageUrl: [img2_1],
+		bestseller: true,
+		seller: {
+			userId: "64f1a1a2e6e123456789abe1",
+			name: "Simran Kaur",
+			email: "simran@example.com",
+		},
+		createdAt: "2025-06-18T09:00:00Z",
+	},
+	{
+		_id: "product-22",
+		title: "Recycled Sari Wallet",
+		description: "Colorful wallet made from upcycled sari fabric.",
+		category: "Fashion",
+		price: 110,
+		imageUrl: [img3_1],
+		bestseller: false,
+		seller: {
+			userId: "64f1a1a2e6e123456789abe2",
+			name: "Fatima Khan",
+			email: "fatima@example.com",
+		},
+		createdAt: "2025-06-17T12:00:00Z",
+	},
+	{
+		_id: "product-23",
+		title: "Seed Bomb Kit",
+		description: "Kit with clay and seeds to create your own seed bombs for planting.",
+		category: "Gifting",
+		price: 95,
+		imageUrl: [img4_1],
+		bestseller: true,
+		seller: {
+			userId: "64f1a1a2e6e123456789abe3",
+			name: "Rahul Sethi",
+			email: "rahul@example.com",
+		},
+		createdAt: "2025-06-16T15:00:00Z",
+	},
+	{
+		_id: "product-24",
+		title: "Cork Yoga Mat",
+		description: "Non-slip yoga mat made from natural cork and rubber.",
+		category: "Utilities",
+		price: 350,
+		imageUrl: [img5_1],
+		bestseller: false,
+		seller: {
+			userId: "64f1a1a2e6e123456789abe4",
+			name: "Priyansh Mehta",
+			email: "priyansh@example.com",
+		},
+		createdAt: "2025-06-15T11:00:00Z",
+	},
+	{
+		_id: "product-25",
+		title: "Handmade Clay Earrings",
+		description: "Unique earrings crafted from natural clay, painted by hand.",
+		category: "Fashion",
+		price: 130,
+		imageUrl: [img6_1],
+		bestseller: true,
+		seller: {
+			userId: "64f1a1a2e6e123456789abe5",
+			name: "Shreya Nair",
+			email: "shreya@example.com",
+		},
+		createdAt: "2025-06-14T13:00:00Z",
+	}
 ];
