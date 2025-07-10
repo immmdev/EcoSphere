@@ -11,7 +11,7 @@ import CommunityDisplay from "./components/CommunityDisplay";
 import CommunityPostForm from "./components/CommunityPostCreate";
 import CommunityNewForm from "./components/CommunityNewForm";
 import LearnVideoCreate from "./components/LearnVideoCreate";
-import Random from "./pages/Random"
+
 
 import CreateInitiative from "./components/initiative-Formpage";
 
