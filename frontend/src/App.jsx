@@ -12,6 +12,9 @@ import CommunityPostForm from "./components/CommunityPostCreate";
 import CommunityNewForm from "./components/CommunityNewForm";
 import LearnVideoCreate from "./components/LearnVideoCreate";
 import Random from "./pages/Random"
+
+import CreateInitiative from "./components/initiative-Formpage";
+
 import Orders from "./pages/Orders";
 import PlaceOrder from "./components/EcoShopComponents/PlaceOrder";
 import Verify from "./components/EcoShopComponents/Verify"
@@ -32,6 +35,7 @@ function App() {
 				<Route path="/learn" element={<Learn />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/initiatives" element={<Initiative />} />
+				<Route path="/initiatives/form-page" element={<CreateInitiative/>} />
 				<Route path="/eco-shop" element={<EcoShop />} />
                 <Route path="/all-collections" element={<Collection />} />
        			<Route path='/eco-shop/:productId' element={<Product />} />
