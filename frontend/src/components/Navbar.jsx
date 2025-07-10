@@ -57,7 +57,12 @@ function Navbar() {
 				{/* Mobile Toggle */}
 				<button onClick={() => setIsOpen(true)} className="lg:hidden text-gray-300">
 					<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth={2}
+							d="M4 6h16M4 12h16M4 18h16"
+						/>
 					</svg>
 				</button>
 
@@ -88,9 +93,24 @@ function Navbar() {
 							{isProfileDropdownOpen && (
 								<div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-50 border border-gray-600">
 									<div className="py-1 text-sm text-gray-300">
-										<NavLink to="/profile" className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400">My Profile</NavLink>
-										<NavLink to="/cart" className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400">My Cart</NavLink>
-										<NavLink to="/myorders" className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400">My Orders</NavLink>
+										<NavLink
+											to="/profile"
+											className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400"
+										>
+											My Profile
+										</NavLink>
+										<NavLink
+											to="/cart"
+											className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400"
+										>
+											My Cart
+										</NavLink>
+										<NavLink
+											to="/myorders"
+											className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400"
+										>
+											My Orders
+										</NavLink>
 										<hr className="border-gray-600" />
 										<button
 											onClick={logout}
@@ -140,8 +160,18 @@ function Navbar() {
 						onClick={() => setIsOpen(false)}
 						className="absolute top-4 right-4 text-white hover:text-gray-200"
 					>
-						<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+						<svg
+							className="w-6 h-6"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M6 18L18 6M6 6l12 12"
+							/>
 						</svg>
 					</button>
 
@@ -163,9 +193,33 @@ function Navbar() {
 						))}
 						{token ? (
 							<>
-								<li><NavLink to="/profile" onClick={() => setIsOpen(false)} className="hover:text-lime-300">My Profile</NavLink></li>
-								<li><NavLink to="/cart" onClick={() => setIsOpen(false)} className="hover:text-lime-300">My Cart</NavLink></li>
-								<li><NavLink to="/myorders" onClick={() => setIsOpen(false)} className="hover:text-lime-300">My Orders</NavLink></li>
+								<li>
+									<NavLink
+										to="/profile"
+										onClick={() => setIsOpen(false)}
+										className="hover:text-lime-300"
+									>
+										My Profile
+									</NavLink>
+								</li>
+								<li>
+									<NavLink
+										to="/cart"
+										onClick={() => setIsOpen(false)}
+										className="hover:text-lime-300"
+									>
+										My Cart
+									</NavLink>
+								</li>
+								<li>
+									<NavLink
+										to="/myorders"
+										onClick={() => setIsOpen(false)}
+										className="hover:text-lime-300"
+									>
+										My Orders
+									</NavLink>
+								</li>
 								<li>
 									<button
 										onClick={() => {
@@ -180,8 +234,24 @@ function Navbar() {
 							</>
 						) : (
 							<>
-								<li><NavLink to="/login" onClick={() => setIsOpen(false)} className="hover:text-lime-300">Login</NavLink></li>
-								<li><NavLink to="/signup" onClick={() => setIsOpen(false)} className="hover:text-lime-300">Signup</NavLink></li>
+								<li>
+									<NavLink
+										to="/login"
+										onClick={() => setIsOpen(false)}
+										className="hover:text-lime-300"
+									>
+										Login
+									</NavLink>
+								</li>
+								<li>
+									<NavLink
+										to="/signup"
+										onClick={() => setIsOpen(false)}
+										className="hover:text-lime-300"
+									>
+										Signup
+									</NavLink>
+								</li>
 							</>
 						)}
 					</ul>
