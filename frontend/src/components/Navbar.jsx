@@ -17,12 +17,15 @@ function Navbar() {
 	};
 
 	const toggleProfileDropdown = () => {
-		setIsProfileDropdownOpen(!isProfileDropdownOpen);
+		setIsProfileDropdownOpen((prev) => !prev);
 	};
 
 	useEffect(() => {
 		const handleClickOutside = (event) => {
-			if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+			if (
+				profileDropdownRef.current &&
+				!profileDropdownRef.current.contains(event.target)
+			) {
 				setIsProfileDropdownOpen(false);
 			}
 		};
@@ -44,9 +47,8 @@ function Navbar() {
 	];
 
 	return (
-		<nav className="bg-black border-b border-black px-4 py-3">
+		<nav className="bg-black border-b px-4 py-3">
 			<div className="max-w-7xl mx-auto flex items-center justify-between">
-				{/* Logo */}
 				<NavLink to="/" className="flex items-center gap-2">
 					<img src="/earth.png" alt="logo" className="w-10 h-10" />
 					<span style={{ fontFamily: "Pacifico" }} className="text-gray-300 text-lg">
@@ -54,7 +56,7 @@ function Navbar() {
 					</span>
 				</NavLink>
 
-				{/* Mobile Toggle */}
+				{/* Mobile Toggler */}
 				<button onClick={() => setIsOpen(true)} className="lg:hidden text-gray-300">
 					<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -81,24 +83,104 @@ function Navbar() {
 						<li className="relative" ref={profileDropdownRef}>
 							<button
 								onClick={toggleProfileDropdown}
-								className="text-gray-300 hover:text-green-400 transition duration-200"
+								className="flex items-center gap-1 text-gray-300 hover:text-green-400 transition duration-200"
 							>
-								Profile ▼
+								<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+									/>
+								</svg>
+								<svg
+									className={`w-4 h-4 transition-transform duration-200 ${
+										isProfileDropdownOpen ? "rotate-180" : ""
+									}`}
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+								</svg>
 							</button>
+
+							{/* Dropdown */}
 							{isProfileDropdownOpen && (
 								<div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-50 border border-gray-600">
-									<div className="py-1 text-sm text-gray-300">
-										<NavLink to="/profile" className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400">My Profile</NavLink>
-										<NavLink to="/cart" className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400">My Cart</NavLink>
-										<NavLink to="/myorders" className="block px-4 py-2 hover:bg-gray-700 hover:text-green-400">My Orders</NavLink>
-										<hr className="border-gray-600" />
-										<button
-											onClick={logout}
-											className="block w-full text-left px-4 py-2 text-red-400 hover:bg-gray-700 hover:text-red-300"
-										>
-											Logout
-										</button>
-									</div>
+									<ul className="py-1 text-sm text-gray-300">
+										<li>
+											<NavLink
+												to="/profile"
+												onClick={() => setIsProfileDropdownOpen(false)}
+												className="flex items-center gap-2 px-4 py-2 hover:bg-gray-700 hover:text-green-400"
+											>
+												<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+													/>
+												</svg>
+												My Profile
+											</NavLink>
+										</li>
+										<li>
+											<NavLink
+												to="/cart"
+												onClick={() => setIsProfileDropdownOpen(false)}
+												className="flex items-center gap-2 px-4 py-2 hover:bg-gray-700 hover:text-green-400"
+											>
+												<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"
+													/>
+												</svg>
+												My Cart
+											</NavLink>
+										</li>
+										<li>
+											<NavLink
+												to="/myorders"
+												onClick={() => setIsProfileDropdownOpen(false)}
+												className="flex items-center gap-2 px-4 py-2 hover:bg-gray-700 hover:text-green-400"
+											>
+												<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M9 5h6m-3 0v14M5 12h14"
+													/>
+												</svg>
+												My Orders
+											</NavLink>
+										</li>
+										<hr className="border-gray-600 my-1" />
+										<li>
+											<button
+												onClick={() => {
+													logout();
+													setIsProfileDropdownOpen(false);
+												}}
+												className="flex items-center gap-2 w-full text-left px-4 py-2 text-red-400 hover:bg-gray-700 hover:text-red-300"
+											>
+												<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M17 16l4-4m0 0l-4-4m4 4H7"
+													/>
+												</svg>
+												Logout
+											</button>
+										</li>
+									</ul>
 								</div>
 							)}
 						</li>
@@ -108,9 +190,7 @@ function Navbar() {
 								<NavLink
 									to="/login"
 									className={({ isActive }) =>
-										isActive
-											? "text-green-400 font-semibold"
-											: "text-gray-300 hover:text-green-400"
+										isActive ? "text-green-400 font-semibold" : "text-gray-300 hover:text-green-400"
 									}
 								>
 									Login
@@ -120,9 +200,7 @@ function Navbar() {
 								<NavLink
 									to="/signup"
 									className={({ isActive }) =>
-										isActive
-											? "text-green-400 font-semibold"
-											: "text-gray-300 hover:text-green-400"
+										isActive ? "text-green-400 font-semibold" : "text-gray-300 hover:text-green-400"
 									}
 								>
 									Signup
@@ -144,7 +222,6 @@ function Navbar() {
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
 						</svg>
 					</button>
-
 					<ul className="flex flex-col gap-6 text-center text-white text-lg font-medium">
 						{navLinks.map((link) => (
 							<li key={link.name}>
@@ -152,9 +229,7 @@ function Navbar() {
 									to={link.path}
 									onClick={() => setIsOpen(false)}
 									className={({ isActive }) =>
-										isActive
-											? "text-lime-300 font-semibold"
-											: "text-white hover:text-lime-300"
+										isActive ? "text-lime-300 font-semibold" : "hover:text-lime-300"
 									}
 								>
 									{link.name}
