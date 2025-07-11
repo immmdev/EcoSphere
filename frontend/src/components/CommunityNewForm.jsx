@@ -1,42 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ShopContext } from "../contexts/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const CommunityNewForm = ({ onCreate }) => {
+const CommunityNewForm = () => {
+  const { token, backendUrl, navigate, refresh, setRefresh } = useContext(ShopContext);
+
   const [form, setForm] = useState({
     name: "",
     agenda: "",
     description: "",
-    creator: "",
     coverImage: "",
   });
 
   const [error, setError] = useState("");
 
+  //function using await, and attaching proper Authorization header
+  const postCommunity = async () => {
+    try {
+      await axios.post(`${backendUrl}/api/communities/new-community`, form,{headers: {token}});
+
+      toast.success("EcoCommunity created");
+      return true;
+    } catch (err) {
+      console.error(err);
+      toast.error("EcoCommunity Creation failed");
+      return false;
+    }
+  };
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name || !form.agenda || !form.description || !form.creator) {
+    // Basic validation
+    if (!form.name || !form.agenda || !form.description) {
       setError("Please fill in all required fields.");
       return;
     }
 
-    const newCommunity = {
-      id: Date.now(),
-      ...form,
-      members: 1, // creator is the first member
-      joined: true,
-    };
+    const isCreated = await postCommunity();
+    if (isCreated) {
+      setRefresh(!refresh);        
+      navigate("/communities");     
+    }
 
-    if (onCreate) onCreate(newCommunity);
 
     setForm({
       name: "",
       agenda: "",
       description: "",
-      creator: "",
       coverImage: "",
     });
 
@@ -80,15 +96,6 @@ const CommunityNewForm = ({ onCreate }) => {
             onChange={handleChange}
             placeholder="Short Description *"
             rows={4}
-            className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
-          />
-
-          <input
-            type="text"
-            name="creator"
-            value={form.creator}
-            onChange={handleChange}
-            placeholder="Your Name (Creator) *"
             className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
           />
 
