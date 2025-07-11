@@ -7,8 +7,6 @@ import userRouter from './routes/user.route.js';
 import cartRouter from './routes/cart.route.js';
 import productRouter from './routes/product.route.js';
 import orderRouter from './routes/order.route.js';
-
-import orderRouter from './routes/order.route.js';
 import contactRoutes from './routes/contact.route.js'
 //app config
 const app = express();

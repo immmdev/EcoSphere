@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 import LatestCollection from "../components/EcoShopComponents/LatestCollection";
 import BestSeller from "../components/EcoShopComponents/BestSeller";
 
