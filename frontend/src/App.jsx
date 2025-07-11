@@ -56,7 +56,6 @@ function App() {
                 <Route path="/carbon-tracker" element={<CarbonTracker/>} />
                 <Route path="/eco" element={<Eco/>} />
                 <Route path="/initiate" element={<Initiate/>} />
-
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
 				<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
 				<Route path="learn/article/new" element={<LearnArticleCreate />} />
