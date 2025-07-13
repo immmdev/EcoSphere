@@ -33,7 +33,10 @@ const Orders = () => {
 				});
 				setOrderData(allOrderItems.reverse());
 			}
-		} catch (error) {}
+		} catch (error) {
+            console.error("Error fetching orders:", error); 
+            
+        }
 	};
 
 	useEffect(() => {
