@@ -7,7 +7,7 @@ function CommunityLanding() {
   const { backendUrl, navigate, refresh, setRefresh } = useContext(ShopContext);
   const [tab, setTab] = useState("all");
   const [communities, setCommunities] = useState([]);
-  const [communityName, setCommunityName]=useState("");
+  const [communityName, setCommunityName] = useState("");
 
   const fetchCommunity = async () => {
     try {
@@ -24,32 +24,33 @@ function CommunityLanding() {
   }, [refresh]);
 
 
-  const joiningCommunity = async () => {
+  const joiningCommunity = async (communityName) => {
     try {
-      await axios.post(`${backendUrl}/api/communities/join-community`,{communityName} ,{ headers: { token } });
-      toast.success("joined");
+      await axios.post(
+        `${backendUrl}/api/communities/join-community`,
+        { communityName },
+        { headers: { token } }
+      );
+      toast.success("Successfully joined the community!");
       return true;
     } catch (err) {
       console.error(err);
-      toast.error("EcoCommunity Creation failed");
+      toast.error("Failed to join the community.");
       return false;
     }
   };
 
-  let onJoinHandler = async (e) => {
+  const onJoinHandler = async (e, name) => {
     e.preventDefault();
-    const isJoin = joiningCommunity();
 
-    if (isJoin) {
-      setCommunityName(e.target.value)
+    const isJoined = await joiningCommunity(name);
+
+    if (isJoined) {
+      setCommunityName(name);
       setRefresh(!refresh);
-
     }
+  };
 
-    
-
-
-  }
 
   const filtered = tab === "joined"
     ? communities.filter((c) => c.joined)
@@ -92,8 +93,8 @@ function CommunityLanding() {
             key={t}
             onClick={() => setTab(t)}
             className={`font-semibold px-6 py-2 rounded-full transition-all duration-150 ${tab === t
-                ? 'bg-lime-300 text-green-900 shadow-[0_4px_0_#65a30d]'
-                : 'bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857]'
+              ? 'bg-lime-300 text-green-900 shadow-[0_4px_0_#65a30d]'
+              : 'bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857]'
               } hover:translate-y-[1px] active:translate-y-[2px] active:shadow-none`}
           >
             All Communities
@@ -122,11 +123,10 @@ function CommunityLanding() {
               <div className="flex justify-between items-center mt-4">
 
                 <button
-                  onClick={onJoinHandler} 
-                  value={comm.name}
+                  onClick={(e) => onJoinHandler(e, comm.name)}
                   className='font-semibold px-6 py-2 rounded-full transition-all duration-150
-                    bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857]
-                   hover:translate-y-[1px] active:translate-y-[2px] active:shadow-none'
+                  bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857]
+                  hover:translate-y-[1px] active:translate-y-[2px] active:shadow-none'
                 >Join</button>
                 <Link
                   to={`/community/${comm._id}`}
