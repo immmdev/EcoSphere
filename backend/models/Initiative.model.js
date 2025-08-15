@@ -1,20 +1,26 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const {Schema} = mongoose;
 
 const initiativeSchema = new Schema({
-    owner:{
+    leader:{
         type:Schema.Types.ObjectId,
         ref:"User"
     },
-    name:String,
-    address:String,
-    photos:[String],
+    title:String,
     description:String,
-    Perks:[String],
-    checkIn:Number,
-    checkOut:Number,
-    maxGuests:Number,
-    price:Number
+    imgUrl:String,
+    category:String,
+    location:String,
+    members:[{
+        type:Schema.Types.ObjectId,
+        ref:"User"
+    }],
+    createdAt:{
+        type:Date,
+        default:Date.now
+    },
 })
 
-module.exports = mongoose.model("Place", initiativeSchema);
+const Initiative= mongoose.model("Initiative", initiativeSchema);
+
+export default Initiative;

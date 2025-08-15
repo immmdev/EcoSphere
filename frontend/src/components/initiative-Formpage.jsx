@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {toast } from 'sonner';
+import axios from 'axios';
 
 const categories = [
   'Tree Plantation',
@@ -10,17 +12,14 @@ const categories = [
   'Workshops',
 ];
 
-const statuses = ['Active', 'Upcoming', 'Completed'];
-
 const CreateInitiative = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
-    image: '',
+    imgUrl: '',
     description: '',
     category: '',
     location: '',
-    status: '',
   });
 
   const handleChange = (e) => {
@@ -33,8 +32,21 @@ const CreateInitiative = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitted Initiative:', formData);
-    alert('Initiative Created Successfully!');
-    navigate('/');
+    const token = localStorage.getItem('token');
+
+    axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/initiative/create`, formData, {
+      headers: {
+        token
+      }
+    })
+    .then(response => {
+      toast.success('Initiative created successfully!');
+      navigate('/initiatives');
+    })
+    .catch(error => {
+      console.error('Error creating initiative:', error);
+      toast.error('Failed to create initiative.');
+    });
   };
 
   return (
@@ -54,6 +66,7 @@ const CreateInitiative = () => {
             onChange={handleChange}
             required
             className="w-full mt-1 border border-green-300 rounded px-3 py-2"
+            placeholder='Enter the title of your initiative'
           />
         </div>
 
@@ -61,8 +74,8 @@ const CreateInitiative = () => {
           <label className="block text-green-700 font-medium">Image URL</label>
           <input
             type="text"
-            name="image"
-            value={formData.image}
+            name="imgUrl"
+            value={formData.imgUrl}
             onChange={handleChange}
             required
             placeholder="https://example.com/image.jpg"
@@ -77,7 +90,8 @@ const CreateInitiative = () => {
             value={formData.description}
             onChange={handleChange}
             required
-            className="w-full mt-1 border border-green-300 rounded px-3 py-2 h-24"
+            className="w-full mt-1 border border-green-300 rounded px-3 py-2 min-h-24"
+            placeholder='Describe your Initiative here ...'
           ></textarea>
         </div>
 
@@ -106,10 +120,11 @@ const CreateInitiative = () => {
             onChange={handleChange}
             required
             className="w-full mt-1 border border-green-300 rounded px-3 py-2"
+            placeholder='Enter the location of your initiative'
           />
         </div>
 
-        <div>
+        {/* <div>
           <label className="block text-green-700 font-medium">Status</label>
           <select
             name="status"
@@ -123,7 +138,7 @@ const CreateInitiative = () => {
               <option key={i} value={status}>{status}</option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         <button
           type="submit"

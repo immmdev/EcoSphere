@@ -8,6 +8,7 @@ import cartRouter from './routes/cart.route.js';
 import productRouter from './routes/product.route.js';
 import orderRouter from './routes/order.route.js';
 import contactRoutes from './routes/contact.route.js'
+import initiativeRoutes from './routes/initiative.route.js';
 //app config
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -25,6 +26,7 @@ app.use('/api/product', productRouter)
 app.use('/api/order', orderRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/contact',contactRoutes)
+app.use('/api/initiative', initiativeRoutes)
 
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the backend server!');
