@@ -4,6 +4,7 @@ import Product from "./components/EcoShopComponents/Product";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
+import {Toaster} from 'sonner';
 import CarbonFootprintCalculator from "./pages/EcoCalci";
 import Community from "./components/Support/Community";
 import LearnGrow from "./components/Support/LearnGrow";
@@ -25,12 +26,11 @@ import Collection from "./components/EcoShopComponents/Collection";
 import ChatBot from "./pages/ChatBot";
 import ChatBotImg from "./assets/chatbot.png";
 
-
-
 function App() {
 	return (
 		<div>
-			<ToastContainer />
+			<ToastContainer position="top-right" theme="dark"/>
+			<Toaster position="bottom-right" theme="dark" richColors/>
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<Home />} />
@@ -53,6 +53,13 @@ function App() {
 				<Route path="/myorders" element={<Orders />} />
 
 				<Route path="/communities" element={<Communities />} />
+				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
+				<Route path="/getting-started" element={<GettingStarted/>} />
+                <Route path="/community" element={<Community/>} />
+                <Route path="/learn-grow" element= {<LearnGrow/>}/>
+                <Route path="/carbon-tracker" element={<CarbonTracker/>} />
+                <Route path="/eco" element={<Eco/>} />
+                <Route path="/initiate" element={<Initiate/>} />
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
 				<Route path="/getting-started" element={<GettingStarted />} />
 				<Route path="/community" element={<Community />} />

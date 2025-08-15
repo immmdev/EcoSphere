@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'sonner';
 
 const categories = [
   'All',
@@ -41,7 +43,7 @@ const images = [
 const Initiatives = () => {
   const [current, setCurrent] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('All');
-
+  const [AllInitiatives, setAllInitiatives] = useState([]);
   useEffect(() => {
     const slide = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -49,10 +51,40 @@ const Initiatives = () => {
     return () => clearInterval(slide);
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/initiative/getinitiatives`);
+        setAllInitiatives(response.data.List);
+      } catch (error) {
+        console.error("Error fetching initiatives:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const InitiativeAction=async(initiativeId,action)=>{
+    try {
+      const token=localStorage.getItem('token');
+      console.log("Initiative Action:", initiativeId, action);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/initiative/memberaction`, {
+        initiativeId,
+        action
+      }, {
+        headers: {
+          token
+        }
+      });
+      toast.success(`Initiative ${action} successfully!`);
+    } catch (error) {
+      console.error("Error processing initiative action:", error);
+    }
+  }
+
   const filteredInitiatives =
     selectedCategory === 'All'
-      ? featured
-      : featured.filter((item) => item.category === selectedCategory);
+      ? AllInitiatives
+      : AllInitiatives.filter((item) => item.category === selectedCategory);
 
   return (
     <div className="eco-static-bg text-green-900 min-h-screen scroll-smooth">
@@ -127,7 +159,7 @@ const Initiatives = () => {
           {filteredInitiatives.map((item, i) => (
             <div key={i} className="bg-emerald-100 shadow-md rounded-md p-4 space-y-3">
               <img
-                src={item.image}
+                src={item.imgUrl}
                 alt="Initiative"
                 className="w-full h-40 object-cover rounded"
               />
@@ -136,7 +168,11 @@ const Initiatives = () => {
               <span className="inline-block bg-green-800 text-green-100 px-2 py-1 text-xs rounded">
                 {item.category}
               </span>
-              <button className="block text-green-800 font-medium hover:underline">Join</button>
+              <span className="inline-block bg-green-800 text-green-100 px-2 py-1 text-xs rounded">
+                {item.members.length} Members
+              </span>
+              <button onClick={() => InitiativeAction(item._id, 'join')} className="block text-green-800 font-medium hover:underline">Join</button>
+              <button onClick={() => InitiativeAction(item._id, 'leave')} className="block text-green-800 font-medium hover:underline">Leave</button>
             </div>
           ))}
         </div>

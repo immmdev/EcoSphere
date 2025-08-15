@@ -32,13 +32,15 @@ app.use('/api/order', orderRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/contact',contactRoutes)
 
-
 app.use('/api/communities',communityRouter);
 
 
 app.use("/api/ai", ecoRouter );
 
 
+
+
+app.use('/api/initiative', initiativeRoutes)
 
 
 app.get('/', (req, res) => {
