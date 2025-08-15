@@ -38,9 +38,6 @@ app.use('/api/communities',communityRouter);
 
 app.use("/api/ai", ecoRouter );
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
 
 
 
