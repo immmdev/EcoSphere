@@ -154,14 +154,14 @@ function Navbar() {
 												onClick={() => setIsProfileDropdownOpen(false)}
 												className="flex items-center gap-2 px-4 py-2 hover:bg-gray-700 hover:text-green-400"
 											>
-												<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														strokeWidth={2}
-														d="M9 5h6m-3 0v14M5 12h14"
-													/>
-												</svg>
+									<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M5 8h14l1 12H4L5 8zm7-4a4 4 0 00-4 4v0a4 4 0 008 0v0a4 4 0 00-4-4z"
+										/>
+									</svg>
 												My Orders
 											</NavLink>
 										</li>

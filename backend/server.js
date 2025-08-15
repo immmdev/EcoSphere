@@ -7,9 +7,12 @@ import userRouter from './routes/user.route.js';
 import cartRouter from './routes/cart.route.js';
 import productRouter from './routes/product.route.js';
 import orderRouter from './routes/order.route.js';
+
 import communityRouter from './routes/community.route.js';
 
+import contactRoutes from './routes/contact.route.js';
 
+import ecoRouter from './routes/ecoAI.route.js';
 
 //app config
 const app = express();
@@ -26,10 +29,18 @@ app.use('/api/user', userRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/product', productRouter)
 app.use('/api/order', orderRouter);
+app.use('/api/order', orderRouter);
+app.use('/api/contact',contactRoutes)
 
 
 app.use('/api/communities',communityRouter);
 
+
+app.use("/api/ai", ecoRouter );
+
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
 
 
 

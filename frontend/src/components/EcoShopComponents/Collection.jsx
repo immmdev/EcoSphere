@@ -184,18 +184,23 @@ const Collection = () => {
 				</div>
 				<div className="flex justify-between text-base sm:text-2xl mb-4">
 					<Title text1={"ALL"} text2={"COLLECTIONS"} />
-					{/* Product Sort */}
-					<select
-						onChange={(e) => setSortType(e.target.value)}
-						className="border text-white border-gray-300 text-sm px-2 cursor-pointer "
-					>
-						<option value="relevant">Sort by: Relevant</option>
-						<option value="low-high">Sort by: Low to High</option>
-						<option value="high-low">Sort by: Hight to Low</option>
-					</select>
-				</div>
-
-				{/* Map Products */}
+                    {/* Product Sort */}
+                    <div className="relative">
+                        <select
+                            onChange={(e) => setSortType(e.target.value)}
+                            className="appearance-none border bg-black text-white border-gray-400 text-sm px-4 py-2 rounded pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all duration-200 cursor-pointer"
+                        >
+                            <option value="relevant">Sort by: Relevant</option>
+                            <option value="low-high">Sort by: Low to High</option>
+                            <option value="high-low">Sort by: High to Low</option>
+                        </select>
+                        <span className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-300">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
 				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
 					{filterProducts.map((item, index) => (
 						<ProductItem
