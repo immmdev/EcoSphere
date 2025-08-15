@@ -12,6 +12,8 @@ import communityRouter from './routes/community.route.js';
 
 import contactRoutes from './routes/contact.route.js';
 
+import initiativeRouter from './routes/initiative.route.js'
+
 import ecoRouter from './routes/ecoAI.route.js';
 
 //app config
@@ -40,7 +42,7 @@ app.use("/api/ai", ecoRouter );
 
 
 
-app.use('/api/initiative', initiativeRoutes)
+app.use('/api/initiative', initiativeRouter)
 
 
 app.get('/', (req, res) => {
