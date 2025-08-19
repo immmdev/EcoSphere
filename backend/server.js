@@ -16,6 +16,9 @@ import initiativeRouter from './routes/initiative.route.js'
 
 import ecoRouter from './routes/ecoAI.route.js';
 
+import learnRouter from './routes/learn.route.js';
+import articleModel from './models/article.model.js';
+
 //app config
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -34,19 +37,29 @@ app.use('/api/order', orderRouter);
 app.use('/api/order', orderRouter);
 app.use('/api/contact',contactRoutes)
 
+// community api endpoint
 app.use('/api/communities',communityRouter);
 
-
+// eco-ai api endpoint
 app.use("/api/ai", ecoRouter );
 
-
-
-
+// initiative api end point
 app.use('/api/initiative', initiativeRouter)
 
+// learn api endpoint
+app.use('/api/learn',learnRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the backend server!');
+});
+
+app.get("/cleardb", async(req,res)=>{
+  try{
+    await articleModel.deleteMany({});
+    res.json({message:"success"});
+  }catch(err){
+    res.json({message:"error"});
+  }
 });
 
 app.listen(PORT, () => {
