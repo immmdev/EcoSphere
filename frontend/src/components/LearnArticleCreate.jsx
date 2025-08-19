@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import axios from "axios";
+import { ShopContext } from '../contexts/ShopContext';
+import { toast } from 'react-toastify';
 
-function LearnArticleCreate({ onCreate }) {
+function LearnArticleCreate() {
+    const { backendUrl, token, refresh, setRefresh, navigate, activeTab, setActiveTab } = useContext(ShopContext);
+
     const [form, setForm] = useState({
         title: '',
         summary: '',
         content: '',
-        author: '',
         coverImage: '',
         tags: '',
         category: 'Beginner',
@@ -18,34 +22,54 @@ function LearnArticleCreate({ onCreate }) {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const postArticle = async (data) => {
+        try {
+            await axios.post(
+                `${backendUrl}/api/learn/new-article`,
+                data,
+                { headers: { token } }
+            );
+            toast.success("Article saved successfully");
+            return true;
+        } catch (err) {
+            toast.error("Article failed to save");
+            console.error(err);
+            return false;
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!form.title || !form.content || !form.author) {
-            setError('Title, Content, and Author are required.');
+        if (!form.title || !form.content) {
+            setError('Title and Content are required.');
             return;
         }
 
         const newArticle = {
             ...form,
-            tags: form.tags.split(',').map((tag) => tag.trim()).filter(Boolean),
-            createdAt: new Date(),
+            tags: form.tags
+                .split(',')
+                .map((tag) => tag.trim())
+                .filter(Boolean)
         };
+        console.log(newArticle);
+        const isCreated = await postArticle(newArticle);
+        if (isCreated) {
+            setRefresh(!refresh);
+            navigate("/learn");
 
-        if (onCreate) onCreate(newArticle);
-        alert('Article created successfully!');
-
-        setForm({
-            title: '',
-            summary: '',
-            content: '',
-            author: '',
-            coverImage: '',
-            tags: '',
-            category: 'Beginner',
-            type: 'Article',
-        });
-        setError('');
+            setForm({
+                title: '',
+                summary: '',
+                content: '',
+                coverImage: '',
+                tags: '',
+                category: 'Beginner',
+                type: 'Article',
+            });
+            setError('');
+        }
     };
 
     return (
@@ -53,21 +77,23 @@ function LearnArticleCreate({ onCreate }) {
             <h2 className="text-4xl font-bold text-white text-center mb-4 tracking-wide">
                 Sow Words, Grow Change
             </h2>
-             <p className='text-green-50 mb-5 text-lg text-center'>Inspire others with your green lifestyle tips, climate thoughts, or sustainability stories. Every article contributes to a more aware and eco-conscious world</p>
+            <p className='text-green-50 mb-5 text-lg text-center'>
+                Inspire others with your green lifestyle tips, climate thoughts, or sustainability stories.
+                Every article contributes to a more aware and eco-conscious world
+            </p>
 
             <div className="max-w-3xl mx-auto p-6 bg-green-50 rounded-lg shadow-md">
 
                 {error && <p className="text-red-500 mb-2">{error}</p>}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-
                     <input
                         type="text"
                         name="title"
                         value={form.title}
                         onChange={handleChange}
                         placeholder="Title *"
-                        className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
+                        className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                     />
 
                     <input
@@ -76,7 +102,7 @@ function LearnArticleCreate({ onCreate }) {
                         value={form.summary}
                         onChange={handleChange}
                         placeholder="Summary"
-                        className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
+                        className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                     />
 
                     <textarea
@@ -85,16 +111,7 @@ function LearnArticleCreate({ onCreate }) {
                         onChange={handleChange}
                         placeholder="Full Content *"
                         rows={6}
-                        className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
-                    />
-
-                    <input
-                        type="text"
-                        name="author"
-                        value={form.author}
-                        onChange={handleChange}
-                        placeholder="Author *"
-                        className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
+                        className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                     />
 
                     <input
@@ -103,7 +120,7 @@ function LearnArticleCreate({ onCreate }) {
                         value={form.coverImage}
                         onChange={handleChange}
                         placeholder="Cover Image URL"
-                        className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
+                        className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                     />
 
                     <input
@@ -112,7 +129,7 @@ function LearnArticleCreate({ onCreate }) {
                         value={form.tags}
                         onChange={handleChange}
                         placeholder="Tags (comma-separated)"
-                        className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
+                        className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                     />
 
                     <div className="flex flex-wrap gap-4">
@@ -120,22 +137,19 @@ function LearnArticleCreate({ onCreate }) {
                             name="category"
                             value={form.category}
                             onChange={handleChange}
-                            className=" text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
+                            className=" text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                         >
-                            <option value="Beginner">Beginner</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Advanced">Advanced</option>
-                        </select>
+                            <option value="All">All</option>
+                            <option value="Climate Change">Climate Change</option>
+                            <option value="Sustainable Living">Sustainable Living</option>
+                            <option value="Renewable Energy">Renewable Energy</option>
+                            <option value="Food & Diet">Food & Diet</option>
+                            <option value="Sustainable Fashion">Sustainable Fashion</option>
+                            <option value="Eco-Friendly Homes">Eco-Friendly Homes</option>
+                            <option value="Waste & Recycling">Waste & Recycling</option>
+                            <option value="Biodiversity & Nature">Biodiversity & Nature</option>
+                            <option value="DIY Projects">DIY Projects</option>
 
-                        <select
-                            name="type"
-                            value={form.type}
-                            onChange={handleChange}
-                            className="text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
-                        >
-                            <option value="Article">Article</option>
-                            <option value="Guide">Guide</option>
-                            <option value="Video">Video</option>
                         </select>
                     </div>
 

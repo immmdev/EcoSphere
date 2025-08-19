@@ -14,7 +14,7 @@ function LearnHeader() {
 
 
     return (
-        <section className="w-full eco-static-bg py-16 px-6 md:px-20 text-center ">
+        <section className="w-full eco-static-bg py-16 px-6 md:px-20 text-center  ">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
                     Learn and Grow
@@ -24,7 +24,7 @@ function LearnHeader() {
                 </p>
 
                 {/* Filter Buttons */}
-                <div className="flex flex-wrap justify-center gap-3">
+                <div className="flex flex-wrap justify-center gap-3 mb-16">
 
                     <button
                         onClick={(e)=> setIsVideo(0)}
@@ -41,9 +41,11 @@ function LearnHeader() {
                         Videos
                     </button>
                 </div>
+              
             </div>
+              {/* <hr className='my-10 text-green-100 text-muted '></hr> */}
             <LearnCategoryTabs isVideo={isVideo}/>
-            {isVideo===1? <LearnVideo/> : <LearnArticle/>}
+            {isVideo===1? <LearnVideo/> : <LearnArticle isVideo={isVideo}/>}
          </section>
     );
 }

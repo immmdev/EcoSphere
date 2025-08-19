@@ -16,6 +16,10 @@ const ShopContextProvider = (props) => {
 	const [refresh, setRefresh]=useState(false);
 	const [products, setProducts] = useState([]);
 	const [token, setToken] = useState("");
+	  const [likes, setLikes] = useState(0);
+	  const [liked, setLiked] = useState(false);
+	  const [articles, setArticles] = useState([]);
+	  const [activeTab, setActiveTab] = useState('All');
 	const navigate = useNavigate();
 
 	const addToCart = async (itemId) => {
@@ -180,6 +184,14 @@ const ShopContextProvider = (props) => {
         getCartAmount,
 		refresh,
 		setRefresh,
+		likes, 
+		setLikes,
+		liked, 
+		setLiked,
+		articles,
+		setArticles,
+		activeTab, 
+		setActiveTab
 
 	};
 

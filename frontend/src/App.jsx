@@ -67,13 +67,17 @@ function App() {
 				<Route path="/carbon-tracker" element={<CarbonTracker />} />
 				<Route path="/eco" element={<Eco />} />
 				<Route path="/initiate" element={<Initiate />} />
+				
 				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
+
 				<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
 				<Route path="learn/article/new" element={<LearnArticleCreate />} />
 				<Route path="learn/video/new" element={<LearnVideoCreate />} />
+
 				<Route path="/communities/post/new" element={<CommunityPostForm />} />
 				<Route path="/communities/new" element={<CommunityNewForm />} />
 				<Route path="/community/:id" element={<CommunityDisplay />} />
+
 				<Route path="/ecobot-ai" element={<ChatBot />} />
 			</Routes> 
 			<div title="Ask EcoAi?" style={{borderRadius:"50%"}} className="p-3 bg-green-100/30 fixed bottom-10 right-10 text-center 

@@ -1,51 +1,75 @@
-import React, { useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-function LearnCategoryTabs({ isVideo }) {
-  const [activeTab, setActiveTab] = useState('All');
+import React, { useState, useRef, useContext } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ShopContext } from "../contexts/ShopContext";
 
-  const categories = [
-    'All',
-    'Carbon Basics',
-    'Zero Waste',
-    'DIY Reuse Projects',
-    'Green Tech',
-    'Nature',
-    'Natural Beauty'
-  ];
+const categories = [
+  "All",
+  "Climate Change",
+  "Sustainable Living",
+  "Renewable Energy",
+  "Food & Diet",
+  "Sustainable Fashion",
+  "Eco-Friendly Homes",
+  "Waste & Recycling",
+  "Biodiversity & Nature",
+  "DIY Projects",
+];
+
+function ArticleFilters() {
+  const {activeTab, setActiveTab} = useContext(ShopContext);
+  const scrollRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -200 : 200,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
-    <div className="mt-10 px-4 md:px-8">
-      <div className='eco-static-bg py-6 px-4 border border-b border-green-100'>
-        {/* Filters + Buttons */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveTab(category)}
-              aria-pressed={activeTab === category}
-              className={
+    <div className="w-full flex items-center justify-center gap-2">
+     
+      {/* Left Arrow */}
+      <button
+        onClick={() => scroll("left")}
+        className="text-green-100 transition"
+      >
+        <ChevronLeft size={28} />
+      </button>
+
+      {/* Scrollable Categories */}
+      <div
+        ref={scrollRef}
+        className="flex gap-3 overflow-x-auto no-scrollbar py-4 px-2"
+      >
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setActiveTab(category)}
+            className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition-all duration-200
+              ${
                 activeTab === category
-                  ? 'bg-lime-300 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150'
-                  : 'bg-emerald-400 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150'
-              }
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+                  ? "bg-lime-300 text-green-900 shadow-[0_4px_0_#65a30d]"
+                  : "bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857] hover:bg-emerald-500"
+              }`}
+          >
+            {category}
+          </button>
+        ))}
       </div>
 
-      <Link to={isVideo ? "/learn/video/new" : "/learn/article/new"}> <button
-
-        className="flex items-center mt-5 gap-2 px-4 py-2 bg-green-100 text-green-900 border border-green-900 rounded hover:bg-green-200 active:bg-lime-400 active:text-green-800 transition"
+      {/* Right Arrow */}
+      <div></div>
+      <button
+        onClick={() => scroll("right")}
+        className="text-green-100  transition"
       >
-        <FaPlus />
-        <span>Create</span>
+        <ChevronRight size={28} />
       </button>
-      </Link>
     </div>
   );
 }
 
-export default LearnCategoryTabs;
+export default ArticleFilters;
