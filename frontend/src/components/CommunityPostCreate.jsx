@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const CommunityPostForm = ({ onCreate }) => {
+  const [searchParams] = useSearchParams();
+  const communityId = searchParams.get("communityId");
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
+    communityId,
     title: "",
     content: "",
-    author: "",
     tag: "General",
     image: "",
   });
@@ -16,33 +23,50 @@ const CommunityPostForm = ({ onCreate }) => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.title || !form.content || !form.author) {
-      setError("Title, Content, and Author are required.");
-      return;
+    try {
+      if (!form.title || !form.content) {
+        setError("Title and Content are required.");
+        return;
+      }
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/communities/make-post`,
+        form,
+        {
+          headers: { token: localStorage.getItem("token") },
+        }
+      );
+      if (response.data.success === true) {
+        toast.success("Post created successfully!");
+        navigate(`/community`);
+      } else {
+        toast.error("Failed to create post.");
+      }
+
+      const newPost = {
+        id: Date.now(),
+        ...form,
+        time: "Just now",
+        likes: 0,
+        comments: [],
+      };
+
+      if (onCreate) onCreate(newPost);
+
+      setForm({
+        title: "",
+        content: "",
+        tag: "General",
+        image: "",
+      });
+
+      setError("");
+    } catch (err) {
+      console.error("Error creating post:", err);
+      toast.error("An error occurred while creating the post.");
     }
-
-    const newPost = {
-      id: Date.now(),
-      ...form,
-      time: "Just now",
-      likes: 0,
-      comments: [],
-    };
-
-    if (onCreate) onCreate(newPost);
-
-    setForm({
-      title: "",
-      content: "",
-      author: "",
-      tag: "General",
-      image: "",
-    });
-
-    setError("");
   };
 
   return (
@@ -51,14 +75,14 @@ const CommunityPostForm = ({ onCreate }) => {
         Grow Green Conversations
       </h2>
       <p className="text-green-50 mb-5 text-lg text-center">
-        Share your actions, thoughts, or tips with the community and inspire others to live sustainably.
+        Share your actions, thoughts, or tips with the community and inspire
+        others to live sustainably.
       </p>
 
       <div className="max-w-3xl mx-auto p-6 bg-green-50 rounded-lg shadow-md">
         {error && <p className="text-red-500 mb-2">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <input
             type="text"
             name="title"
@@ -74,15 +98,6 @@ const CommunityPostForm = ({ onCreate }) => {
             onChange={handleChange}
             placeholder="What's on your mind? *"
             rows={5}
-            className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
-          />
-
-          <input
-            type="text"
-            name="author"
-            value={form.author}
-            onChange={handleChange}
-            placeholder="Your Name *"
             className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
           />
 

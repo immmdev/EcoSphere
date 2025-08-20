@@ -61,7 +61,7 @@ function CommunityLanding() {
   };
 
   return (
-    <div className="eco-static-bg min-h-screen text-green-900 ">
+    <div className="eco-static-bg min-h-screen text-green-900">
       <div className="relative h-[60vh] w-full overflow-hidden">
         <div className="absolute inset-0 mb-20 flex flex-col justify-center items-center z-20 text-center px-4 -translate-y-10">
           <h1 className="text-5xl mb-md:text-5xl font-extrabold text-white">
@@ -104,7 +104,9 @@ function CommunityLanding() {
 
       {/* Community Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 pb-10 mt-5">
-        {filtered.map((comm) => (
+        {filtered.map((comm) =>{ 
+          console.log(comm.members)
+          return(
           <div
             key={comm._id}
             className="bg-green-50 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
@@ -118,7 +120,7 @@ function CommunityLanding() {
               <h2 className="text-2xl font-extrabold text-green-900 mb-2">{comm.name}</h2>
               <p className="text-md font-semibold text-green-800 mb-1">{comm.agenda}</p>
               <p className="text-sm text-green-700 mb-1">{comm.description}</p>
-              <p className="text-sm text-green-700 mb-3">{comm.members} members</p>
+              <p className="text-sm text-green-700 mb-3">{comm.members.length} members</p>
 
               <div className="flex justify-between items-center mt-4">
 
@@ -138,7 +140,7 @@ function CommunityLanding() {
               </div>
             </div>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   );
