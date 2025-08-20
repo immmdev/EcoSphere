@@ -41,7 +41,8 @@ const CommunityNewForm = () => {
       setError("Please fill in all required fields.");
       return;
     }
-
+    if(form.coverImage.trim()==="")
+      form.coverImage="https://images.unsplash.com/photo-1716547286289-3e650d7bdf7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHVuc3BhbHNofGVufDB8fDB8fHww";
     const isCreated = await postCommunity();
     if (isCreated) {
       setRefresh(!refresh);        
@@ -111,6 +112,7 @@ const CommunityNewForm = () => {
           <button
             type="submit"
             className="bg-emerald-400 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150"
+            onClick={()=>{handleSubmit()}}
           >
             Create Community
           </button>
