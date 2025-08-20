@@ -25,7 +25,7 @@ const createInitiative = async (req, res) => {
 
 const getInitiatives = async (req, res) => {
   try {
-    const initiatives = await Initiative.find({});
+    const initiatives = await Initiative.find({}).populate("leader");
     res.status(200).json({ List : initiatives });
   } catch (err) {
     console.error("Error fetching initiatives:", err);

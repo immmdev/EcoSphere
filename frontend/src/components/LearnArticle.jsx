@@ -30,6 +30,13 @@ function LearnArticle({isVideo}) {
 
   return (
     <div className="grid   grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 ">
+      <Link className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 p-20
+               transition-all duration-200 ease-out
+               text-green-900 text-center flex items-center justify-center" to={isVideo ? "/learn/video/new" : "/learn/article/new"}>
+     
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-plus-icon lucide-square-plus"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+        
+      </Link>
       {articles
       .filter((article)=> activeTab==="All" ? true : article.category==activeTab)
       
@@ -77,13 +84,7 @@ function LearnArticle({isVideo}) {
           </Link>
         </div>
       ))}
-       <Link className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 p-20
-               transition-all duration-200 ease-out
-               text-green-900 text-center flex items-center justify-center" to={isVideo ? "/learn/video/new" : "/learn/article/new"}>
-     
-            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-plus-icon lucide-square-plus"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
-        
-      </Link>
+       
       
       
     </div>

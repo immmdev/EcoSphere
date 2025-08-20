@@ -25,6 +25,7 @@ import Verify from "./components/EcoShopComponents/Verify"
 import Collection from "./components/EcoShopComponents/Collection";
 import ChatBot from "./pages/ChatBot";
 import ChatBotImg from "./assets/chatbot.png";
+import IntitiaveInDetail from "./pages/IntiativeInDetail";
 
 function App() {
 	return (
@@ -33,6 +34,7 @@ function App() {
 			<Toaster position="bottom-right" theme="dark" richColors/>
 			<Navbar />
 			<Routes>
+				{/* general segment routes */}
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
@@ -40,10 +42,13 @@ function App() {
 				<Route path="/support" element={<Support />} />
 				<Route path="/learn" element={<Learn />} />
 				<Route path="/contact" element={<Contact />} />
-				<Route path="/initiatives" element={<Initiative />} />
-				<Route path="/initiatives/form-page" element={<CreateInitiative />} />
 
-                // EcoShop Routes
+				{/* initative segment routes */}
+				<Route path="/initiatives" element={<Initiative />} />
+				<Route path="/initiatives/create-initiative" element={<CreateInitiative />} />
+				<Route path="/initiatives/:id" element={<IntitiaveInDetail/>}/>
+
+                {/* EcoShop segment Routes */}
 				<Route path="/eco-shop" element={<EcoShop />} />
 				<Route path="/eco-shop/all-collections" element={<Collection />} />
 				<Route path='/eco-shop/:productId' element={<Product />} />
@@ -52,32 +57,29 @@ function App() {
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/myorders" element={<Orders />} />
 
-				<Route path="/communities" element={<Communities />} />
-				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
-				<Route path="/getting-started" element={<GettingStarted/>} />
-                <Route path="/community" element={<Community/>} />
-                <Route path="/learn-grow" element= {<LearnGrow/>}/>
-                <Route path="/carbon-tracker" element={<CarbonTracker/>} />
-                <Route path="/eco" element={<Eco/>} />
-                <Route path="/initiate" element={<Initiate/>} />
-				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
-				<Route path="/getting-started" element={<GettingStarted />} />
-				<Route path="/community" element={<Community />} />
-				<Route path="/learn-grow" element={<LearnGrow />} />
-				<Route path="/carbon-tracker" element={<CarbonTracker />} />
+				{/* carbon footprin calci and tracker segment routes */}
 				<Route path="/eco" element={<Eco />} />
-				<Route path="/initiate" element={<Initiate />} />
-				
-				<Route path="/eco-calculator" element={<CarbonFootprintCalculator />} />
+				<Route path="/eco-calculator" element={<CarbonFootprintCalculator/>}/>
+				<Route path="/carbon-tracker" element={<CarbonTracker/>} />
 
+                <Route path="/initiate" element={<Initiate/>} />
+				<Route path="/getting-started" element={<GettingStarted />} />
+				
+				{/* learn segment routes */}
+				<Route path="/learn-grow" element={<LearnGrow />} />
 				<Route path="/learn/article/:id" element={<LearnArticleInDetail />} />
 				<Route path="learn/article/new" element={<LearnArticleCreate />} />
 				<Route path="learn/video/new" element={<LearnVideoCreate />} />
 
+
+				{/* communities segment routes */}
+				<Route path="/communities" element={<Communities />} />			
+				<Route path="/community" element={<Community/>} />
 				<Route path="/communities/post/new" element={<CommunityPostForm />} />
 				<Route path="/communities/new" element={<CommunityNewForm />} />
 				<Route path="/community/:id" element={<CommunityDisplay />} />
 
+				{/* ai-bot route */}
 				<Route path="/ecobot-ai" element={<ChatBot />} />
 			</Routes> 
 			<div title="Ask EcoAi?" style={{borderRadius:"50%"}} className="p-3 bg-green-100/30 fixed bottom-10 right-10 text-center 

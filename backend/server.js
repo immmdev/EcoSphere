@@ -18,6 +18,7 @@ import ecoRouter from './routes/ecoAI.route.js';
 
 import learnRouter from './routes/learn.route.js';
 import articleModel from './models/article.model.js';
+import Initiative from './models/Initiative.model.js';
 
 //app config
 const app = express();
@@ -55,7 +56,7 @@ app.get('/', (req, res) => {
 
 app.get("/cleardb", async(req,res)=>{
   try{
-    await articleModel.deleteMany({});
+    await Initiative.deleteMany({});
     res.json({message:"success"});
   }catch(err){
     res.json({message:"error"});

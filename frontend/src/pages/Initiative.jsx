@@ -1,37 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const categories = [
-  'All',
-  'Tree Plantation',
-  'Waste Management',
-  'Sustainable Living',
-  'Awareness Drives',
-  'Community Cleanups',
-  'Workshops',
-];
-
-const featured = [
-  {
-    title: 'Green Roots: Tree Plantation Drive',
-    image: 'https://www.aces.edu/wp-content/uploads/2019/03/GettyImages-1096104376.jpg',
-    description: 'Join our mission to plant 1000 trees across urban zones.',
-    category: 'Tree Plantation',
-  },
-  {
-    title: 'Zero-Waste Week Challenge',
-    image: 'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?q=80&w=1170&auto=format&fit=crop',
-    description: 'Live a week without generating waste. Are you in?',
-    category: 'Waste Management',
-  },
-  {
-    title: 'Eco Talks in Schools',
-    image: 'https://hindustanuniv.ac.in/assets/img/events/2023/jan/road-safety-awareness3.jpg',
-    description: 'Spreading awareness through education in rural schools.',
-    category: 'Awareness Drives',
-  },
+  "All",
+  "Tree Plantation",
+  "Waste & Recycling",
+  "Sustainable Living",
+  "Awareness & Campaigns",
+  "Community Cleanups",
+  "Workshops & Training",
+  "Renewable Energy",
+  "Water & Conservation",
+  "Biodiversity & Nature",
+  "Green Tech & Innovation",
 ];
 
 const images = [
@@ -44,6 +28,23 @@ const Initiatives = () => {
   const [current, setCurrent] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [AllInitiatives, setAllInitiatives] = useState([]);
+  const scrollRef = useRef(null);
+
+
+  // scroll logic
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { scrollLeft } = scrollRef.current;
+      const scrollAmount = 300;
+      if (direction === "left") {
+        scrollRef.current.scrollTo({ left: scrollLeft - scrollAmount, behavior: "smooth" });
+      } else {
+        scrollRef.current.scrollTo({ left: scrollLeft + scrollAmount, behavior: "smooth" });
+      }
+    }
+  };
+
+  // auto slider
   useEffect(() => {
     const slide = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -51,6 +52,7 @@ const Initiatives = () => {
     return () => clearInterval(slide);
   }, []);
 
+  // fetch initiatives
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,124 +65,183 @@ const Initiatives = () => {
     fetchData();
   }, []);
 
-  const InitiativeAction=async(initiativeId,action)=>{
+  // join/leave action
+  const InitiativeAction = async (initiativeId, action) => {
     try {
-      const token=localStorage.getItem('token');
-      console.log("Initiative Action:", initiativeId, action);
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/initiative/memberaction`, {
-        initiativeId,
-        action
-      }, {
-        headers: {
-          token
-        }
-      });
+      const token = localStorage.getItem('token');
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/initiative/memberaction`,
+        { initiativeId, action },
+        { headers: { token } }
+      );
       toast.success(`Initiative ${action} successfully!`);
     } catch (error) {
       console.error("Error processing initiative action:", error);
     }
-  }
+  };
 
+  // filter initiatives
   const filteredInitiatives =
     selectedCategory === 'All'
       ? AllInitiatives
-      : AllInitiatives.filter((item) => item.category === selectedCategory);
+      : AllInitiatives.filter((item) => item.category == selectedCategory);
 
   return (
-    <div className="eco-static-bg text-green-900 min-h-screen scroll-smooth">
-      {/* Header Section with Slider */}
-      <section className="relative h-[70vh] flex items-center justify-center text-center bg-green-50 overflow-hidden">
-        {/* Image Slider */}
-        <div className="absolute inset-0 z-0">
-          {images.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt={`Slide ${i}`}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                i === current ? 'opacity-80' : 'opacity-0'
-              }`}
-            />
-          ))}
-        </div>
+    <div className="eco-static-bg text-green-900 scroll-smooth">
+      <div className="flex flex-col items-center justify-center text-center pt-16 px-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
+          EcoSphere Initiatives
+        </h1>
 
-        {/* Content on top */}
-        <div className="relative z-10 px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-green-900 mb-4">Our Initiatives for a Greener Future</h1>
-          <p className="mt-4 text-green-900 font-semibold max-w-2xl mx-auto">
-            Explore environmental campaigns and projects making real change — join, support, or create your own.
-          </p>
-          <div className="mt-6 flex flex-col md:flex-row justify-center gap-4">
-            <Link
-              style={{ fontFamily: 'Raleway, sans-serif' }}
-              to="/initiatives/form-page"
-              className="bg-lime-300 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
-            >
-              + Create Initiative
-            </Link>
+        <p className="text-green-100 text-lg md:text-xl mb-6 leading-relaxed max-w-2xl">
+          Start green initiatives, let people join, and create real impact together.
+        </p>
+      </div>
 
-            <a
-              href="#initiatives"
-              style={{ fontFamily: 'Raleway, sans-serif' }}
-              className="bg-lime-300 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
-            >
-              Explore All Initiatives
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Category Tabs */}
-      <section className="eco-static-bg py-6 px-4 border border-green-100">
-        <div className="flex flex-wrap justify-center gap-3">
-          {categories.map((cat, i) => (
-            <button
-              key={i}
-              className={
-                selectedCategory === cat
-                  ? 'bg-lime-300 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150 '
-                  : 'bg-emerald-400 text-emerald-1000 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150'
-              }
-              onClick={() => setSelectedCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
 
       {/* All Initiatives Grid */}
-      <section id="initiatives" className="py-12 px-6 max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold text-green-100 mb-6">
-          {selectedCategory === 'All' ? 'All Initiatives' : `${selectedCategory} Initiatives`}
-        </h2>
+      <section id="initiatives" className="py-12  max-w-6xl mx-auto">
+        <section className=" flex mb-6 items-center gap-3">
 
-        <div className="grid md:grid-cols-3 gap-6">
+          <button
+            onClick={() => scroll("left")}
+            className="text-green-100 hover:text-green-900"
+          >
+            <ChevronLeft size={32} />
+          </button>
+
+          {/* Scrollable Categories */}
+          <div
+            ref={scrollRef}
+            className="flex gap-3 overflow-x-auto no-scrollbar py-4 px-2"
+          >
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition-all duration-200
+              ${selectedCategory === category
+                    ? "bg-lime-300 text-green-900 shadow-[0_4px_0_#65a30d]"
+                    : "bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857] hover:bg-emerald-500"
+                  }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => scroll("right")}
+            className="text-green-100 hover:text-green-900"
+          >
+            <ChevronRight size={32} />
+          </button>
+        </section>
+
+
+        {/* add new initiative card */}
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Link to="/initiatives/create-initiative"
+            className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 p-20 transition-all duration-200 ease-out text-green-900 text-center flex items-center justify-center" >
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-plus-icon lucide-square-plus"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M8 12h8" /><path d="M12 8v8" />
+            </svg>
+
+
+            {/* displaying each intitiave after filteration */}
+          </Link>
           {filteredInitiatives.map((item, i) => (
-            <div key={i} className="bg-emerald-100 shadow-md rounded-md p-4 space-y-3">
+            <div
+              key={i}
+              className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 
+                 transition-all duration-200 ease-out flex flex-col"
+            >
+              {/* Image */}
               <img
                 src={item.imgUrl}
                 alt="Initiative"
-                className="w-full h-40 object-cover rounded"
+                className="w-full h-40 object-cover"
               />
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="text-sm text-green-1000">Location: India | Status: Active</p>
-              <span className="inline-block bg-green-800 text-green-100 px-2 py-1 text-xs rounded">
-                {item.category}
-              </span>
-              <span className="inline-block bg-green-800 text-green-100 px-2 py-1 text-xs rounded">
-                {item.members.length} Members
-              </span>
-              <button onClick={() => InitiativeAction(item._id, 'join')} className="block text-green-800 font-medium hover:underline">Join</button>
-              <button onClick={() => InitiativeAction(item._id, 'leave')} className="block text-green-800 font-medium hover:underline">Leave</button>
-            </div>
-          ))}
-        </div>
 
-        {filteredInitiatives.length === 0 && (
-          <p className="text-center text-green-100 mt-4">No initiatives found in this category.</p>
-        )}
+
+              {/* Card Content */}
+              <div className="p-6 flex flex-col justify-between flex-grow">
+                {/* Top Info */}
+                <Link to={`/initiatives/${item._id}`} state={item}>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-green-900">{item.leader.name.toUpperCase()}</span>
+                      <span className="text-sm text-green-900">
+                        {new Date(item.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl font-semibold">{item.title}</h3>
+
+
+                    {/* Category */}
+                    <span className="inline-block bg-green-800 text-green-100 px-2 py-1 text-xs rounded">
+                      {item.category}
+                    </span>
+                  </div>
+                </Link>
+
+                {/* Location */}
+                <span className="flex items-center py-1 gap-1 text-green-900 text overflow-hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-map-pin"
+                  >
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <a
+                    title='Get Location'
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      item.location
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-900 overflow-hidden cursor-pointer"
+                  >
+                    {item.location}
+                  </a>
+                </span>
+                {/* Bottom Button */}
+                <div className="mt-4">
+                  <Link
+                    state={item}
+                    className="text-green-900 font-medium hover:underline"
+                    to={`/initiatives/${item._id}`}
+
+                  >
+                    Learn More →
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+
+          ))}
+
+
+        </div>
+        {/* add button */}
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        </div>
       </section>
+
     </div>
   );
 };

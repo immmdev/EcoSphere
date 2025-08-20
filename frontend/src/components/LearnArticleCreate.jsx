@@ -92,7 +92,7 @@ function LearnArticleCreate() {
                         name="title"
                         value={form.title}
                         onChange={handleChange}
-                        placeholder="Title *"
+                        placeholder="Title"
                         className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                     />
 
@@ -137,7 +137,7 @@ function LearnArticleCreate() {
                             name="category"
                             value={form.category}
                             onChange={handleChange}
-                            className=" text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
+                            className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                         >
                             <option value="All">All</option>
                             <option value="Climate Change">Climate Change</option>
