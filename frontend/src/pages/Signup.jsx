@@ -8,6 +8,7 @@ const Signup = () => {
 	const { token, setToken, backendUrl, navigate } = React.useContext(ShopContext);
 	const [name, setName] = React.useState("");
 	const [email, setEmail] = React.useState("");
+	const [phone,setPhone]=React.useState("");
 	const [password, setPassword] = React.useState("");
 
 	const handleSubmit = async (e) => {
@@ -16,6 +17,7 @@ const Signup = () => {
 			const response = await axios.post(backendUrl + "/api/user/register", {
 				name,
 				email,
+				phone,
 				password,
 			});
 			if (response.data.success) {
@@ -60,6 +62,14 @@ const Signup = () => {
 						name="email"
 						placeholder="Email"
 						onChange={(e) => setEmail(e.target.value)}
+						className="w-full text-green-800 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
+						required
+					/>
+					<input
+						type="text"
+						name="phone"
+						placeholder="WhatsApp Number"
+						onChange={(e) => setPhone(e.target.value)}
 						className="w-full text-green-800 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
 						required
 					/>

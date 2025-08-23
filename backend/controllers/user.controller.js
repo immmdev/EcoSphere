@@ -47,7 +47,7 @@ const registerUser = async (req, res) => {
     
     try {
         
-        const { name, email, password } = req.body;
+        const { name, email,phone,password } = req.body;
 
         // Check if user already exists
         const exists = await User.findOne({email});
@@ -66,7 +66,7 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Password must be at least 5 characters long' });
         }
 
-        if(!name || !email || !password) {
+        if(!name || !email || !password || !phone) {
             return res.status(400).json({ success: false, message: 'Please fill all the fields' });
         }
 
@@ -77,6 +77,7 @@ const registerUser = async (req, res) => {
         const newUser = new User({
             name,
             email,
+            phone,
             password: hashedPassword
         });
 

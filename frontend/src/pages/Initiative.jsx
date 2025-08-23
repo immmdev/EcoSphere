@@ -65,20 +65,6 @@ const Initiatives = () => {
     fetchData();
   }, []);
 
-  // join/leave action
-  const InitiativeAction = async (initiativeId, action) => {
-    try {
-      const token = localStorage.getItem('token');
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/initiative/memberaction`,
-        { initiativeId, action },
-        { headers: { token } }
-      );
-      toast.success(`Initiative ${action} successfully!`);
-    } catch (error) {
-      console.error("Error processing initiative action:", error);
-    }
-  };
 
   // filter initiatives
   const filteredInitiatives =
