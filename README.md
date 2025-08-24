@@ -1,4 +1,4 @@
-# EcoSphere 🌍
+# 🌍 EcoSphere 
 ### "Track Impact. Build Community. Create Green Change."
 
 EcoSphere is an AI-powered sustainability platform that combines carbon tracking, personalized eco-guidance, habit formation with rewards, and skill monetization — making sustainable living simple, engaging, and rewarding for everyone.
@@ -171,7 +171,7 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 - Priority community support and exclusive content
 - Early access to new features and tools
 
-### 2. 🛍 Green Marketplace Revenue
+### 2.  Green Marketplace Revenue
 - **Commission Structure**: 5-15% seller fees based on product category
 - **Sponsored Listings**: Featured product placement for increased visibility
 - **Premium Seller Tools**: Enhanced analytics and marketing tools
@@ -260,7 +260,7 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 
 1. **Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/ecosphere.git
+git clone https://github.com/immmdev/ecosphere.git
 cd ecosphere
 ```
 
@@ -543,7 +543,7 @@ We believe in open-source collaboration for environmental solutions. Our MIT lic
 We're building relationships with environmental experts, technology mentors, and sustainability advocates to guide our mission.
 
 ###  Contributors
-Special thanks to all contributors who help make EcoSphere better! Check our [Contributors](https://github.com/yourusername/ecosphere/graphs/contributors) page for the complete list.
+Special thanks to all contributors who help make EcoSphere better! Check our [Contributors](https://github.com/immmdev/ecosphere/graphs/contributors) page for the complete list.
 
 ##  Recognition & Achievements
 
