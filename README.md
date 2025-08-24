@@ -472,12 +472,12 @@ ecosphere/
 
 | Area | Current Target | Long-term Vision |
 |------|----------------|------------------|
-| ** Active Users** | 10,000+ | 1 Million+ |
-| ** Carbon Reduced** | 1,000 tons CO₂ | 100,000 tons CO₂ |
-| ** Trees Planted** | 5,000 trees | 1 Million trees |
-| ** Waste Diverted** | 50 tons | 10,000 tons |
-| ** Eco Products** | 1,000+ listings | 100,000+ listings |
-| ** Educational Impact** | 100+ institutions | 10,000+ schools |
+| Active Users | 10,000+ | 1 Million+ |
+|  Carbon Reduced | 1,000 tons CO₂ | 100,000 tons CO₂ |
+|  Trees Planted | 5,000 trees | 1 Million trees |
+|  Waste Diverted | 50 tons | 10,000 tons |
+|  Eco Products | 1,000+ listings | 100,000+ listings |
+|  Educational Impact | 100+ institutions | 10,000+ schools |
 
 </div>
 
