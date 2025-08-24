@@ -113,7 +113,9 @@ cp .env.example .env
 ```
 
 Add your environment variables:
-```env backend
+
+backend
+
 PORT=4000
 
 MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net"
@@ -130,10 +132,11 @@ ADMIN_PASSWORD="<your_admin_password>"
 STRIPE_SECRET_KEY="sk_test_<your_stripe_secret_key>"
 GEMINI_API_KEY="<your_gemini_api_key>"
 
+frontend
+VITE_BACKEND_URL="http://localhost:4000"
+
 ```
 
-```env frontend
-VITE_BACKEND_URL="http://localhost:4000"
 
 
 
@@ -149,8 +152,8 @@ npm start
 ```
 
 5. **Access the application**
-- Frontend: `http://localhost:3000`
-- Backend API: `http://localhost:5000`
+- Frontend: `http://localhost:5134`
+- Backend API: `http://localhost:4000`
 
 ##  User Journey Example
 
@@ -202,11 +205,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Open source community for tools and libraries
 - Environmental organizations inspiring our mission
 
-##  Contact
+##  Author
 
-For questions, suggestions, or collaborations:
-- Email: myselfdevsingh123@gmail.com.com
-- Website: [www.ecosphere.com](https://eco-sphere-v1.vercel.app/)
+CSE Student at **Institute of Engineering and Technology (IET), Lucknow)**
+ Email: [myselfdevsingh123@gmail.com](mailto:myselfdevsingh123@gmail.com)  
+ WhatsApp: [+91 7235898946](https://wa.me/917235898946)
+ Website: [www.ecosphere.com](https://eco-sphere-v1.vercel.app/)
 
 ---
 
