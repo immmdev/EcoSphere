@@ -5,8 +5,6 @@ EcoSphere is an AI-powered sustainability platform that combines carbon tracking
 
 <div align="center">
 
-![EcoSphere Banner](https://via.placeholder.com/800x200/4CAF50/FFFFFF?text=EcoSphere+-+Because+Green+Should+Pay+Off)
-
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/ecosphere)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/yourusername/ecosphere)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/yourusername/ecosphere/blob/main/LICENSE)
