@@ -510,10 +510,6 @@ EcoSphere practices what it preaches:
 - **Digital Minimalism**: Optimized performance to reduce device energy consumption
 - **Responsible Growth**: Scaling strategies that maintain environmental principles
 
-##  License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for complete details.
-
 ### Open Source Philosophy
 We believe in open-source collaboration for environmental solutions. Our MIT license allows:
 -  Commercial use
@@ -526,7 +522,7 @@ We believe in open-source collaboration for environmental solutions. Our MIT lic
 
 <div align="center">
 
-### 🎯 Core Team
+###  Core Team
 
 **Dev Singh** - Lead Developer & Co-Founder  
 *Full-stack development and technical architecture*
