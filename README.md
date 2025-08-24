@@ -14,7 +14,7 @@ EcoSphere is an AI-powered sustainability platform that combines carbon tracking
 
 </div>
 
-## 🌱 Problem Statement
+##  Problem Statement
 
 While many people learn about climate change and want to contribute to sustainability, there's no single platform that provides:
 - Personal impact tracking with AI-powered insights
@@ -25,7 +25,7 @@ While many people learn about climate change and want to contribute to sustainab
 
 EcoSphere solves this by creating an all-in-one ecosystem for sustainable living that transforms environmental consciousness into actionable, rewarding experiences.
 
-## 📊 Market Insights
+##  Market Insights
 
 ### Education Level Impact on Climate Awareness
 - **Graduate & Above**: 92% believe global warming is happening, 72% attribute it to human activities
@@ -34,16 +34,16 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 
 *Source: Yale Climate Communication Studies*
 
-## 🚀 Features
+##  Features
 
-### 1. 📊 AI-Powered Carbon Footprint Tracker
+### 1.  AI-Powered Carbon Footprint Tracker
 - **Multi-Category Tracking**: Transport, electricity, food habits, and shopping behavior
 - **AI Insights**: Personalized reduction suggestions based on usage patterns
 - **Progress Analytics**: Weekly/monthly improvement trends with detailed visualizations
 - **Achievement System**: Earn badges for consistency and milestone achievements
 - **Social Sharing**: Share progress with communities and inspire others
 
-### 2. 🤝 Eco-Communities + Green Initiatives
+### 2.  Eco-Communities + Green Initiatives
 - **Live Communities**: Socket.IO-based real-time chat and discussions
 - **Initiative Management**: 
   - Tree planting drives
@@ -54,7 +54,7 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 - **Impact Tracking**: Monitor trees planted, waste reduced, volunteer participation
 - **Community Features**: Progress sharing, eco-advice exchange, project discussions
 
-### 3. 🛒 Eco Marketplace - Learn & Monetize
+### 3.  Eco Marketplace - Learn & Monetize
 - **Product Categories**: Handmade crafts, upcycled items, organic products
 - **Creator Tools**: 
   - Step-by-step DIY video tutorials
@@ -64,14 +64,14 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 - **Revenue Sharing**: Fair compensation for eco-product creators
 - **Quality Assurance**: Community ratings and verified seller system
 
-### 4. ♻️ Recycle & Reuse Hub
+### 4.  Recycle & Reuse Hub
 - **Educational Content**: Video guides on waste sorting and composting
 - **Digital Sustainability**: Tips for reducing digital carbon footprint
 - **Community Knowledge**: User-generated reuse guides and tips
 - **Waste Management**: E-waste disposal and proper recycling methods
 - **Circular Economy**: Promote reuse before recycling philosophy
 
-### 5. 🏆 Gamification & Personal Growth
+### 5.  Gamification & Personal Growth
 - **Achievement Badges**: 
   - Tracking consistency rewards
   - Initiative participation recognition
@@ -82,14 +82,14 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 - **Leaderboards**: Friendly competition with privacy controls
 - **Monthly Challenges**: Themed sustainability challenges with rewards
 
-### 6. 📚 Sustainability Learning Hub
+### 6.  Sustainability Learning Hub
 - **Curated Content**: Educational videos from NGOs, educators, and creators
 - **Weekly Features**: "Eco Hero of the Week" spotlight series
 - **Content Filtering**: By topic, difficulty level, and target audience
 - **Interactive Learning**: Quizzes, assessments, and certification programs
 - **Resource Library**: Downloadable guides and reference materials
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 <div align="center">
@@ -136,9 +136,9 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 - **Cloudinary/Firebase** - Scalable file and video storage with optimization
 - **RESTful APIs** - Clean, intuitive API design for data management
 
-## 🎯 Target Audience
+## Target Audience
 
-### 🎓 B2C Market (Primary Focus)
+###  B2C Market (Primary Focus)
 
 #### Higher Education Segment
 - **Size**: 43.3 million students enrolled in colleges/universities
@@ -152,7 +152,7 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 - **Infrastructure**: 57% computer access, 54% internet connectivity
 - **Potential**: Growing environmental consciousness in younger demographics
 
-### 🏢 B2B Market (Secondary Focus)
+###  B2B Market (Secondary Focus)
 
 #### Educational Institutions
 - Colleges promoting campus sustainability initiatives
@@ -164,36 +164,36 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
 - **Government**: Climate awareness and policy implementation programs  
 - **Corporations**: CSR initiatives and employee engagement programs
 
-## 💰 Revenue Model
+##  Revenue Model
 
-### 1. 🔄 Subscription Plans
+### 1.  Subscription Plans
 **EcoSphere Premium**
 - Ad-free experience with enhanced features
 - Advanced analytics and personalized insights
 - Priority community support and exclusive content
 - Early access to new features and tools
 
-### 2. 🛍️ Green Marketplace Revenue
+### 2. 🛍 Green Marketplace Revenue
 - **Commission Structure**: 5-15% seller fees based on product category
 - **Sponsored Listings**: Featured product placement for increased visibility
 - **Premium Seller Tools**: Enhanced analytics and marketing tools
 - **Affiliate Partnerships**: Revenue sharing with eco-friendly brands
 
-### 3. 📱 Advertisement Integration
+### 3.  Advertisement Integration
 - **Learning Content**: Sponsored educational videos and articles
 - **Targeted Suggestions**: Eco-friendly product recommendations
 - **Community Sponsorships**: Brand partnerships with environmental initiatives
 - **Native Advertising**: Seamlessly integrated sustainable product placements
 
-### 4. 🏢 B2B Services
+### 4.  B2B Services
 - **Corporate Dashboards**: Employee sustainability tracking and reporting
 - **CSR Solutions**: Comprehensive carbon footprint management
 - **Educational Licensing**: Platform access for institutions
 - **Custom Integrations**: Tailored solutions for enterprise clients
 
-## 🗺️ Development Roadmap
+##  Development Roadmap
 
-### Phase 1: Foundation & Research ✅
+### Phase 1: Foundation & Research 
 - **Duration**: Completed
 - **Deliverables**: 
   - Market research and competitive analysis
@@ -250,7 +250,7 @@ EcoSphere solves this by creating an all-in-one ecosystem for sustainable living
   - Regional partnership development
   - Compliance with international environmental standards
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - **Node.js** (v16.0 or higher)
@@ -288,31 +288,21 @@ cp .env.example .env
 
 Add your backend environment variables:
 ```env
-# Server Configuration
-PORT=5000
-NODE_ENV=development
+PORT=4000
 
-# Database
-MONGODB_URI=mongodb://localhost:27017/ecosphere
-# or MongoDB Atlas: mongodb+srv://username:password@cluster.mongodb.net/ecosphere
+MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net"
 
-# Authentication
-JWT_SECRET=your_super_secret_jwt_key_here
-JWT_EXPIRES_IN=7d
+CLOUDINARY_API_KEY="<your_cloudinary_api_key>"
+CLOUDINARY_SECRET_KEY="<your_cloudinary_secret_key>"
+CLOUDINARY_CLOUD_NAME="<your_cloudinary_cloud_name>"
 
-# Third Party APIs
-CARBON_INTERFACE_API_KEY=your_carbon_interface_api_key
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+JWT_SECRET="<your_jwt_secret>"
 
-# Email Service (Optional)
-EMAIL_SERVICE=gmail
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_app_password
+ADMIN_EMAIL="admin@ecosphere.com"
+ADMIN_PASSWORD="<your_admin_password>"
 
-# Socket.IO Configuration
-CORS_ORIGIN=http://localhost:3000
+STRIPE_SECRET_KEY="sk_test_<your_stripe_secret_key>"
+GEMINI_API_KEY="<your_gemini_api_key>"
 ```
 
 #### Frontend Environment (.env)
@@ -324,28 +314,12 @@ cp .env.example .env
 
 Add your frontend environment variables:
 ```env
-# API Configuration
-REACT_APP_API_URL=http://localhost:5000/api
-REACT_APP_SOCKET_URL=http://localhost:5000
-
-# Third Party Services
-REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
-REACT_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-
-# Analytics (Optional)
-REACT_APP_GOOGLE_ANALYTICS_ID=your_ga_tracking_id
-
-# App Configuration
-REACT_APP_NAME=EcoSphere
-REACT_APP_VERSION=1.0.0
+VITE_BACKEND_URL="http://localhost:4000"
 ```
 
 4. **Database Setup**
 ```bash
 # Start MongoDB service (if running locally)
-mongod
 
 # Or use MongoDB Atlas cloud database
 # Update MONGODB_URI in your .env file accordingly
@@ -363,9 +337,8 @@ npm start
 ```
 
 6. **Access the Application**
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:5000
-- **API Documentation**: http://localhost:5000/api/docs (if implemented)
+- **Frontend**: http://localhost:5134
+- **Backend API**: http://localhost:4000
 
 ### Development Scripts
 
@@ -385,37 +358,37 @@ npm run test       # Run test suite
 npm run eject      # Eject from Create React App
 ```
 
-## 📱 Complete User Journey
+## Complete User Journey
 
-### 🌟 Onboarding Experience
+### Onboarding Experience
 1. **Registration** → Create account with email/social login
 2. **Profile Setup** → Input basic lifestyle data for carbon tracking
 3. **Goal Setting** → Define personal sustainability objectives
 4. **First Achievement** → Earn "Green Beginner" welcome badge
 
-### 🎯 Core Engagement Loop
+### Core Engagement Loop
 5. **Community Discovery** → Join "Plastic-Free July" initiative
 6. **Active Participation** → Share daily progress and tips
 7. **Initiative Creation** → Launch "Clean Up at Gomti River" event
 8. **Event Management** → Coordinate participants and track outcomes
 
-### 🛠️ Creator Journey
+### Creator Journey
 9. **Learning Phase** → Watch DIY tutorial: "Make Plant Pots from Cement Bags"
 10. **Product Creation** → Craft eco-friendly items using learned techniques
 11. **Marketplace Entry** → List handmade products for sale
 12. **Creator Recognition** → Earn "Sustainability Creator" badge
 
-### 📈 Growth & Impact
+###  Growth & Impact
 13. **Community Leadership** → Share progress and inspire others
 14. **Advanced Features** → Access AI-powered sustainability roadmap
 15. **Measurable Impact** → Track carbon reduction and community influence
 16. **Long-term Engagement** → Monthly challenges and continued learning
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions from developers, designers, environmental enthusiasts, and sustainability experts! 
 
-### 🔄 Development Process
+### Development Process
 
 1. **Fork the Repository**
 ```bash
@@ -448,21 +421,21 @@ git push origin feature/amazing-sustainability-feature
 - Reference related issues if applicable
 - Wait for code review and feedback
 
-### 🐛 Bug Reports
+###  Bug Reports
 Please use GitHub Issues to report bugs with:
 - Clear reproduction steps
 - Expected vs actual behavior
 - Environment details (OS, browser, Node version)
 - Screenshots or screen recordings if helpful
 
-### 💡 Feature Requests
+### Feature Requests
 We encourage feature suggestions that align with our sustainability mission:
 - Environmental impact measurement
 - Community engagement improvements
 - Educational content enhancements
 - Accessibility improvements
 
-## 📊 Project Structure
+##  Project Structure
 
 ```
 ecosphere/
@@ -495,29 +468,29 @@ ecosphere/
 └── LICENSE               # MIT License
 ```
 
-## 📊 Impact Metrics & Goals
+##  Impact Metrics & Goals
 
 <div align="center">
 
 | Area | Current Target | Long-term Vision |
 |------|----------------|------------------|
-| **👥 Active Users** | 10,000+ | 1 Million+ |
-| **🌱 Carbon Reduced** | 1,000 tons CO₂ | 100,000 tons CO₂ |
-| **🌳 Trees Planted** | 5,000 trees | 1 Million trees |
-| **♻️ Waste Diverted** | 50 tons | 10,000 tons |
-| **🏪 Eco Products** | 1,000+ listings | 100,000+ listings |
-| **🎓 Educational Impact** | 100+ institutions | 10,000+ schools |
+| ** Active Users** | 10,000+ | 1 Million+ |
+| ** Carbon Reduced** | 1,000 tons CO₂ | 100,000 tons CO₂ |
+| ** Trees Planted** | 5,000 trees | 1 Million trees |
+| ** Waste Diverted** | 50 tons | 10,000 tons |
+| ** Eco Products** | 1,000+ listings | 100,000+ listings |
+| ** Educational Impact** | 100+ institutions | 10,000+ schools |
 
 </div>
 
-### 🎯 Success Metrics
+###  Success Metrics
 - **Personal Growth**: Individual habit formation and carbon footprint reduction
 - **Community Impact**: Real-world environmental initiatives and collaboration
 - **Economic Opportunity**: Creator earnings and sustainable product promotion
 - **Educational Value**: Knowledge sharing and environmental awareness
 - **Environmental Results**: Measurable CO₂ reduction and waste minimization
 
-## 🔒 Privacy & Security
+##  Privacy & Security
 
 ### Data Protection
 - **GDPR Compliance**: Full compliance with European data protection regulations
@@ -531,7 +504,7 @@ ecosphere/
 - **Infrastructure**: Regular security audits and penetration testing
 - **Monitoring**: Real-time security monitoring and incident response
 
-## 🌍 Sustainability Commitment
+##  Sustainability Commitment
 
 EcoSphere practices what it preaches:
 - **Carbon Neutral Hosting**: 100% renewable energy-powered servers
@@ -539,19 +512,19 @@ EcoSphere practices what it preaches:
 - **Digital Minimalism**: Optimized performance to reduce device energy consumption
 - **Responsible Growth**: Scaling strategies that maintain environmental principles
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for complete details.
 
 ### Open Source Philosophy
 We believe in open-source collaboration for environmental solutions. Our MIT license allows:
-- ✅ Commercial use
-- ✅ Modification and distribution
-- ✅ Private use
-- ✅ Patent use
-- ⚠️ No warranty or liability
+-  Commercial use
+-  Modification and distribution
+-  Private use
+-  Patent use
+-  No warranty or liability
 
-## 👥 Team & Leadership
+##  Team & Leadership
 
 <div align="center">
 
@@ -560,28 +533,28 @@ We believe in open-source collaboration for environmental solutions. Our MIT lic
 **Dev Singh** - Lead Developer & Co-Founder  
 *Full-stack development and technical architecture*
 
-**Anubhav Dixit** - Product Manager & Co-Founder  
+**Anubhav Dixit** - Backend apis & Co-Founder  
 *Product strategy and user experience design*
 
-**Pranshu Shakya** - Community Manager & Co-Founder  
+**Pranshu Shakya** - EcoShop developer & Co-Founder  
 *Community building and sustainability partnerships*
 
 </div>
 
-### 🤝 Advisory Board
+###  Advisory Board
 We're building relationships with environmental experts, technology mentors, and sustainability advocates to guide our mission.
 
-### 🌟 Contributors
+###  Contributors
 Special thanks to all contributors who help make EcoSphere better! Check our [Contributors](https://github.com/yourusername/ecosphere/graphs/contributors) page for the complete list.
 
-## 🏆 Recognition & Achievements
+##  Recognition & Achievements
 
-- 🥈 **Sustainability Innovation Award** - College Tech Fest 2024
-- 🌱 **Environmental Impact Recognition** - IET Lucknow
-- 📈 **Best Social Impact Startup** - Regional Entrepreneur Summit
-- 🎓 **Student Innovation Excellence** - Academic Recognition Program
+-  **Sustainability Innovation Award** - College Tech Fest 2024
+-  **Environmental Impact Recognition** - IET Lucknow
+-  **Best Social Impact Startup** - Regional Entrepreneur Summit
+-  **Student Innovation Excellence** - Academic Recognition Program
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 ### Research & Data Sources
 - **Yale Climate Communication** - Climate awareness research and market insights
@@ -599,45 +572,32 @@ Special thanks to all contributors who help make EcoSphere better! Check our [Co
 - **Environmental Studies Programs** - Academic guidance and research validation
 - **Sustainability Clubs** - Beta testing and community feedback
 
-## 📞 Contact & Support
+##  Contact & Support
 
 ### 🌐 Connect With Us
-- **Website**: [www.ecosphere.green](https://ecosphere.green)
-- **Email**: team@ecosphere.green
-- **Twitter**: [@EcoSphereApp](https://twitter.com/EcoSphereApp)
-- **LinkedIn**: [EcoSphere Platform](https://linkedin.com/company/ecosphere-platform)
-- **Instagram**: [@ecosphere_green](https://instagram.com/ecosphere_green)
+- **Website**: [www.ecosphere.green](https://eco-sphere-v1.vercel.app/)
+- **Email**: myselfdevsingh123@gmail.com
 
-### 💬 Community Channels
-- **Discord**: [EcoSphere Community](https://discord.gg/ecosphere)
-- **Slack**: [Developer Discussions](https://ecosphere.slack.com)
-- **Reddit**: [r/EcoSphere](https://reddit.com/r/EcoSphere)
 
-### 🆘 Support & Documentation
-- **User Guide**: [docs.ecosphere.green](https://docs.ecosphere.green)
-- **Developer Docs**: [dev.ecosphere.green](https://dev.ecosphere.green)
-- **FAQ**: [help.ecosphere.green](https://help.ecosphere.green)
-- **Issue Tracker**: [GitHub Issues](https://github.com/yourusername/ecosphere/issues)
-
-### 🚀 Partnership Opportunities
+###  Partnership Opportunities
 Interested in partnering with EcoSphere? We welcome collaborations with:
 - Environmental organizations and NGOs
 - Educational institutions and research centers
 - Sustainable brands and eco-friendly companies
 - Technology partners and service providers
 
-Contact us at partnerships@ecosphere.green for collaboration discussions.
+Contact us at myselfdev123@gmail.com for collaboration discussions.
 
 ---
 
 <div align="center">
 
-## 🌱 Join the Movement
+##  Join the Movement
 
 **Made with 💚 for a sustainable future**
 
 *Because Green Should Pay Off* 🌍
 
-**Ready to make a difference? Start your sustainable journey today! 🚀**
+**Ready to make a difference? Start your sustainable journey today! **
 
 </div>
