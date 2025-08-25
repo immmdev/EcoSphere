@@ -47,6 +47,7 @@ function App() {
 				<Route path="/initiatives" element={<Initiative />} />
 				<Route path="/initiatives/create-initiative" element={<CreateInitiative />} />
 				<Route path="/initiatives/:id" element={<IntitiaveInDetail/>}/>
+				
 
                 {/* EcoShop segment Routes */}
 				<Route path="/eco-shop" element={<EcoShop />} />

@@ -72,4 +72,28 @@ const memberAction = async (req, res) => {
   }
 };
 
-export { createInitiative, getInitiatives, memberAction };
+const fetchJoins = async (req, res) => {
+  try {
+    const {id,userId} = req.params;
+    const initiative = await  Initiative.findById(id);
+
+    if (!initiative) {
+      return res.status(404).json({ message: "Article not found" });
+    }
+
+    const joinCount = initiative.members.length;
+    const joinArray=initiative.members;
+
+   
+    return res.status(200).json({
+      joins:joinCount,
+      joinArray:joinArray
+   
+    });
+  } catch (err) {
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export { createInitiative, getInitiatives, memberAction,fetchJoins};

@@ -1,17 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { ShopContext } from '../contexts/ShopContext';
+import { jwtDecode } from 'jwt-decode';
 
 
 
 function InitiativeInDetail() {
     const location = useLocation();
-    const {token,refresh}=useContext
-    
-    const[initiative,setInitiative]=useState(location.state);
+    const { id } = useParams();
+    const { backendUrl } = useContext(ShopContext);
+    const [joins, setjoins] = useState(0);
+    const [loading, setLoading] = useState(0);
 
-    useEffect(()=>{setInitiative(location.state)},[location.state])
+    // setting initiative
+    const [initiative, setInitiative] = useState(location.state);
+
+    // members array to check joined or not
+    const [members, setMembers] = useState([]);
+
+
+    // extracting token from localstorage
+    const token = localStorage.getItem("token");
+
+    useEffect(() => { setInitiative(location.state) }, [location.state])
 
     if (!initiative) {
         return (
@@ -48,6 +61,27 @@ function InitiativeInDetail() {
         }
     };
 
+    //  Fetch joins & isLiked
+    const fetchJoins = () => {
+        axios
+            .get(`${backendUrl}/api/initiative/${id}`, { headers: { token } })
+            .then((res) => {
+                setjoins(res.data.joins);
+                setMembers(res.data.joinArray);
+            })
+            .catch((err) => {
+                if (err) {
+                    console.log(err);
+                }
+
+            });
+    };
+
+
+    // fetch joins on first mount
+    useEffect(() => { fetchJoins(), [] })
+
+
     // join/leave action
     const InitiativeAction = async (initiativeId, action) => {
         try {
@@ -57,13 +91,19 @@ function InitiativeInDetail() {
                 { initiativeId, action },
                 { headers: { token } }
             );
-            toast.success(`Initiative ${action} successfully!`);
-            console.log(initiative)
+            console.log(!members.includes(jwtDecode(token).id));
+            fetchJoins();
+            console.log(`Initiative ${action} successfully!`);
+            // setRefresh(!refresh);
+            setLoading(0);
+            // console.log(initiative)
         } catch (error) {
             console.error("Error processing initiative action:", error);
+            setRefresh(!refresh);
         }
 
     };
+
 
 
     return (
@@ -99,32 +139,110 @@ function InitiativeInDetail() {
 
 
 
-                        <div className='flex gap-5 my-2 hover:cursor-pointer'>
+                        <div className='flex gap-4 my-2 hover:cursor-pointer'>
                             {/* share button */}
                             <button onClick={handleShare}>
-                                <span>
+                                <span className='flex gap-1 text-bold hover:cursor-pointer'>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill='#0d542b' viewBox="0 0 640 640"><path d="M448 256C501 256 544 213 544 160C544 107 501 64 448 64C395 64 352 107 352 160C352 165.4 352.5 170.8 353.3 176L223.6 248.1C206.7 233.1 184.4 224 160 224C107 224 64 267 64 320C64 373 107 416 160 416C184.4 416 206.6 406.9 223.6 391.9L353.3 464C352.4 469.2 352 474.5 352 480C352 533 395 576 448 576C501 576 544 533 544 480C544 427 501 384 448 384C423.6 384 401.4 393.1 384.4 408.1L254.7 336C255.6 330.8 256 325.5 256 320C256 314.5 255.5 309.2 254.7 304L384.4 231.9C401.3 246.9 423.6 256 448 256z" /></svg>
                                 </span>
                             </button>
 
-                            {/* <button onClick={()=>InitiativeAction(initiative._id,"leave")}>
-                                <span className='flex gap-1 text-bold hover:cursor-pointer'>
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill='#0d542b' viewBox="0 0 640 640"><path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z" /></svg>
-                                    </span>
-                                    <span className='text-green-900 text-xl'>Join ({initiative.members.length})</span>
-                                </span>
-                            </button> */}
 
-                            
-                            <button onClick={()=>{InitiativeAction(initiative._id,"join")}}>
-                                <span className='flex gap-1 text-bold hover:cursor-pointer'>
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill='#0d542b' viewBox="0 0 640 640"><path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z" /></svg>
-                                    </span>
-                                    <span className='text-green-900 text-xl'>Join ({initiative.members.length})</span>
-                                </span>
-                            </button>
+                            {/* conditinal rending of join button */}
+                            {members.includes(jwtDecode(token).id) ? (
+                                <button
+                                    disabled={loading}
+                                    onClick={() => {
+                                        setLoading(true);
+                                        InitiativeAction(initiative._id, "leave");
+                                    }}
+                                    className="flex items-center gap-2 px-4 py-2 hover:bg-green-50 "
+                                >
+                                    {loading ? (
+                                        // spinner
+                                        <svg
+                                            className="animate-spin h-6 w-6 text-green-900"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                            ></circle>
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                            ></path>
+                                        </svg>
+                                    ) : (
+                                        <>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="29"
+                                                height="29"
+                                                fill="#0d542b"
+                                                viewBox="0 0 640 640"
+                                            >
+                                                <path d="M530.8 134.1C545.1 144.5 548.3 164.5 537.9 178.8L281.9 530.8C276.4 538.4 267.9 543.1 258.5 543.9C249.1 544.7 240 541.2 233.4 534.6L105.4 406.6C92.9 394.1 92.9 373.8 105.4 361.3C117.9 348.8 138.2 348.8 150.7 361.3L252.2 462.8L486.2 141.1C496.6 126.8 516.6 123.6 530.9 134z" />
+                                            </svg>
+                                            <span className="text-green-900 text-xl">Joined ({joins})</span>
+                                        </>
+                                    )}
+                                </button>
+                            ) : (
+                                <button
+                                    disabled={loading}
+                                    onClick={() => {
+                                        setLoading(true);
+                                        InitiativeAction(initiative._id, "join");
+                                    }}
+                                    className="flex items-center gap-2 px-4 py-2  hover:bg-green-50 disabled:opacity-60"
+                                >
+                                    {loading ? (
+                                        // spinner
+                                        <svg
+                                            className="animate-spin h-6 w-6 text-green-900"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                            ></circle>
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                            ></path>
+                                        </svg>
+                                    ) : (
+                                        <>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="29"
+                                                height="29"
+                                                fill="#0d542b"
+                                                viewBox="0 0 640 640"
+                                            >
+                                                <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z" />
+                                            </svg>
+                                            <span className="text-green-900 text-xl">Join ({joins})</span>
+                                        </>
+                                    )}
+                                </button>
+                            )}
+
 
                         </div>
 

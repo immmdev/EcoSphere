@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShopContext } from '../contexts/ShopContext';
 
 const categories = [
   "All",
@@ -28,8 +29,10 @@ const Initiatives = () => {
   const [current, setCurrent] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [AllInitiatives, setAllInitiatives] = useState([]);
+  const [isSticky, setIsSticky] = useState(false);
   const scrollRef = useRef(null);
-
+  const headerRef = useRef(null);
+  const stickyRef = useRef(null);
 
   // scroll logic
   const scroll = (direction) => {
@@ -43,6 +46,20 @@ const Initiatives = () => {
       }
     }
   };
+
+  // sticky header logic
+  useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current) {
+        const headerBottom = headerRef.current.offsetTop + headerRef.current.offsetHeight;
+        const scrollPosition = window.scrollY;
+        setIsSticky(scrollPosition > headerBottom);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // auto slider
   useEffect(() => {
@@ -65,7 +82,6 @@ const Initiatives = () => {
     fetchData();
   }, []);
 
-
   // filter initiatives
   const filteredInitiatives =
     selectedCategory === 'All'
@@ -74,7 +90,8 @@ const Initiatives = () => {
 
   return (
     <div className="eco-static-bg text-green-900 scroll-smooth">
-      <div className="flex flex-col items-center justify-center text-center pt-16 px-4">
+      {/* Header Section */}
+      <div ref={headerRef} className="flex flex-col items-center justify-center text-center pt-16 px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
           EcoSphere Initiatives
         </h1>
@@ -84,60 +101,85 @@ const Initiatives = () => {
         </p>
       </div>
 
+      {/* Sticky Category Filter */}
+      <div 
+        ref={stickyRef}
+        className={`${
+          isSticky 
+            ? 'fixed top-0 left-0 right-0 z-50 eco-static-bg shadow-lg' 
+            : 'relative p-0'
+        } transition-all duration-300 ease-in-out`}
+      >
+        <div className="max-w-6xl mx-auto py-4">
+          <section className="flex mb-2 items-center gap-3 px-4">
+            <button
+              onClick={() => scroll("left")}
+              className="text-green-100 hover:text-green-900 flex-shrink-0"
+            >
+              <ChevronLeft size={32} />
+            </button>
+
+            {/* Scrollable Categories */}
+            <div
+              ref={scrollRef}
+              className="flex gap-3 overflow-x-auto no-scrollbar py-2 "
+            >
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0
+                  ${selectedCategory === category
+                      ? "bg-lime-300 text-green-900 shadow-[0_4px_0_#65a30d]"
+                      : "bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857] hover:bg-emerald-500"
+                    }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            {/* Right Arrow */}
+            <button
+              onClick={() => scroll("right")}
+              className="text-green-100 hover:text-green-900 flex-shrink-0"
+            >
+              <ChevronRight size={32} />
+            </button>
+          </section>
+        </div>
+      </div>
+
+      {/* Add spacing when sticky to prevent content jump */}
+      {isSticky && <div style={{ height: stickyRef.current?.offsetHeight || 0 }} />}
 
       {/* All Initiatives Grid */}
-      <section id="initiatives" className="py-12  max-w-6xl mx-auto">
-        <section className=" flex mb-6 items-center gap-3">
-
-          <button
-            onClick={() => scroll("left")}
-            className="text-green-100 hover:text-green-900"
-          >
-            <ChevronLeft size={32} />
-          </button>
-
-          {/* Scrollable Categories */}
-          <div
-            ref={scrollRef}
-            className="flex gap-3 overflow-x-auto no-scrollbar py-4 px-2"
-          >
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition-all duration-200
-              ${selectedCategory === category
-                    ? "bg-lime-300 text-green-900 shadow-[0_4px_0_#65a30d]"
-                    : "bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857] hover:bg-emerald-500"
-                  }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-
-          {/* Right Arrow */}
-          <button
-            onClick={() => scroll("right")}
-            className="text-green-100 hover:text-green-900"
-          >
-            <ChevronRight size={32} />
-          </button>
-        </section>
-
-
+      <section id="initiatives" className='px-24'>
         {/* add new initiative card */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Link to="/initiatives/create-initiative"
-            className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 p-20 transition-all duration-200 ease-out text-green-900 text-center flex items-center justify-center" >
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-plus-icon lucide-square-plus"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M8 12h8" /><path d="M12 8v8" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+          <Link 
+            to="/initiatives/create-initiative"
+            className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 p-20 transition-all duration-200 ease-out text-green-900 text-center flex items-center justify-center" 
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="200" 
+              height="200" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="1" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              className="lucide lucide-square-plus-icon lucide-square-plus"
+            >
+              <rect width="18" height="18" x="3" y="3" rx="2" />
+              <path d="M8 12h8" />
+              <path d="M12 8v8" />
             </svg>
-
-
-            {/* displaying each intitiave after filteration */}
           </Link>
+
+          {/* displaying each initiative after filteration */}
           {filteredInitiatives.map((item, i) => (
             <div
               key={i}
@@ -150,7 +192,6 @@ const Initiatives = () => {
                 alt="Initiative"
                 className="w-full h-40 object-cover"
               />
-
 
               {/* Card Content */}
               <div className="p-6 flex flex-col justify-between flex-grow">
@@ -165,7 +206,6 @@ const Initiatives = () => {
                     </div>
 
                     <h3 className="text-2xl font-semibold">{item.title}</h3>
-
 
                     {/* Category */}
                     <span className="inline-block bg-green-800 text-green-100 px-2 py-1 text-xs rounded">
@@ -203,31 +243,22 @@ const Initiatives = () => {
                     {item.location}
                   </a>
                 </span>
+
                 {/* Bottom Button */}
                 <div className="mt-4">
                   <Link
                     state={item}
                     className="text-green-900 font-medium hover:underline"
                     to={`/initiatives/${item._id}`}
-
                   >
                     Learn More →
                   </Link>
                 </div>
               </div>
-
             </div>
-
           ))}
-
-
-        </div>
-        {/* add button */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
         </div>
       </section>
-
     </div>
   );
 };
