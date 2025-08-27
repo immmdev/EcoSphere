@@ -154,7 +154,7 @@ const Initiatives = () => {
       {isSticky && <div style={{ height: stickyRef.current?.offsetHeight || 0 }} />}
 
       {/* All Initiatives Grid */}
-      <section id="initiatives" className='px-24'>
+      <section id="initiatives" className='lg:px-24 md:px-16 px:8'>
         {/* add new initiative card */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
           <Link 
