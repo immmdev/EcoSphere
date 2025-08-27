@@ -28,8 +28,11 @@ function LearnArticle({ isVideo }) {
 
     , [refresh, backendUrl]);
 
+        // <div className="max-w-8xl  ">
+
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6   py-4 lg:px-16 md:px-8">
       <Link className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 p-20
                transition-all duration-200 ease-out
                text-green-900 text-center flex items-center justify-center" to={isVideo ? "/learn/video/new" : "/learn/article/new"}>

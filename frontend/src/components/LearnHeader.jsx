@@ -36,7 +36,7 @@ function LearnHeader() {
                         Learn and Grow
                     </h1>
                     <p className="text-green-100 text-lg md:text-xl mb-6">
-                        Empowering you with knowledge for a greener future.
+                        Empowering you with knowledge for a greener future. Discover tips, articles, and tools to lead a more sustainable life.
                     </p>
 
                     {/* Filter Buttons */}
@@ -64,9 +64,9 @@ function LearnHeader() {
                     ref={stickyRef}
                     className={`${
                         isSticky 
-                             ? "fixed top-0 left-0 right-0  z-50 eco-static-bg shadow-lg"
-            : "relative p-4"
-          } transition-all duration-300 ease-in-out`}
+                            ? 'fixed top-0 left-0 right-0 z-50   eco-static-bg shadow-lg' 
+                            : 'mt-10  py-4 lg:px-16 md:px-8'
+                    } `}
                 >
                     <LearnCategoryTabs isVideo={isVideo}/>
                 </div>

@@ -47,7 +47,7 @@ function ArticleFilters({ isSticky }) {
       {/* Scrollable Categories */}
       <div
         ref={scrollRef}
-        className="flex gap-3 overflow-x-auto no-scrollbar py-2 px-2"
+        className="flex gap-3 overflow-x-auto no-scrollbar py-2 "
       >
         {categories.map((category) => (
           <button
