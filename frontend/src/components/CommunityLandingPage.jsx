@@ -124,11 +124,11 @@ function CommunityLanding() {
             : "relative p-4"
           } transition-all duration-300 ease-in-out`}
       >
-        <div className="mx-auto py-4 ">
-          <section className="flex mb-2 items-center gap-3 px-16">
+        <div className=" max-w-8xl  py-4 lg:px-16 md:px-8  ">
+          <section className="flex mb-2 items-center gap-3">
             <button
               onClick={() => scroll("left")}
-              className="text-green-100 hover:text-green-900 flex-shrink-0"
+              className="text-green-100 flex-shrink-0"
             >
               <ChevronLeft size={32} />
             </button>

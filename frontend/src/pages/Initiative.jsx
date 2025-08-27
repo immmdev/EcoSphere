@@ -93,7 +93,7 @@ const Initiatives = () => {
       {/* Header Section */}
       <div ref={headerRef} className="flex flex-col items-center justify-center text-center pt-16 px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">
-          EcoSphere Initiatives
+          EcoInitiatives
         </h1>
 
         <p className="text-green-100 text-lg md:text-xl mb-6 leading-relaxed max-w-2xl">
@@ -110,7 +110,7 @@ const Initiatives = () => {
             : 'relative p-0'
         } transition-all duration-300 ease-in-out`}
       >
-        <div className="max-w-8xl mx-auto py-4 px-16">
+        <div className="max-w-8xl  py-4 lg:px-16 md:px-8 ">
           <section className="flex mb-2 items-center gap-3 px-4">
             <button
               onClick={() => scroll("left")}

@@ -36,7 +36,7 @@ function LearnHeader() {
                         Learn and Grow
                     </h1>
                     <p className="text-green-100 text-lg md:text-xl mb-6">
-                        Empowering you with knowledge for a greener future. Discover tips, articles, and tools to lead a more sustainable life.
+                        Empowering you with knowledge for a greener future.
                     </p>
 
                     {/* Filter Buttons */}
