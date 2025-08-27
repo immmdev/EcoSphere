@@ -57,7 +57,6 @@ const getArticles = async (req, res) => {
         if (!allArticles) {
             return res.success(404).json({ message: "server error" });
         }
-        console.log(allArticles)
         return res.status(200).json({ success: true, allArticles });
       
     } catch (error) {

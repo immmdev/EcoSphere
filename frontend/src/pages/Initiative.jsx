@@ -110,7 +110,7 @@ const Initiatives = () => {
             : 'relative p-0'
         } transition-all duration-300 ease-in-out`}
       >
-        <div className="max-w-6xl mx-auto py-4">
+        <div className="max-w-8xl mx-auto py-4 px-16">
           <section className="flex mb-2 items-center gap-3 px-4">
             <button
               onClick={() => scroll("left")}

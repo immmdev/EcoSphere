@@ -33,7 +33,7 @@ const Login = () => {
 	}, [token]);
 
 	return (
-		<div className="flex flex-col items-center justify-center py-10  bg-green-50 eco-static-bg">
+		<div className="flex flex-col items-center px-6 justify-center py-10 bg-green-50 eco-static-bg">
 			{/* Header */}
 			<div className="text-center mb-8">
 				<h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">

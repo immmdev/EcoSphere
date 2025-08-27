@@ -71,7 +71,7 @@ function CommunityDisplay() {
         ></img>
       </div>
       <div className="flex flex-col md:flex-row justify-between items-center pl-15 pr-15 mb-10  mt-10 ">
-        <div className="text-left">
+        <div className="text-left whitespace-pre-wrap">
           <h1 className="text-3xl font-bold text-green-50 mb-2">
             {community.name}
           </h1>

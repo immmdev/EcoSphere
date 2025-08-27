@@ -19,6 +19,7 @@ import ecoRouter from './routes/ecoAI.route.js';
 import learnRouter from './routes/learn.route.js';
 import articleModel from './models/article.model.js';
 import Initiative from './models/Initiative.model.js';
+import Community from './models/community.model.js';
 
 //app config
 const app = express();
@@ -54,14 +55,14 @@ app.get('/', (req, res) => {
   res.status(200).send('Welcome to the backend server!');
 });
 
-// app.get("/cleardb", async(req,res)=>{
-//   try{
-//     await Initiative.deleteMany({});
-//     res.json({message:"success"});
-//   }catch(err){
-//     res.json({message:"error"});
-//   }
-// });
+app.get("/cleardb", async(req,res)=>{
+  try{
+    await Community.deleteMany({});
+    res.json({message:"success"});
+  }catch(err){
+    res.json({message:"error"});
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -3,7 +3,7 @@ import Post from "../models/posts.model.js";
 
 const createCommunity = async (req, res) => {
   try {
-    const { name, agenda, description, coverImage, userId } = req.body;
+    const { name, agenda, description, coverImage, category, userId } = req.body;
 
     // Check if community with the same name already exists
     const isMatch = await Community.findOne({ name });
@@ -17,6 +17,7 @@ const createCommunity = async (req, res) => {
       agenda,
       description,
       coverImage,
+      category,
       creator: userId,
       members: [userId],
       posts: [],
