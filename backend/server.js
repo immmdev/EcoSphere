@@ -17,8 +17,7 @@ import initiativeRouter from './routes/initiative.route.js'
 import ecoRouter from './routes/ecoAI.route.js';
 
 import learnRouter from './routes/learn.route.js';
-import articleModel from './models/article.model.js';
-import Initiative from './models/Initiative.model.js';
+
 import Community from './models/community.model.js';
 
 //app config

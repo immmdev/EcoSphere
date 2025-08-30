@@ -53,7 +53,7 @@ const findCommunityByName = async (req, res) => {
 
 const fetchCommunity = async (req, res) => {
   try {
-    const allCommunities = await Community.find({}).populate("creator", "name");
+    const allCommunities = await Community.find({}).populate("creator");
     res.status(200).json(allCommunities);
   } catch (err) {
     res.status(500).json({ message: "Server error" });
@@ -62,25 +62,56 @@ const fetchCommunity = async (req, res) => {
 
 const actionCommunity = async (req, res) => {
   try {
-    const { communityName, userId, action } = req.body;
+    const { communityName, action, userId } = req.body;
 
-    if (action == "join") {
-      await Community.findOneAndUpdate(
+    // findOne to get single community object
+    const community = await Community.findOne({ name: communityName });
+
+    if (!community) {
+      return res.status(404).json({ message: "Community not found" });
+    }
+
+
+    if (userId == community.creator.toString()) {
+      return res.status(200).json({ message: "You are the leader of this initiative." });
+    }
+
+    if (action === "join") {
+      const updatedCommunity = await Community.findOneAndUpdate(
         { name: communityName },
-        { $addToSet: { users: userId } }
+        { $addToSet: { members: userId } },
+        { new: true }
       );
-    } else if (action == "leave") {
-      await Community.findOneAndUpdate(
+
+      return res.status(200).json({
+        message: "success",
+        members: updatedCommunity.members,
+      });
+    }
+
+    else if (action === "leave") {
+      const updatedCommunity = await Community.findOneAndUpdate(
         { name: communityName },
-        { $pull: { users: userId } }
+        { $pull: { members: userId } },
+        { new: true }
       );
-    } else {
-      res.status(400).json({ message: "Invalid Action" });
+
+      return res.status(200).json({
+        message: "success",
+        members: updatedCommunity.members,
+        updatedCommunity: updatedCommunity,
+      });
+    }
+
+    else {
+      return res.status(400).json({ message: "Invalid Action" });
     }
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server Error" });
   }
 };
+
 
 const makePosts = async (req, res) => {
   try {
@@ -121,7 +152,7 @@ const fetchCommunityPosts = async (req, res) => {
         select: "name",
       },
     });
-    
+
     if (!community) {
       return res.status(404).json({ message: "Community not found" });
     }
@@ -131,6 +162,25 @@ const fetchCommunityPosts = async (req, res) => {
   }
 };
 
+// fetch-joins
+const fetchJoins = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+
+    if (id) {
+      let community = await Community.findById(id);
+      let members = community.members;
+      return res.status(200).json({ message: "Success", members: members })
+    } else {
+      return res.status(404).json({ message: "invalid community id"})
+    }
+
+  } catch {
+    return res.status(500), json({ message: "server failed" })
+  }
+}
+
 export {
   createCommunity,
   fetchCommunity,
@@ -138,4 +188,5 @@ export {
   makePosts,
   findCommunityByName,
   fetchCommunityPosts,
+  fetchJoins,
 };

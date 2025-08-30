@@ -37,6 +37,7 @@ const memberAction = async (req, res) => {
   try {
     const { initiativeId, userId, action } = req.body;
     // Find the initiative and update its members based on the action
+
     const initiative = await Initiative.findById(initiativeId);
     if(userId==initiative.leader){
         res.status(200).json("You are the leader of this initiative.");
@@ -53,6 +54,8 @@ const memberAction = async (req, res) => {
         { $addToSet: { initiatives: initiativeId } },
         { new: true }
       );
+
+
     } else if (action === "leave") {
       await Initiative.findByIdAndUpdate(initiativeId, {
         $pull: { members: userId },
@@ -74,7 +77,7 @@ const memberAction = async (req, res) => {
 
 const fetchJoins = async (req, res) => {
   try {
-    const {id,userId} = req.params;
+    const {id} = req.params;
     const initiative = await  Initiative.findById(id);
 
     if (!initiative) {
