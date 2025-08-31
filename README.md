@@ -524,15 +524,11 @@ We believe in open-source collaboration for environmental solutions. Our MIT lic
 
 ###  Core Team
 
-**Dev Singh** - Lead Developer & Co-Founder  
+**Dev Singh** - Lead Developer
+
 *Full-stack development and technical architecture*
 
-**Anubhav Dixit** - Backend apis & Co-Founder  
-*Product strategy and user experience design*
-
-**Pranshu Shakya** - EcoShop developer & Co-Founder  
-*Community building and sustainability partnerships*
-
+**Pranshu Shakya** - EcoShop developer
 </div>
 
 ###  Advisory Board
@@ -568,7 +564,7 @@ Special thanks to all contributors who help make EcoSphere better! Check our [Co
 
 ##  Contact & Support
 
-### 🌐 Connect With Us
+### Connect With Us
 - **Website**: [www.ecosphere.green](https://eco-sphere-v1.vercel.app/)
 - **Email**: myselfdevsingh123@gmail.com
 
