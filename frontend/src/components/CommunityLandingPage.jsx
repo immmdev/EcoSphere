@@ -120,8 +120,8 @@ function CommunityLanding() {
       <div
         ref={stickyRef}
         className={`${isSticky
-            ? "fixed top-0 left-0 right-0  z-50 eco-static-bg shadow-lg"
-            : "relative p-4"
+          ? "fixed top-0 left-0 right-0  z-50 eco-static-bg shadow-lg"
+          : "relative p-4"
           } transition-all duration-300 ease-in-out`}
       >
         <div className=" max-w-8xl  py-4 lg:px-16 md:px-8  ">
@@ -197,39 +197,39 @@ function CommunityLanding() {
             className="bg-emerald-100 shadow-md rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-2 
                transition-all duration-200 ease-out"
           >
-            
+
             <img
               src={comm.coverImage}
               alt={`${comm.name} cover`}
               className="w-full h-48 object-cover"
             />
             <Link
-                to={`/community/${comm._id}`}
-                state={{ community: comm }}>
+              to={`/community/${comm._id}`}
+              state={{ community: comm }}>
 
-            <div className="p-5">
-              <div>
-              <h2 className="text-xl font-semibold text-green-900">
-                {comm.name}
-              </h2>
-              </div>
-              <div className="my-2">
-              <p className="text-green-900 overflow-hidden line-clamp-2">
-                {comm.agenda}
-              </p>
-              </div>
+              <div className="p-5">
+                <div>
+                  <h2 className="text-xl font-semibold text-green-900">
+                    {comm.name}
+                  </h2>
+                </div>
+                <div className="my-2">
+                  <p className="text-green-900 overflow-hidden line-clamp-2">
+                    {comm.agenda}
+                  </p>
+                </div>
 
-              <div>
-              <Link
-                to={`/community/${comm._id}`}
-                state={{ community: comm }}
-                className="text-green-900 font-medium hover:underline"
-              >
-                Explore →
-              </Link>
+                <div>
+                  <Link
+                    to={`/community/${comm._id}`}
+                    state={{ community: comm }}
+                    className="text-green-900 font-medium hover:underline"
+                  >
+                    Explore →
+                  </Link>
+                </div>
               </div>
-            </div>
- </Link>
+            </Link>
           </div>
         ))}
       </div>
