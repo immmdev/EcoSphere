@@ -169,7 +169,7 @@ const fetchJoins = async (req, res) => {
 
 
     if (id) {
-      let community = await Community.findById(id);
+      let community = await Community.findById(id).populate("members");
       let members = community.members;
       return res.status(200).json({ message: "Success", members: members })
     } else {

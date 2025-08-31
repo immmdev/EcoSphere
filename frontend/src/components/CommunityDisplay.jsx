@@ -17,6 +17,9 @@ function CommunityDisplay() {
   const [joins, setjoins] = useState(0);
   const [loading, setLoading] = useState(false);
   const [members, setMembers] = useState([]);
+  const [membersId, setMembersId] = useState([]);
+  const [open, setOpen] = useState(false);
+
   let token = localStorage.getItem("token");
   const userId = token ? jwtDecode(token).id : null;
 
@@ -49,6 +52,9 @@ function CommunityDisplay() {
       const res = await axios.get(`${backendUrl}/api/communities/${id}`);
       setMembers(res.data.members);
       setjoins(res.data.members.length);
+      setMembersId(res.data.members.map((member) => {
+        return member._id;
+      }))
     } catch (err) {
       console.log(err);
     }
@@ -65,10 +71,10 @@ function CommunityDisplay() {
 
     // optimistic update first ui changes then chnges in backend
     if (action === "join") {
-      setMembers((prev) => [...prev, userId]);
+      setMembersId((prev) => [...prev, userId]);
       setjoins((prev) => prev + 1);
     } else {
-      setMembers((prev) => prev.filter((id) => id !== userId));
+      setMembersId((prev) => prev.filter((id) => id !== userId));
       setjoins((prev) => Math.max(0, prev - 1));
     }
 
@@ -145,67 +151,12 @@ function CommunityDisplay() {
   if (!community) {
     return <div className="p-6 text-green-800">Community data not found.</div>;
   }
+
   return (
-    <div className="eco-static-bg min-h-screen flex justify-between text-green-900">
+    <div className="eco-static-bg min-h-screen grid lg:grid-cols-3 grid-cols-1  justify-between  text-green-900">
 
-      {/* <div className="align-items-center">
-        <img
-          src={community.coverImage}
-          alt={`${community.name} cover`}
-          className=" h-100 w-full"
-        ></img>
-      </div>
-      <div className="flex flex-col md:flex-row justify-between items-center pl-15 pr-15 mb-10  mt-10 ">
-        <div className="text-left whitespace-pre-wrap">
-          <h1 className="text-3xl font-bold text-green-50 mb-2">
-            {community.name}
-          </h1>
-          <p className="text-green-50 mb-1"> Admin {community.creator.name}</p>
-          <p className="text-green-50 mb-1">Agenda is {community.agenda}</p>
-          <p className="text-green-50 mb-1">
-            Total Members {community.members.length}
-          </p>
-        </div>
-
-        <div className="text-center md:text-left">
-          <h3 className="text-3xl font-bold text-green-50 mb-2">
-            Want to Share or Ask Something?
-          </h3>
-          <p className="text-green-50 mb-1">
-            Post your tips, guides, or initiatives with the community.
-          </p>
-          <Link
-            to={{
-              pathname: "/communities/post/new",
-              search: `?communityId=${community._id}`,
-            }}
-          >
-            <button className="bg-lime-300 mt-3 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150">
-              + Create post
-            </button>
-          </Link>
-        </div>
-      </div> */}
-
-
-      {/* Tabs */}
-      {/* <div className="flex mb-5 gap-3 ml-5 pt-5">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={
-              activeTab === tab
-                ? "bg-lime-300 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
-                : "bg-emerald-400 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150"
-            }
-          >
-            {tab}
-          </button>
-        ))}
-      </div> */}
       {/* Community Description (Left Section) */}
-      <div className="eco-static-bg border-1 border-r-green-100 w-full p-5 rounded-2xl">
+      <div className="eco-static-bg border-1 border-r-green-100 w-full p-5 ">
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">
@@ -257,25 +208,7 @@ function CommunityDisplay() {
             </svg>
           </button>
 
-          {/* Gmail */}
-          <a
-            href={`https://mail.google.com/mail/?view=cm&fs=1&to=${community.creator.email}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#0d542b"
-              width="28"
-              height="28"
-              viewBox="0 0 640 640"
-            >
-              <path d="M125.4 128C91.5 128 64 155.5 64 189.4C64 190.3 64 191.1 64.1 192L64 192L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 192L575.9 192C575.9 191.1 576 190.3 576 189.4C576 155.5 548.5 128 514.6 128L125.4 128zM528 256.3L528 448C528 456.8 520.8 464 512 464L128 464C119.2 464 112 456.8 112 448L112 256.3L266.8 373.7C298.2 397.6 341.7 397.6 373.2 373.7L528 256.3zM112 189.4C112 182 118 176 125.4 176L514.6 176C522 176 528 182 528 189.4C528 193.6 526 197.6 522.7 200.1L344.2 335.5C329.9 346.3 310.1 346.3 295.8 335.5L117.3 200.1C114 197.6 112 193.6 112 189.4z" />
-            </svg>
-
-          </a>
-
+         
           {/* WhatsApp */}
           <a
             href={`https://wa.me/91${community.creator.phone}?text=Hi%20${community.creator.name}`}
@@ -296,8 +229,10 @@ function CommunityDisplay() {
             {community.creator.phone}
           </a>
 
+
+
           {/* Join Button with Text */}
-          {members.includes(jwtDecode(token).id) ? (
+          {membersId.includes(jwtDecode(token).id) ? (
             <button
               disabled={loading}
               onClick={() => {
@@ -389,102 +324,160 @@ function CommunityDisplay() {
             </button>
           )}
 
+          <Link to={{
+            pathname: "/communities/post/new",
+            search: `?communityId=${community._id}`,
+          }}>          <button className="flex items-center gap-1">
+              <svg height="22"
+                width="22"
+                fill="#0d542b"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 640"><path d="M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM296 408L296 344L232 344C218.7 344 208 333.3 208 320C208 306.7 218.7 296 232 296L296 296L296 232C296 218.7 306.7 208 320 208C333.3 208 344 218.7 344 232L344 296L408 296C421.3 296 432 306.7 432 320C432 333.3 421.3 344 408 344L344 344L344 408C344 421.3 333.3 432 320 432C306.7 432 296 421.3 296 408z" /></svg>
+              <span>Create</span>
+            </button>
+          </Link>
 
         </div>
       </div>
 
+      <div className="eco-static-bg border border-y-green-100 sm:hidden w-full px-5 py-4">
+       
 
-
-
-      <div className=" w-full px-16">
-        {filteredPosts.length === 0 && (
-          <div className="flex items-center gap-4">
-            <div className="text-gray-200 text-2xl"> No posts available </div>{" "}
-            <Link
-              to={{
-                pathname: "/communities/post/new",
-                search: `?communityId=${community._id}`,
-              }}
+        {/* followers card horizontally scrollable */}
+        <div className="overflow-x-auto no-scrollbar flex gap-4 pb-2">
+          {members.map((member, index) => (
+            <div
+              key={index}
+              className="bg-green-100 text-green-900 p-4 rounded-xl shadow flex flex-col items-center min-w-[140px]"
             >
-              <button className="bg-lime-300 mt-3 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150">
-                + Create post
-              </button>
-            </Link>
-          </div>
-        )}
-        {filteredPosts.map((post) => (
-          <div
-            key={post.id}
-            className="bg-green-50 rounded-xl shadow-md mb-5 overflow-hidden"
-          >
-            <div className="relative">
+              {/* Avatar */}
               <img
-                src={post.image}
-                alt={post.title}
-                className="w-full h-60 object-cover"
+                className="bg-green-900 rounded-full h-20 w-20 p-1 mb-3"
+                src="https://png.pngtree.com/png-vector/20231019/ourlarge/pngtree-user-profile-avatar-png-image_10211467.png"
+                alt={member.name}
               />
-            </div>
-            <div className="p-4">
-              <h2 className="font-bold text-md uppercase mb-2">{post.title}</h2>
-              <p className="text-sm text-green-800 mb-3">{post.content}</p>
-              <div className="text-xs text-green-800 flex justify-between  mb-2">
-                <div className="bg-green-700 text-white text-xs px-2 py-1 rounded">
-                  {post.tag}
-                </div>
-                <div className="flex justify-between">
-                  <div>
-                    <button>
-                      <FaHeart className="text-green-600 w-10 h-4 transition-colors duration-200" />
-                    </button>
-                  </div>
-                  <div>{post.joins}</div>
-                </div>
-              </div>
 
-              <div className="flex justify-between mb-5 mt-2">
-                <div className="text-sm">Posted by {post.authorId.name}</div>
-                <div className="text-sm">{post.time}</div>
-              </div>
+              {/* Name */}
+              <div className="font-medium text-green-900 mb-3 text-center">{member.name}</div>
 
-              <button
-                onClick={() => toggleComments(post.id)}
-                className="text-green-700 text-sm font-medium hover:underline"
-              >
-                {openComments[post.id] ? "Hide Comments" : "View Comments"}
+              {/* Follow Button */}
+              <button className="px-4 py-1 rounded-full font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857] hover:bg-emerald-500">
+                Follow
               </button>
+            </div>
+          ))}
+        </div>
+      </div>
 
-              {openComments[post.id] && (
-                <div className="mt-4 border-t pt-3">
-                  <h4 className="text-green-700 font-medium mb-2">Comments</h4>
-                  {post.comments.map((cmt, idx) => (
-                    <div key={idx} className="text-sm text-gray-800 mb-1">
-                      <strong className="text-green-800">{cmt.user}:</strong>{" "}
-                      {cmt.text}
+
+      {/* middle part */}
+      <div className="w-full lg:px-16 md:px-14 px-4 py-5">
+        <div className="bg-green-100 text-green-900 h-10 w-full mb-4 flex justify-center rounded-xl items-center text-2xl">
+          Community Feed
+        </div>
+
+        {/* SCROLLABLE WRAPPER */}
+        <div className="lg:h-[600px] lg:overflow-y-auto md:h-[600px] md:overflow-y-auto  no-scrollbar ">
+          
+          {filteredPosts.map((post) => (
+            <div
+              key={post.id}
+              className="bg-green-100 rounded-xl shadow-md mb-5 overflow-hidden"
+            >
+              <div className="relative">
+                <img src={post.image} alt={post.title} className="w-full h-60 object-cover" />
+              </div>
+              <div className="p-4">
+                <h2 className="font-bold text-md uppercase mb-2">{post.title}</h2>
+                <p className="text-sm text-green-800 mb-3">{post.content}</p>
+                <div className="text-xs text-green-800 flex justify-between mb-2">
+                  <div className="bg-green-700 text-white text-xs px-2 py-1 rounded">
+                    {post.tag}
+                  </div>
+                  <div className="flex justify-between">
+                    <div>
+                      <button>
+                        <FaHeart className="text-green-600 w-10 h-4 transition-colors duration-200" />
+                      </button>
                     </div>
-                  ))}
-                  <div className="mt-2 flex gap-2">
-                    <input
-                      value={chatInputs[post.id] || ""}
-                      onChange={(e) =>
-                        handleInputChange(post.id, e.target.value)
-                      }
-                      className="flex-1 border border-green-300 px-3 py-1 rounded-md text-sm"
-                      placeholder="Add a comment..."
-                    />
-                    <button
-                      onClick={() => handleAddComment(post.id)}
-                      className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 text-sm"
-                    >
-                      Send
-                    </button>
+                    <div>{post.joins}</div>
                   </div>
                 </div>
-              )}
+
+                <div className="flex justify-between mb-5 mt-2">
+                  <div className="text-sm">Posted by {post.authorId.name}</div>
+                  <div className="text-sm">{post.time}</div>
+                </div>
+
+                <button
+                  onClick={() => toggleComments(post.id)}
+                  className="text-green-700 text-sm font-medium hover:underline"
+                >
+                  {openComments[post.id] ? "Hide Comments" : "View Comments"}
+                </button>
+
+                {openComments[post.id] && (
+                  <div className="mt-4 border-t pt-3">
+                    <h4 className="text-green-700 font-medium mb-2">Comments</h4>
+                    {post.comments.map((cmt, idx) => (
+                      <div key={idx} className="text-sm text-gray-800 mb-1">
+                        <strong className="text-green-800">{cmt.user}:</strong> {cmt.text}
+                      </div>
+                    ))}
+                    <div className="mt-2 flex gap-2">
+                      <input
+                        value={chatInputs[post.id] || ""}
+                        onChange={(e) => handleInputChange(post.id, e.target.value)}
+                        className="flex-1 border border-green-300 px-3 py-1 rounded-md text-sm"
+                        placeholder="Add a comment..."
+                      />
+                      <button
+                        onClick={() => handleAddComment(post.id)}
+                        className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 text-sm"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      <div className="eco-static-bg border border-l-green-100 w-full ">Members</div>
+
+      <div className="eco-static-bg border hidden md:block border-l-green-100 w-full px-5 py-4 ">
+        <div className="bg-green-100 text-green-900 h-10 w-full mb-4 flex justify-center rounded-xl items-center text-2xl">Community Members</div>
+        {/* followers card */}
+        <div className="h-[600px] overflow-y-auto no-scrollbar">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
+
+            {members.map((member, index) => (
+              <div
+                key={index}
+                className="bg-green-100 text-green-900 p-4 rounded-xl shadow flex flex-col items-center"
+              >
+                {/* Avatar */}
+                <img
+                  className="bg-green-900 rounded-full h-20 w-20 p-1 mb-3"
+                  src="https://png.pngtree.com/png-vector/20231019/ourlarge/pngtree-user-profile-avatar-png-image_10211467.png"
+                  alt={member.name}
+                />
+
+                {/* Name */}
+                <div className="font-medium text-green-900 mb-3 text-center">{member.name}</div>
+
+                {/* Follow Button */}
+                <button className="px-6 py-1 rounded-full font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857] hover:bg-emerald-500">
+                  Follow
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+
+      </div>
     </div>
   );
 }
