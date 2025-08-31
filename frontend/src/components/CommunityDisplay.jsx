@@ -156,7 +156,7 @@ function CommunityDisplay() {
     <div className="eco-static-bg min-h-screen grid lg:grid-cols-3 grid-cols-1  justify-between  text-green-900">
 
       {/* Community Description (Left Section) */}
-      <div className="eco-static-bg border-1 border-r-green-100 w-full p-5 ">
+      <div className="eco-static-bg border-1 lg:border-r-green-100 w-full p-5 ">
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">
