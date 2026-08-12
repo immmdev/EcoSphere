@@ -1,5 +1,4 @@
 import React from "react";
-import { FaShareAlt, FaCog } from "react-icons/fa";
 import { ShopContext } from "../contexts/ShopContext";
 import userService from "../services/userService";
 
@@ -42,12 +41,6 @@ function ProfileTop() {
 					<h3 className="font-semibold text-lg text-green-800">{profileData.name}</h3>
 					<p className="text-sm text-green-900">{profileData.email}</p>
 				</div>
-			</div>
-
-			{/* Actions */}
-			<div className="flex items-center gap-3 text-green-800 text-lg">
-				<FaShareAlt className="cursor-pointer hover:text-[#BFFF00] transition" />
-				<FaCog className="cursor-pointer hover:text-[#BFFF00] transition" />
 			</div>
 		</div>
 	);
