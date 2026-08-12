@@ -32,7 +32,7 @@ const createInitiative = async (req, res) => {
 
 const getInitiatives = async (req, res) => {
   try {
-    const initiatives = await Initiative.find({}).populate("leader");
+    const initiatives = await Initiative.find({}).populate("leader", "-password");
     res.status(200).json({ List : initiatives });
   } catch (err) {
     console.error("Error fetching initiatives:", err);
@@ -85,20 +85,20 @@ const memberAction = async (req, res) => {
 const fetchJoins = async (req, res) => {
   try {
     const {id} = req.params;
-    const initiative = await  Initiative.findById(id);
+    const initiative = await Initiative.findById(id).populate("leader", "-password");
 
     if (!initiative) {
-      return res.status(404).json({ message: "Article not found" });
+      return res.status(404).json({ message: "Initiative not found" });
     }
 
     const joinCount = initiative.members.length;
     const joinArray=initiative.members;
 
-   
+
     return res.status(200).json({
       joins:joinCount,
-      joinArray:joinArray
-   
+      joinArray:joinArray,
+      initiative,
     });
   } catch (err) {
     return res.status(500).json({ message: "Server error" });
