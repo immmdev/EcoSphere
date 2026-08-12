@@ -253,11 +253,11 @@ function CarbonFootprintCalculator() {
               </div>
             )}
 
-            <div className="flex justify-between mt-6">
+            <div className="flex justify-between items-center gap-3 mt-6">
               <button
                 onClick={() => setStep((s) => Math.max(0, s - 1))}
                 disabled={step === 0}
-                className="px-6 py-2 rounded-full font-semibold text-green-900 border border-green-800 disabled:opacity-30"
+                className="px-4 py-1.5 sm:px-6 sm:py-2 text-sm sm:text-base rounded-full font-semibold text-green-900 border border-green-800 disabled:opacity-30 flex-shrink-0"
               >
                 Back
               </button>
@@ -265,9 +265,9 @@ function CarbonFootprintCalculator() {
                 <button
                   onClick={handleSubmit}
                   disabled={submitting}
-                  className="bg-emerald-400 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150 disabled:opacity-60"
+                  className="bg-emerald-400 text-green-900 font-semibold px-4 py-1.5 sm:px-6 sm:py-2 text-sm sm:text-base rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150 disabled:opacity-60"
                 >
-                  {submitting ? 'Calculating…' : 'Calculate Daily Footprint'}
+                  {submitting ? 'Calculating…' : 'Calculate Footprint'}
                 </button>
               )}
             </div>
@@ -321,7 +321,7 @@ function OptionQuestion({ question, options, value, onSelect }) {
   return (
     <div>
       <p className="text-green-900 font-semibold text-lg text-center mb-4">{question}</p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
         {options.map((opt) => {
           const selected = value === opt.value;
           const Icon = opt.icon;
@@ -330,15 +330,15 @@ function OptionQuestion({ question, options, value, onSelect }) {
               key={opt.value}
               type="button"
               onClick={() => onSelect(opt.value)}
-              className={`flex flex-col items-center justify-center gap-1.5 rounded-xl px-3 py-4 text-center border-2 transition-all duration-150 ${
+              className={`flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2.5 sm:px-3 sm:py-4 text-center border-2 transition-all duration-150 ${
                 selected
                   ? 'border-emerald-600 bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857]'
                   : 'border-green-300 bg-white text-green-900 hover:border-emerald-400 hover:bg-green-50'
               }`}
             >
-              <Icon className="w-6 h-6" strokeWidth={1.75} />
-              <span className="font-semibold text-sm">{opt.label}</span>
-              {opt.sublabel && <span className="text-xs text-green-700">{opt.sublabel}</span>}
+              <Icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
+              <span className="font-semibold text-xs sm:text-sm">{opt.label}</span>
+              {opt.sublabel && <span className="text-[10px] sm:text-xs text-green-700">{opt.sublabel}</span>}
             </button>
           );
         })}

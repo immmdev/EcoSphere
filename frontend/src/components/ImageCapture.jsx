@@ -37,7 +37,7 @@ function ImageCapture({ onChange, label = "Cover Image" }) {
           onClick={() => galleryInputRef.current?.click()}
           className="flex-1 bg-lime-300 text-green-900 font-semibold px-4 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
         >
-          Choose from Gallery
+          Gallery
         </button>
       </div>
 
