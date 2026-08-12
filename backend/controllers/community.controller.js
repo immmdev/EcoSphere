@@ -1,9 +1,10 @@
+import { v2 as cloudinary } from "cloudinary";
 import Community from "../models/community.model.js";
 import Post from "../models/posts.model.js";
 
 const createCommunity = async (req, res) => {
   try {
-    const { name, agenda, description, coverImage, category, userId } = req.body;
+    const { name, agenda, description, category, userId } = req.body;
 
     // Check if community with the same name already exists
     const isMatch = await Community.findOne({ name });
@@ -11,12 +12,18 @@ const createCommunity = async (req, res) => {
       return res.status(409).json({ message: "Community already exists" });
     }
 
+    let coverImage;
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, { resource_type: "image" });
+      coverImage = result.secure_url;
+    }
+
     // Create new community
     const newCommunity = new Community({
       name,
       agenda,
       description,
-      coverImage,
+      ...(coverImage && { coverImage }),
       category,
       creator: userId,
       members: [userId],
@@ -115,7 +122,13 @@ const actionCommunity = async (req, res) => {
 
 const makePosts = async (req, res) => {
   try {
-    const { communityId, userId, title, content, tag, image } = req.body;
+    const { communityId, userId, title, content, tag } = req.body;
+
+    let image;
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, { resource_type: "image" });
+      image = result.secure_url;
+    }
 
     const Postdata = {
       communityId,
@@ -147,10 +160,10 @@ const fetchCommunityPosts = async (req, res) => {
     const community = await Community.findById(communityId).populate({
       path: "posts",
       select: "authorId title content tag image likes comments createdAt",
-      populate: {
-        path: "authorId",
-        select: "name",
-      },
+      populate: [
+        { path: "authorId", select: "name" },
+        { path: "comments.user", select: "name" },
+      ],
     });
 
     if (!community) {
@@ -158,6 +171,64 @@ const fetchCommunityPosts = async (req, res) => {
     }
     res.status(200).json({ posts: community.posts });
   } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const toggleLike = async (req, res) => {
+  try {
+    const { postId, userId } = req.body;
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const likes = Array.isArray(post.likes) ? post.likes : [];
+    const alreadyLiked = likes.some((like) => like.toString() === userId.toString());
+
+    post.likes = alreadyLiked
+      ? likes.filter((like) => like.toString() !== userId.toString())
+      : [...likes, userId];
+
+    await post.save();
+
+    res.status(200).json({
+      message: "Likes updated",
+      isLiked: !alreadyLiked,
+      likesCount: post.likes.length,
+      likes: post.likes,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const addComment = async (req, res) => {
+  try {
+    const { postId, userId, content } = req.body;
+
+    if (!content || !content.trim()) {
+      return res.status(400).json({ message: "Comment cannot be empty" });
+    }
+
+    const post = await Post.findByIdAndUpdate(
+      postId,
+      { $push: { comments: { user: userId, content, createdAt: new Date() } } },
+      { new: true }
+    ).populate({ path: "comments.user", select: "name" });
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.status(201).json({
+      message: "Comment added",
+      comments: post.comments,
+    });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -189,4 +260,6 @@ export {
   findCommunityByName,
   fetchCommunityPosts,
   fetchJoins,
+  toggleLike,
+  addComment,
 };

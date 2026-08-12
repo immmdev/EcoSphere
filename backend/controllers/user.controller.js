@@ -134,4 +134,38 @@ const userDetails = async (req, res) => {
     }
 }
 
-export { loginUser, registerUser, adminLogin, userDetails };
+const toggleFollow = async (req, res) => {
+    try {
+        const { userId, targetUserId } = req.body;
+
+        if (!targetUserId) {
+            return res.status(400).json({ success: false, message: 'targetUserId is required' });
+        }
+        if (targetUserId === userId) {
+            return res.status(400).json({ success: false, message: "You can't follow yourself" });
+        }
+
+        const targetUser = await User.findById(targetUserId);
+        if (!targetUser) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        const currentUser = await User.findById(userId);
+        const isFollowing = currentUser.following.some((id) => id.toString() === targetUserId);
+
+        if (isFollowing) {
+            await User.findByIdAndUpdate(userId, { $pull: { following: targetUserId } });
+            await User.findByIdAndUpdate(targetUserId, { $pull: { followers: userId } });
+        } else {
+            await User.findByIdAndUpdate(userId, { $addToSet: { following: targetUserId } });
+            await User.findByIdAndUpdate(targetUserId, { $addToSet: { followers: userId } });
+        }
+
+        res.status(200).json({ success: true, isFollowing: !isFollowing });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+export { loginUser, registerUser, adminLogin, userDetails, toggleFollow };

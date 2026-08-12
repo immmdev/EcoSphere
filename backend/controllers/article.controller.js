@@ -1,3 +1,4 @@
+import { v2 as cloudinary } from "cloudinary";
 import articleModel from "../models/article.model.js";
 import mongoose from "mongoose";
 
@@ -8,7 +9,6 @@ const createArticle = async (req, res) => {
             title,
             summary,
             content,
-            coverImage,
             tags,
             category,
             type,
@@ -24,12 +24,22 @@ const createArticle = async (req, res) => {
             });
         }
 
+        let coverImage = "";
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, { resource_type: "image" });
+            coverImage = result.secure_url;
+        }
+
+        const tagsArray = Array.isArray(tags)
+            ? tags
+            : (tags || "").split(",").map((t) => t.trim()).filter(Boolean);
+
         const newArticle = new articleModel({
             title,
             summary,
             content,
             category,
-            tags,
+            tags: tagsArray,
             type,
             author: new mongoose.Types.ObjectId(userId),
             coverImage
@@ -53,12 +63,30 @@ const createArticle = async (req, res) => {
 
 const getArticles = async (req, res) => {
     try {
-        const allArticles = await articleModel.find({}).populate("author");
-        if (!allArticles) {
-            return res.success(404).json({ message: "server error" });
-        }
-        return res.status(200).json({ success: true, allArticles });
-      
+        const page = Math.max(1, Number(req.query.page) || 1);
+        const limit = Math.max(1, Number(req.query.limit) || 9);
+        const category = req.query.category;
+
+        const filter = category && category !== "All" ? { category } : {};
+
+        const [allArticles, totalCount] = await Promise.all([
+            articleModel
+                .find(filter)
+                .populate("author")
+                .sort({ createdAt: -1 })
+                .skip((page - 1) * limit)
+                .limit(limit),
+            articleModel.countDocuments(filter),
+        ]);
+
+        return res.status(200).json({
+            success: true,
+            allArticles,
+            currentPage: page,
+            totalPages: Math.max(1, Math.ceil(totalCount / limit)),
+            totalCount,
+        });
+
     } catch (error) {
 
         return res.status(500).json({ error: error });

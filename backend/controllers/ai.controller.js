@@ -1,7 +1,25 @@
 import axios from 'axios';
+
+const askGemini = async (payLoad) => {
+  const response = await axios.post(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+    {
+      contents: [
+        { parts: [{ text: payLoad }] },
+      ],
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "X-goog-api-key": process.env.GEMINI_API_KEY,
+      },
+    }
+  );
+  return response.data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+};
+
 const ecoBot=async (req, res) => {
   try {
-    
     const { payLoad } = req.body;
     const response = await axios.post(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
@@ -24,4 +42,4 @@ const ecoBot=async (req, res) => {
   }
 }
 
-export {ecoBot};
+export { ecoBot, askGemini };

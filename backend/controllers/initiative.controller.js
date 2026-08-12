@@ -1,9 +1,16 @@
+import { v2 as cloudinary } from "cloudinary";
 import Initiative from "../models/Initiative.model.js";
 import User from "../models/user.model.js";
 
 const createInitiative = async (req, res) => {
   try {
-    const { userId, title, description, imgUrl, category, location } = req.body;
+    const { userId, title, description, category, location } = req.body;
+
+    let imgUrl;
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, { resource_type: "image" });
+      imgUrl = result.secure_url;
+    }
 
     const Initiativeinfo = {
       leader: userId,

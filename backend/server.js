@@ -18,6 +18,10 @@ import ecoRouter from './routes/ecoAI.route.js';
 
 import learnRouter from './routes/learn.route.js';
 
+import carbonRouter from './routes/carbon.route.js';
+
+import statsRouter from './routes/stats.route.js';
+
 import Community from './models/community.model.js';
 
 //app config
@@ -49,6 +53,12 @@ app.use('/api/initiative', initiativeRouter)
 
 // learn api endpoint
 app.use('/api/learn',learnRouter);
+
+// carbon tracker api endpoint
+app.use('/api/carbon', carbonRouter);
+
+// dashboard stats api endpoint
+app.use('/api/stats', statsRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the backend server!');

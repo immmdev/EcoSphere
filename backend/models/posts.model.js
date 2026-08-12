@@ -7,7 +7,10 @@ const postSchema = new mongoose.Schema({
   content: String,
   tag: { type: String, default: "General" },
   image: String,
-  likes: { type: Number, default: 0 },
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  }],
   comments: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
