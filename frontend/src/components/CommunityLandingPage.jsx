@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { ShopContext } from "../contexts/ShopContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "react-toastify";
+import communityService from "../services/communityService";
 
 function CommunityLanding() {
-  const { backendUrl, navigate, refresh, setRefresh, token } =
+  const { navigate, refresh } =
     useContext(ShopContext);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -63,7 +63,7 @@ function CommunityLanding() {
 
   const fetchCommunity = async () => {
     try {
-      const res = await axios.get(`${backendUrl}/api/communities/all-communities`);
+      const res = await communityService.listCommunities();
       setCommunities(res.data);
       console.log("Successfully fetched communities");
     } catch (err) {
@@ -77,11 +77,7 @@ function CommunityLanding() {
 
   const joiningCommunity = async (communityName) => {
     try {
-      await axios.post(
-        `${backendUrl}/api/communities/join-community`,
-        { communityName },
-        { headers: { token } }
-      );
+      await communityService.actionCommunity(communityName, "join");
       toast.success("Successfully joined the community!");
       return true;
     } catch (err) {

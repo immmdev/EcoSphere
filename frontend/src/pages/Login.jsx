@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { ShopContext } from "../contexts/ShopContext";
+import userService from "../services/userService";
 
 const Login = () => {
-	const { token, setToken, backendUrl, navigate } = React.useContext(ShopContext);
+	const { token, setToken, navigate } = React.useContext(ShopContext);
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post(backendUrl + "/api/user/login", { email, password });
+			const response = await userService.login(email, password);
 			if (response.data.success) {
 				setToken(response.data.token);
 				localStorage.setItem("token", response.data.token);

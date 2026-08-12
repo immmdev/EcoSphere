@@ -1,8 +1,7 @@
-import { useState, useContext, useRef } from "react";
-import axios from "axios";
-import { ShopContext } from "../contexts/ShopContext";
+import { useState, useRef } from "react";
 import { FiCopy } from "react-icons/fi";
 import ecoAIContext from "../assets/Finetune.js";
+import aiService from "../services/aiService";
 
 
 import ReactMarkdown from "react-markdown";
@@ -13,7 +12,6 @@ function ChatBot() {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const { backendUrl } = useContext(ShopContext);
     const chatEndRef = useRef(null);
 
     const getAIResponse = async () => {
@@ -26,7 +24,7 @@ function ChatBot() {
         const payLoad = prompt + ecoAIContext;
 
         try {
-            const res = await axios.post(`${backendUrl}/api/ai/generate`, { payLoad });
+            const res = await aiService.ask(payLoad);
             const aiText = res.data?.candidates?.[0]?.content?.parts?.[0]?.text || "No output";
 
             let typedText = "";

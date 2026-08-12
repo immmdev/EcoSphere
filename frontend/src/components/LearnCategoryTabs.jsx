@@ -39,7 +39,7 @@ function ArticleFilters({ isSticky }) {
       {/* Left Arrow */}
       <button
         onClick={() => scroll("left")}
-        className="text-green-100 transition flex-shrink-0"
+        className="hidden sm:block text-green-100 transition flex-shrink-0"
       >
         <ChevronLeft size={28} />
       </button>
@@ -47,13 +47,13 @@ function ArticleFilters({ isSticky }) {
       {/* Scrollable Categories */}
       <div
         ref={scrollRef}
-        className="flex gap-3 overflow-x-auto no-scrollbar py-2 "
+        className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-4 sm:px-0"
       >
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setActiveTab(category)}
-            className={`px-6 py-2 rounded-full font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0
+            className={`px-3.5 py-1.5 text-sm sm:px-6 sm:py-2 sm:text-base rounded-full font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0
               ${
                 activeTab === category
                   ? "bg-lime-300 text-green-900 shadow-[0_4px_0_#65a30d]"
@@ -68,7 +68,7 @@ function ArticleFilters({ isSticky }) {
       {/* Right Arrow */}
       <button
         onClick={() => scroll("right")}
-        className="text-green-100 transition flex-shrink-0"
+        className="hidden sm:block text-green-100 transition flex-shrink-0"
       >
         <ChevronRight size={28} />
       </button>

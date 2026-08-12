@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { ShopContext } from "../contexts/ShopContext";
+import userService from "../services/userService";
 
 const Signup = () => {
-	const { token, setToken, backendUrl, navigate } = React.useContext(ShopContext);
+	const { token, setToken, navigate } = React.useContext(ShopContext);
 	const [name, setName] = React.useState("");
 	const [email, setEmail] = React.useState("");
 	const [phone, setPhone] = React.useState("");
@@ -14,12 +14,7 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post(backendUrl + "/api/user/register", {
-				name,
-				email,
-				phone,
-				password,
-			});
+			const response = await userService.register(name, email, phone, password);
 			if (response.data.success) {
 				setToken(response.data.token);
 				localStorage.setItem("token", response.data.token);

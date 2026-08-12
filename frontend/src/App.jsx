@@ -1,4 +1,4 @@
-import { Routes, Route,Link } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { Home, Login, Signup, Support, Learn, Contact, Initiative, EcoShop, Profile, Communities, Cart } from "./pages";
 import Product from "./components/EcoShopComponents/Product";
 import Navbar from "./components/Navbar";
@@ -29,12 +29,16 @@ import IntitiaveInDetail from "./pages/IntiativeInDetail";
 import ScrollToTop from "./components/ScrollTop";
 
 function App() {
+	const location = useLocation();
+	const isHome = location.pathname === "/";
+
 	return (
 		<div>
 			<ToastContainer position="top-right" theme="dark"/>
 			<Toaster position="bottom-right" theme="dark" richColors/>
 			<Navbar />
 			<ScrollToTop />
+			<div className={isHome ? "" : "pt-20 sm:pt-24"}>
 			<Routes>
 
 				{/* general segment routes */}
@@ -85,7 +89,8 @@ function App() {
 
 				{/* ai-bot route */}
 				<Route path="/ecobot-ai" element={<ChatBot />} />
-			</Routes> 
+			</Routes>
+			</div>
 			<div title="Ask EcoAi?" style={{borderRadius:"50%"}} className="p-3 bg-green-100/30 fixed bottom-10 right-10 text-center 
                hover:shadow-xl hover:-translate-y-2 
                transition-all duration-200 ease-out">

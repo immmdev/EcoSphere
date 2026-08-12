@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import contactService from "../../services/contactService";
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -13,7 +13,7 @@ export default function ContactForm() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact/contact`, form);
+      await contactService.sendMessage(form);
       setStatus("Message sent successfully ✅");
       setForm({ name: "", email: "", message: "" });
     } catch (err) {

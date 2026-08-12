@@ -1,5 +1,5 @@
 import React from 'react';
-function CommunityDisplayRight({ members }) {
+function CommunityDisplayRight({ members, userId, followingIds, handleToggleFollow }) {
     return (
         <>
             <div className="eco-static-bg border hidden md:block border-l-green-100 w-full px-5 py-4 ">
@@ -8,7 +8,10 @@ function CommunityDisplayRight({ members }) {
                 <div className="h-[600px] overflow-y-auto no-scrollbar">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
 
-                        {members.map((member, index) => (
+                        {members.map((member, index) => {
+                            const isFollowing = followingIds?.includes(member._id);
+                            const isSelf = member._id === userId;
+                            return (
                             <div
                                 key={index}
                                 className="bg-green-100 text-green-900 p-4 rounded-xl shadow flex flex-col items-center"
@@ -24,11 +27,21 @@ function CommunityDisplayRight({ members }) {
                                 <div className="font-medium text-green-900 mb-3 text-center">{member.name}</div>
 
                                 {/* Follow Button */}
-                                <button className="px-6 py-1 rounded-full font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 bg-emerald-400 text-green-900 shadow-[0_4px_0_#047857] hover:bg-emerald-500">
-                                    Follow
-                                </button>
+                                {!isSelf && (
+                                    <button
+                                        onClick={() => handleToggleFollow(member._id)}
+                                        className={`px-6 py-1 rounded-full font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 shadow-[0_4px_0_#047857] ${
+                                            isFollowing
+                                                ? "bg-green-800 text-green-100 hover:bg-green-900"
+                                                : "bg-emerald-400 text-green-900 hover:bg-emerald-500"
+                                        }`}
+                                    >
+                                        {isFollowing ? "Following" : "Follow"}
+                                    </button>
+                                )}
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
 

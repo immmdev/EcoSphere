@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
-import { ShopContext } from '../contexts/ShopContext';
 import { jwtDecode } from 'jwt-decode';
+import initiativeService from '../services/initiativeService';
 
 
 
 function InitiativeInDetail() {
     const location = useLocation();
     const { id } = useParams();
-    const { backendUrl } = useContext(ShopContext);
     const [joins, setjoins] = useState(0);
     const [loading, setLoading] = useState(0);
 
@@ -63,8 +61,8 @@ function InitiativeInDetail() {
 
     //  Fetch joins & isLiked
     const fetchJoins = () => {
-        axios
-            .get(`${backendUrl}/api/initiative/${id}`, { headers: { token } })
+        initiativeService
+            .fetchJoins(id)
             .then((res) => {
                 setjoins(res.data.joins);
                 setMembers(res.data.joinArray);
@@ -86,11 +84,7 @@ function InitiativeInDetail() {
     const InitiativeAction = async (initiativeId, action) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL}/api/initiative/memberaction`,
-                { initiativeId, action },
-                { headers: { token } }
-            );
+            await initiativeService.memberAction(initiativeId, action);
             console.log(!members.includes(jwtDecode(token).id));
             fetchJoins();
             console.log(`Initiative ${action} successfully!`);

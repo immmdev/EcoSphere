@@ -1,25 +1,25 @@
 import React, { useState, useContext } from "react";
 import { ShopContext } from "../contexts/ShopContext";
-import axios from "axios";
 import { toast } from "react-toastify";
+import ImageCapture from "./ImageCapture";
+import communityService from "../services/communityService";
 
 const CommunityNewForm = () => {
-  const { token, backendUrl, navigate, refresh, setRefresh } = useContext(ShopContext);
+  const { navigate, refresh, setRefresh } = useContext(ShopContext);
 
   const [form, setForm] = useState({
     name: "",
     agenda: "",
     description: "",
-    coverImage: "",
-    category:""
+    category: "",
   });
+  const [coverImage, setCoverImage] = useState(null);
 
   const [error, setError] = useState("");
 
-  //function using await, and attaching proper Authorization header
-  const postCommunity = async () => {
+  const postCommunity = async (formData) => {
     try {
-      await axios.post(`${backendUrl}/api/communities/new-community`, form,{headers: {token}});
+      await communityService.createCommunity(formData);
 
       toast.success("EcoCommunity created");
       return true;
@@ -42,22 +42,24 @@ const CommunityNewForm = () => {
       setError("Please fill in all required fields.");
       return;
     }
-    if(form.coverImage.trim()==="")
-      form.coverImage="https://images.unsplash.com/photo-1716547286289-3e650d7bdf7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHVuc3BhbHNofGVufDB8fDB8fHww";
-    const isCreated = await postCommunity();
-    if (isCreated) {
-      setRefresh(!refresh);        
-      navigate("/communities");     
-    }
 
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => formData.append(key, value));
+    if (coverImage) formData.append("coverImage", coverImage);
+
+    const isCreated = await postCommunity(formData);
+    if (isCreated) {
+      setRefresh(!refresh);
+      navigate("/communities");
+    }
 
     setForm({
       name: "",
       agenda: "",
       description: "",
-      coverImage: "",
-      category:" ",
+      category: "",
     });
+    setCoverImage(null);
 
     setError("");
   };
@@ -102,14 +104,7 @@ const CommunityNewForm = () => {
             className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
           />
 
-          <input
-            type="text"
-            name="coverImage"
-            value={form.coverImage}
-            onChange={handleChange}
-            placeholder="Cover Image URL (optional)"
-            className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
-          />
+          <ImageCapture onChange={setCoverImage} label="Cover Image (optional)" />
 
           <div className="flex flex-wrap gap-4">
             <select
@@ -138,7 +133,6 @@ const CommunityNewForm = () => {
           <button
             type="submit"
             className="bg-emerald-400 text-green-900 font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150"
-            onClick={()=>{handleSubmit()}}
           >
             Create Community
           </button>

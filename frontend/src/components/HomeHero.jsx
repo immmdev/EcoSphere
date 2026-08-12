@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { TrendingUp } from 'lucide-react';
+import { ShopContext } from '../contexts/ShopContext';
 
 function HomeHero() {
+  const { token } = useContext(ShopContext);
+
   return (
     <section
       className="relative w-full h-[90vh] bg-green-700 bg-cover bg-center flex items-center"
@@ -18,7 +21,7 @@ function HomeHero() {
       <div className="container mx-auto px-6 lg:px-16 relative z-10 flex flex-col lg:flex-row items-center justify-between">
         
         <motion.div
-          className="text-white max-w-xxl text-center lg:text-left"
+          className="text-white max-w-xl text-center lg:text-left"
           initial={{ opacity: 0.4, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -38,7 +41,7 @@ function HomeHero() {
           <div className="flex flex-wrap justify-center lg:justify-start gap-4">
             <Link
               style={{ fontFamily: "Raleway, sans-serif" }}
-              to="/signup"
+              to={token ? "/communities" : "/signup"}
               className="bg-lime-300 text-black font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#65a30d] hover:translate-y-[1px] hover:shadow-[0_2px_0_#65a30d] active:translate-y-[2px] active:shadow-none transition-all duration-150"
             >
               Join Us
@@ -46,7 +49,7 @@ function HomeHero() {
 
             <Link
               style={{ fontFamily: "Raleway, sans-serif" }}
-              to="/initiatives"
+              to="/contact"
               className="bg-emerald-400 text-black font-semibold px-6 py-2 rounded-full shadow-[0_4px_0_#047857] hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] active:translate-y-[2px] active:shadow-none transition-all duration-150"
             >
               More about Us

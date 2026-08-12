@@ -3,12 +3,12 @@ import Title from "../EcoShopComponents/Title";
 import CartTotal from "../EcoShopComponents/CartTotal";
 import { assets } from "../../assets/MarketPlace/assets.js";
 import { ShopContext } from "../../contexts/ShopContext.jsx";
-import axios from "axios";
 import { toast } from "react-toastify";
+import orderService from "../../services/orderService";
 
 const PlaceOrder = () => {
 	const [method, setMethod] = React.useState("cod");
-	const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
+	const { navigate, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
 	const [formData, setFormData] = React.useState({
 		firstName: "",
 		lastName: "",
@@ -41,7 +41,7 @@ const PlaceOrder = () => {
             handler: async (response) => {
                 console.log(response);
                 try {
-                    const { data } = await axios.post(backendUrl + "/api/order/verifyRazorpay", {response}, {headers: {token}});
+                    const { data } = await orderService.verifyRazorpay(response);
                     if(data.success) {
                         navigate("/myorders");
                         setCartItems({});
@@ -86,9 +86,10 @@ const PlaceOrder = () => {
                 amount: getCartAmount() + delivery_fee,
             }
 
+            const response = await orderService.placeOrder(method, orderData);
+
             switch (method) {
-                case "cod": 
-                    const response = await axios.post(backendUrl + "/api/order/place", orderData, {headers: {token}});
+                case "cod":
                     if(response.data.success) {
                         setCartItems({});
                         navigate("/myorders");
@@ -99,25 +100,23 @@ const PlaceOrder = () => {
                 break;
 
                 case "stripe":
-                    const stripeResponse = await axios.post(backendUrl + "/api/order/stripe", orderData, {headers: {token}});
-                    if(stripeResponse.data.success) {
-                        const { session_url } = stripeResponse.data;
+                    if(response.data.success) {
+                        const { session_url } = response.data;
                         window.location.replace(session_url);
                     } else {
-                        toast.error(stripeResponse.data.message);
+                        toast.error(response.data.message);
                     }
 
                 break;
 
                 case "razorpay":
-                    const razorpayResponse = await axios.post(backendUrl + "/api/order/razorpay", orderData, {headers: {token}});
-                    if(razorpayResponse.data.success) {
-                        initPay(razorpayResponse.data.order);
+                    if(response.data.success) {
+                        initPay(response.data.order);
                     }
 
                 break;
 
-                default: 
+                default:
                 break;
             }
 

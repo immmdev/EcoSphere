@@ -1,19 +1,18 @@
 import React from "react";
 import { FaShareAlt, FaCog } from "react-icons/fa";
-import ProfileMiddle from "./ProfileMiddle";
 import { ShopContext } from "../contexts/ShopContext";
-import axios from "axios";
+import userService from "../services/userService";
 
 function ProfileTop() {
     const [profileData, setProfileData] = React.useState({});
-    const { token, backendUrl } = React.useContext(ShopContext);
+    const { token } = React.useContext(ShopContext);
 
     const fetchProfileData = async () => {
         if (!token) {
             return;
         }
         try {
-            const response = await axios.post(`${backendUrl}/api/user/profile`, {}, {headers: {token}});
+            const response = await userService.getProfile();
             if (response.data.success) {
                 setProfileData(response.data.user);
             }

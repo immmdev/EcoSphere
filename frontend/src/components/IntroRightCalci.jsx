@@ -1,28 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-function IntroRightCalci({ header, info,imgURL }) {
+import { motion } from 'framer-motion';
+
+function IntroRightCalci({ header, info, imgURL }) {
     return (
-        <div className="px-5 py-5 max-w-screen-xl mx-auto p-5 mt-5 mb-5 ">
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-10">
-
-                {/* Left Content */}
-                <div className="sm:w-1/2 mt-5">
-                    <h1 className="text-2xl text-white font-semibold">{header}</h1>
-                    <p className="text-green-100  mt-2">{info}</p>
-                    <div className="mt-4">
-
-                    </div>
-                </div>
-
-                {/* Right Image */}
-                <div className="sm:w-1/2 text-center mb-5">
-                    <img  src={imgURL} alt={header} style={{width:"40%"}} className="w-4/5 mx-auto " />
-                </div>
-
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="px-5 py-10 max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10"
+        >
+            {/* Left Content */}
+            <div className="order-2 sm:order-1 w-full sm:w-1/2 text-center sm:text-left">
+                <h1 className="text-2xl text-white font-semibold">{header}</h1>
+                <p className="text-green-100 mt-2">{info}</p>
             </div>
-        </div>
 
-
+            {/* Right Image */}
+            <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                viewport={{ once: true }}
+                className="order-1 sm:order-2 w-full sm:w-1/2 text-center mb-5"
+            >
+                <img src={imgURL} alt={header} className="w-4/5 mx-auto" />
+            </motion.div>
+        </motion.div>
     );
 }
 

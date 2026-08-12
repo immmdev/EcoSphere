@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+import ImageCapture from "./ImageCapture";
+import communityService from "../services/communityService";
 
 const CommunityPostForm = ({ onCreate }) => {
   const [searchParams] = useSearchParams();
@@ -9,12 +10,11 @@ const CommunityPostForm = ({ onCreate }) => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    communityId,
     title: "",
     content: "",
     tag: "General",
-    image: "",
   });
+  const [image, setImage] = useState(null);
 
   const [error, setError] = useState("");
 
@@ -31,16 +31,16 @@ const CommunityPostForm = ({ onCreate }) => {
         setError("Title and Content are required.");
         return;
       }
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/communities/make-post`,
-        form,
-        {
-          headers: { token: localStorage.getItem("token") },
-        }
-      );
+
+      const payload = new FormData();
+      payload.append("communityId", communityId);
+      Object.entries(form).forEach(([key, value]) => payload.append(key, value));
+      if (image) payload.append("image", image);
+
+      const response = await communityService.makePost(payload);
       if (response.data.success === true) {
         toast.success("Post created successfully!");
-        navigate(`/community`);
+        navigate(-1);
       } else {
         toast.error("Failed to create post.");
       }
@@ -59,8 +59,8 @@ const CommunityPostForm = ({ onCreate }) => {
         title: "",
         content: "",
         tag: "General",
-        image: "",
       });
+      setImage(null);
 
       setError("");
     } catch (err) {
@@ -101,14 +101,7 @@ const CommunityPostForm = ({ onCreate }) => {
             className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
           />
 
-          <input
-            type="text"
-            name="image"
-            value={form.image}
-            onChange={handleChange}
-            placeholder="Cover Image URL"
-            className="w-full text-green-900 border-b-1 border-green-800 focus:border-green-600 outline-none py-2"
-          />
+          <ImageCapture onChange={setImage} label="Cover Image" />
 
           <select
             name="tag"

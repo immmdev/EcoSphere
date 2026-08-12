@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import axios from "axios";
-import { ShopContext } from "../contexts/ShopContext";
 import { jwtDecode } from "jwt-decode";
+import communityService from "../services/communityService";
+import userService from "../services/userService";
 import CommunityDisplayLeft from "./CommunityDisplayLeft";
 import CommunityDisplayMiddle from "./CommunityDisplayMiddle";
 import CommunityDisplayFollowers from "./CommunityDisplayFollowes";
@@ -15,16 +15,53 @@ import CommunityDisplayRight from "./CommunityDisplayRight";
 function CommunityDisplay() {
   const location = useLocation();
   const { id } = useParams()
-  const { backendUrl } = useContext(ShopContext);
   const { community } = location.state || {};
   const [joins, setjoins] = useState(0);
   const [loading, setLoading] = useState(false);
   const [members, setMembers] = useState([]);
   const [membersId, setMembersId] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [followingIds, setFollowingIds] = useState([]);
 
   let token = localStorage.getItem("token");
   const userId = token ? jwtDecode(token).id : null;
+
+  // fetch who the current user is already following
+  useEffect(() => {
+    const fetchFollowing = async () => {
+      if (!token) return;
+      try {
+        const res = await userService.getProfile();
+        if (res.data.success) {
+          setFollowingIds((res.data.user.following || []).map((id) => id.toString()));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchFollowing();
+  }, [token]);
+
+  // follow/unfollow a community member
+  const handleToggleFollow = async (targetUserId) => {
+    setFollowingIds((prev) =>
+      prev.includes(targetUserId)
+        ? prev.filter((id) => id !== targetUserId)
+        : [...prev, targetUserId]
+    );
+
+    try {
+      await userService.toggleFollow(targetUserId);
+    } catch (err) {
+      console.error("Follow error:", err);
+      toast.error("Something went wrong");
+      // rollback on failure
+      setFollowingIds((prev) =>
+        prev.includes(targetUserId)
+          ? prev.filter((id) => id !== targetUserId)
+          : [...prev, targetUserId]
+      );
+    }
+  };
 
 
 
@@ -36,23 +73,19 @@ function CommunityDisplay() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.post(
-          `${backendUrl}/api/communities/fetch-community-posts`,
-          { communityId: community._id },
-          { headers: { token } }
-        );
+        const res = await communityService.fetchCommunityPosts(community._id);
         if (res.status === 200) {
           setFilteredPosts(res.data.posts);
         }
       } catch { }
     };
-    fetchPosts();
-  }, [backendUrl, community?._id, token]);
+    if (community?._id) fetchPosts();
+  }, [community?._id]);
 
   // fetch members & joins
   const fetchJoins = async () => {
     try {
-      const res = await axios.get(`${backendUrl}/api/communities/${id}`);
+      const res = await communityService.fetchMembers(id);
       setMembers(res.data.members);
       setjoins(res.data.members.length);
       setMembersId(res.data.members.map((member) => {
@@ -82,13 +115,9 @@ function CommunityDisplay() {
     }
 
     try {
-      await axios.post(
-        `${backendUrl}/api/communities/action-community`,
-        { communityName, action },
-        { headers: { token } }
-      );
+      await communityService.actionCommunity(communityName, action);
 
-      // sync actual server data fetched from backend 
+      // sync actual server data fetched from backend
       fetchJoins();
     } catch (err) {
       console.error("Join Error:", err);
@@ -109,12 +138,32 @@ function CommunityDisplay() {
   };
 
   // handling comments
-  const handleAddComment = (id) => {
-    const value = chatInputs[id];
-    if (value?.trim()) {
-      const postIndex = dummyPosts.findIndex((p) => p.id === id);
-      dummyPosts[postIndex].comments.push({ user: "You", text: value });
-      setChatInputs((prev) => ({ ...prev, [id]: "" }));
+  const handleAddComment = async (postId) => {
+    const value = chatInputs[postId];
+    if (!value?.trim()) return;
+
+    try {
+      const res = await communityService.addComment(postId, value.trim());
+      setFilteredPosts((prev) =>
+        prev.map((post) => (post._id === postId ? { ...post, comments: res.data.comments } : post))
+      );
+      setChatInputs((prev) => ({ ...prev, [postId]: "" }));
+    } catch (err) {
+      console.error("Error adding comment:", err);
+      toast.error("Failed to add comment");
+    }
+  };
+
+  // handling likes
+  const handleToggleLike = async (postId) => {
+    try {
+      const res = await communityService.toggleLike(postId);
+      setFilteredPosts((prev) =>
+        prev.map((post) => (post._id === postId ? { ...post, likes: res.data.likes } : post))
+      );
+    } catch (err) {
+      console.error("Error toggling like:", err);
+      toast.error("Failed to update like");
     }
   };
 
@@ -154,10 +203,6 @@ function CommunityDisplay() {
     }
   };
 
-  if (!community) {
-    return <div className="p-6 text-green-800">Community data not found.</div>;
-  }
-
   return (
     <div className="eco-static-bg min-h-screen grid lg:grid-cols-3 grid-cols-1  justify-between  text-green-900">
 
@@ -174,20 +219,31 @@ function CommunityDisplay() {
       />
 
       {/* followers section for small screen */}
-      <CommunityDisplayFollowers members={members} />
+      <CommunityDisplayFollowers
+        members={members}
+        userId={userId}
+        followingIds={followingIds}
+        handleToggleFollow={handleToggleFollow}
+      />
 
       {/* middle section for community feed */}
       <CommunityDisplayMiddle
         filteredPosts={filteredPosts}
         handleAddComment={handleAddComment}
         handleInputChange={handleInputChange}
+        chatInputs={chatInputs}
         openComments={openComments}
         toggleComments={toggleComments}
+        handleToggleLike={handleToggleLike}
+        userId={userId}
       />
 
       {/* right section for followers large and medium screen */}
-      <CommunityDisplayRight 
-      members={members} 
+      <CommunityDisplayRight
+        members={members}
+        userId={userId}
+        followingIds={followingIds}
+        handleToggleFollow={handleToggleFollow}
       />
 
     </div>
@@ -195,4 +251,3 @@ function CommunityDisplay() {
 }
 
 export default CommunityDisplay;
-

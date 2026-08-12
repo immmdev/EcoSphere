@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'sonner';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ShopContext } from '../contexts/ShopContext';
+import initiativeService from '../services/initiativeService';
 
 const categories = [
   "All",
@@ -73,7 +73,7 @@ const Initiatives = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/initiative/getinitiatives`);
+        const response = await initiativeService.listInitiatives();
         setAllInitiatives(response.data.List);
       } catch (error) {
         console.error("Error fetching initiatives:", error);

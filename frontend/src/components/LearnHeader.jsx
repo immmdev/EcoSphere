@@ -30,13 +30,13 @@ function LearnHeader() {
 
     return (
         <>
-            <section className="w-full eco-static-bg py-16 px-6 md:px-20 text-center">
+            <section className="w-full eco-static-bg py-8 sm:py-16 px-6 md:px-20 text-center">
                 <div ref={headerRef} className="max-w-4xl mx-auto">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-4">
                         Learn and Grow
                     </h1>
-                    <p className="text-green-100 text-lg md:text-xl mb-6">
-                        Empowering you with knowledge for a greener future. 
+                    <p className="text-green-100 text-base sm:text-lg md:text-xl mb-4 sm:mb-6">
+                        Empowering you with knowledge for a greener future.
                     </p>
 
                     {/* Filter Buttons */}
@@ -63,9 +63,9 @@ function LearnHeader() {
                 <div 
                     ref={stickyRef}
                     className={`${
-                        isSticky 
-                            ? 'fixed top-0 left-0 right-0 z-50   eco-static-bg shadow-lg' 
-                            : 'mt-10  py-4 lg:px-16 md:px-8'
+                        isSticky
+                            ? 'fixed top-0 left-0 right-0 z-50   eco-static-bg shadow-lg'
+                            : 'mt-4 sm:mt-10 py-2 sm:py-4 lg:px-16 md:px-8'
                     } `}
                 >
                     <LearnCategoryTabs isVideo={isVideo}/>

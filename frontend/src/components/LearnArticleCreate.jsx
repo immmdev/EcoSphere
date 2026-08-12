@@ -1,20 +1,21 @@
 import React, { useState, useContext } from 'react';
-import axios from "axios";
 import { ShopContext } from '../contexts/ShopContext';
 import { toast } from 'react-toastify';
+import ImageCapture from './ImageCapture';
+import learnService from '../services/learnService';
 
 function LearnArticleCreate() {
-    const { backendUrl, token, refresh, setRefresh, navigate, activeTab, setActiveTab } = useContext(ShopContext);
+    const { refresh, setRefresh, navigate } = useContext(ShopContext);
 
     const [form, setForm] = useState({
         title: '',
         summary: '',
         content: '',
-        coverImage: '',
         tags: '',
         category: 'Beginner',
         type: 'Article',
     });
+    const [coverImage, setCoverImage] = useState(null);
 
     const [error, setError] = useState('');
 
@@ -22,13 +23,9 @@ function LearnArticleCreate() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const postArticle = async (data) => {
+    const postArticle = async (formData) => {
         try {
-            await axios.post(
-                `${backendUrl}/api/learn/new-article`,
-                data,
-                { headers: { token } }
-            );
+            await learnService.createArticle(formData);
             toast.success("Article saved successfully");
             return true;
         } catch (err) {
@@ -46,15 +43,11 @@ function LearnArticleCreate() {
             return;
         }
 
-        const newArticle = {
-            ...form,
-            tags: form.tags
-                .split(',')
-                .map((tag) => tag.trim())
-                .filter(Boolean)
-        };
-        console.log(newArticle);
-        const isCreated = await postArticle(newArticle);
+        const formData = new FormData();
+        Object.entries(form).forEach(([key, value]) => formData.append(key, value));
+        if (coverImage) formData.append("coverImage", coverImage);
+
+        const isCreated = await postArticle(formData);
         if (isCreated) {
             setRefresh(!refresh);
             navigate("/learn");
@@ -63,11 +56,11 @@ function LearnArticleCreate() {
                 title: '',
                 summary: '',
                 content: '',
-                coverImage: '',
                 tags: '',
                 category: 'Beginner',
                 type: 'Article',
             });
+            setCoverImage(null);
             setError('');
         }
     };
@@ -114,14 +107,7 @@ function LearnArticleCreate() {
                         className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
                     />
 
-                    <input
-                        type="text"
-                        name="coverImage"
-                        value={form.coverImage}
-                        onChange={handleChange}
-                        placeholder="Cover Image URL"
-                        className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
-                    />
+                    <ImageCapture onChange={setCoverImage} label="Cover Image" />
 
                     <input
                         type="text"

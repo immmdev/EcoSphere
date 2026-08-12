@@ -30,21 +30,20 @@ export default function InfoSection({ imgURL, header, info, visitLink }) {
     return (
         <div
             ref={sectionRef}
-            className={`px-5 py-5 max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-10 min-h-screen transition-all duration-700 ease-out ${
+            className={`px-5 py-10 max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10 sm:min-h-screen transition-all duration-700 ease-out ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
         >
-            {/* Image - hide on small screen */}
+            {/* Image */}
             <div
                 className={`${
                     isVisible ? "scale-100 opacity-100" : "scale-90 opacity-0"
-                } transition-all duration-700 hidden sm:flex sm:w-1/2 justify-center`}
+                } transition-all duration-700 flex w-full sm:w-1/2 justify-center`}
             >
                 <img
-                    style={{ width: "90%" }}
                     src={imgURL}
                     alt="calculator"
-                    className="w-4/5"
+                    className="w-4/5 sm:w-4/5"
                 />
             </div>
 

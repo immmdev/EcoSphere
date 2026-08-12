@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import axios from "axios";
+import ImageCapture from "./ImageCapture";
+import initiativeService from "../services/initiativeService";
 
 const categories = [
   "Others",
@@ -21,11 +22,11 @@ const CreateInitiative = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
-    imgUrl: "",
     description: "",
     category: "",
     location: "",
   });
+  const [image, setImage] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -36,12 +37,13 @@ const CreateInitiative = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
 
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/initiative/create`, formData, {
-        headers: { token },
-      })
+    const payload = new FormData();
+    Object.entries(formData).forEach(([key, value]) => payload.append(key, value));
+    if (image) payload.append("image", image);
+
+    initiativeService
+      .createInitiative(payload)
       .then(() => {
         toast.success("Initiative created successfully!");
         navigate("/initiatives");
@@ -69,10 +71,10 @@ const CreateInitiative = () => {
         onSubmit={handleSubmit}
         className="bg-green-100 rounded-lg shadow-md p-8 w-full max-w-2xl space-y-6"
       >
-        
+
         {/* Title */}
         <div>
-      
+
           <input
             type="text"
             name="title"
@@ -84,11 +86,11 @@ const CreateInitiative = () => {
           />
         </div>
 
-     
+
 
         {/* Description */}
         <div>
-     
+
           <textarea
             name="description"
             value={formData.description}
@@ -98,21 +100,11 @@ const CreateInitiative = () => {
             placeholder="Full description "
           ></textarea>
         </div>
-           {/* Image URL */}
-        <div>
-          
-        
-          <input
-            type="text"
-            name="imgUrl"
-            value={formData.imgUrl}
-            onChange={handleChange}
-            placeholder="Image URL"
-            className="w-full text-green-900 border-b border-green-800 focus:border-green-600 outline-none py-2"
-          />
-        </div>
 
-      
+        {/* Image capture */}
+        <ImageCapture onChange={setImage} label="Initiative Image" />
+
+
         {/* Location */}
         <div>
           <input
@@ -128,8 +120,8 @@ const CreateInitiative = () => {
 
           {/* Category */}
         <div>
-     
-   
+
+
             <select
               value={formData.category}
               onChange={handleChange}
@@ -153,9 +145,9 @@ const CreateInitiative = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-emerald-400 px-6 py-2 rounded-full shadow-[0_4px_0_#047857] 
-                   hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857] 
-                   active:translate-y-[2px] active:shadow-none 
+          className="bg-emerald-400 px-6 py-2 rounded-full shadow-[0_4px_0_#047857]
+                   hover:translate-y-[1px] hover:shadow-[0_2px_0_#047857]
+                   active:translate-y-[2px] active:shadow-none
                    text-green-900 font-semibold transition-all duration-150"
         >
           Publish
